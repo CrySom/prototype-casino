@@ -68,7 +68,6 @@ pm-09.svg                   https://www.figma.com/api/mcp/asset/8f6b9fe0-728e-46
 pm-10.svg                   https://www.figma.com/api/mcp/asset/8f6b9fe0-728e-46ad-a6b0-bf99e678b21f/51289.svg
 pm-11.svg                   https://www.figma.com/api/mcp/asset/8f6b9fe0-728e-46ad-a6b0-bf99e678b21f/db7e3.svg
 icon-chevron-down.svg       https://www.figma.com/api/mcp/asset/8f6b9fe0-728e-46ad-a6b0-bf99e678b21f/bf7c5.svg
-tab-prediction.svg          https://www.figma.com/api/mcp/asset/d70bd989-39b8-4b2a-8b07-1055375ce63b/28700.svg
-tab-chat.svg                https://www.figma.com/api/mcp/asset/d70bd989-39b8-4b2a-8b07-1055375ce63b/4edb8.svg
+tab-prediction.svg          https://www.figma.com/api/mcp/asset/2027b980-68f6-47e8-9ee9-fdcb9d198da9/5dc23.svg
 tab-sport.svg               https://www.figma.com/api/mcp/asset/d70bd989-39b8-4b2a-8b07-1055375ce63b/07745.svg
 tab-casino.svg              https://www.figma.com/api/mcp/asset/d70bd989-39b8-4b2a-8b07-1055375ce63b/dee39.svg

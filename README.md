@@ -20,4 +20,8 @@ The list of files and their source URLs is in `scripts/figma-assets.txt`.
 The URLs expire about 7 days after they were issued (2026-09-25); after that
 they have to be re-exported from Figma.
 
+`tab-chat.png` is not in the list: Figma exports that icon's vector with a
+broken stroke, so it is cropped from a 4× PNG render of the bottom tab bar
+(node `3049:261648`) with the background made transparent.
+
 Open `index.html` in a browser (mobile viewport, 320–480 px).

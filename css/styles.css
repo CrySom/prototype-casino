@@ -1894,3 +1894,33 @@ a {
 .tab-bar__tab.is-active span {
   color: var(--c-brand);
 }
+
+.tab-bar__tab span.icon-20 {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+/* Glyph sits inside the 20px icon frame, as in Figma. */
+.tab-bar__icon-prediction img {
+  position: absolute;
+  inset: 8.33% 15.3% 8.33% 16.67%;
+  display: block;
+  width: 68.03%;
+  height: 83.33%;
+}
+
+/* Menu (hamburger) is three bars in Figma, not an exported asset. */
+.tab-bar__icon-menu i {
+  position: absolute;
+  left: 20.83%;
+  right: 20.83%;
+  height: 8.33%;
+  border-radius: 1px;
+  background: var(--c-accent);
+}
+
+.tab-bar__icon-menu i:nth-child(1) { top: 25%; }
+.tab-bar__icon-menu i:nth-child(2) { top: 45.83%; }
+.tab-bar__icon-menu i:nth-child(3) { top: 66.67%; }
