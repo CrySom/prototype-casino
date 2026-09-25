@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="304" height="152" viewBox="0 0 304 152" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="green glow">
+<path id="glow" opacity="0.75" d="M304 152C223.374 152 146.051 143.993 89.0395 129.74C32.0285 115.487 1.31953e-05 96.1565 1.14156e-05 76C9.63588e-06 55.8435 32.0285 36.5127 89.0395 22.2599C146.051 8.00712 223.374 2.32802e-06 304 0L304 76L304 152Z" fill="url(#paint0_radial_0_8427)" fill-opacity="0.5"/>
+</g>
+<defs>
+<radialGradient id="paint0_radial_0_8427" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(304 76) rotate(180) scale(304 127.079)">
+<stop stop-color="#B2B2B2"/>
+<stop offset="0.6" stop-color="#1A1A1A" stop-opacity="0"/>
+<stop offset="1" stop-color="#0F0F0F" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>

@@ -1,0 +1,13 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Ethereum (ETH)">
+<path id="Vector" d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#5F7EDD"/>
+<path id="Vector_2" d="M11.9988 15.2688L7.9668 12.8868L11.9988 18.57L16.0344 12.8868L11.9988 15.2688Z" fill="white"/>
+<path id="Vector_3" d="M16.032 12.1224L11.9988 14.5056L7.9656 12.1224L11.9988 5.43L16.032 12.1224Z" fill="white"/>
+<g id="Group">
+<path id="Vector_4" d="M16.032 12.1224L11.9988 10.2888V5.43L16.032 12.1224Z" fill="#C1CCF7"/>
+<path id="Vector_5" d="M16.0344 12.8868L11.9988 18.57V15.2688L16.0344 12.8868Z" fill="#C1CCF7"/>
+<path id="Vector_6" d="M11.9988 10.2888V14.5056L7.9668 12.1224L11.9988 10.2888Z" fill="#C1CCF7"/>
+</g>
+<path id="Vector_7" d="M16.032 12.1224L11.9988 14.5056V10.2888L16.032 12.1224Z" fill="#8198EE"/>
+</g>
+</svg>
