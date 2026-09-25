@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Crypto Casino</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Manrope:wght@700;800&family=Roboto+Flex:opsz,wdth,wght,GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC@8..144,25..151,100..1000,-200..150,27..175,323..603,25..135,649..854,-305..-98,560..788,416..570,528..760&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="page">
+
+  <!-- Header for web -->
+  <header class="header">
+    <a class="header__logo" href="#" aria-label="Home"><img src="assets/img/logo.svg" alt=""></a>
+    <div class="header__btns">
+      <a class="btn btn--m btn--secondary" href="#">Sign up</a>
+      <a class="btn btn--m btn--primary" href="#">Sign in</a>
+    </div>
+  </header>
+
+  <!-- Banner container mobile -->
+  <section class="banner-carousel">
+    <div class="banner-carousel__track h-scroll" data-carousel>
+      <article class="banner banner--1"><div class="banner__layer l-vector1"><span><img src="assets/img/banner1-vector1.svg" alt=""></span></div><div class="banner__layer l-ellipse"><span><img src="assets/img/banner1-ellipse.svg" alt=""></span></div><div class="banner__layer l-photo"><img src="assets/img/banner-player.png" alt=""></div><div class="banner__layer l-vector3"><span><img src="assets/img/banner1-vector3.svg" alt=""></span></div><div class="banner__dark"></div><div class="banner__text"><div class="banner__titles"><p class="banner__title">Free Spins</p><p class="banner__prize">bet 20$ - get 40$<br>Free Spins</p></div><a class="btn btn--m btn--secondary banner__btn" href="#"><img src="assets/img/icon-play-btn.svg" alt="">Play now</a></div></article>
+      <article class="banner banner--2"><div class="banner__layer l-vector2"><span><img src="assets/img/banner2-vector2.svg" alt=""></span></div><div class="banner__layer l-ellipse"><span><img src="assets/img/banner2-ellipse.svg" alt=""></span></div><div class="banner__layer l-photo"><img src="assets/img/banner-player.png" alt=""></div><div class="banner__layer l-vector4"><span><img src="assets/img/banner2-vector4.svg" alt=""></span></div><div class="banner__dark"></div><div class="banner__text"><div class="banner__titles"><p class="banner__title">Free Spins</p><p class="banner__prize">bet 20$ - get 40$<br>Free Spins</p></div><a class="btn btn--m btn--secondary banner__btn" href="#"><img src="assets/img/icon-play-btn.svg" alt="">Play now</a></div></article>
+    </div>
+    <div class="pagination" data-pagination><span class="pagination__bullet is-active"></span><span class="pagination__bullet"></span><span class="pagination__bullet"></span><span class="pagination__bullet"></span><span class="pagination__bullet"></span></div>
+  </section>
+
+  <!-- Filter panel -->
+  <div class="filter-panel">
+    <label class="search">
+      <img class="icon-20" src="assets/img/icon-search.svg" alt="">
+      <input class="search__input" type="search" placeholder="Search games, providers, categories">
+    </label>
+    <div class="filter-panel__actions">
+      <button class="btn btn--icon" type="button" aria-label="Providers"><img class="icon-20" src="assets/img/icon-providers.svg" alt=""></button>
+      <button class="btn btn--icon" type="button" aria-label="Favorites"><img class="icon-20" src="assets/img/icon-favorites.svg" alt=""></button>
+    </div>
+  </div>
+
+  <!-- Thematic sections -->
+  <nav class="thematic">
+    <a class="thematic-card thematic-card--casino" href="#">
+      <span class="thematic-card__badge"><img class="icon-20" src="assets/img/icon-casino.svg" alt="">Casino</span>
+      <span class="thematic-card__ellipse"><img src="assets/img/thematic-ellipse-lg.svg" alt=""></span>
+      <span class="thematic-card__art"><span class="thematic-card__img"><img src="assets/img/thematic-casino.png" alt=""></span></span>
+      <span class="pill-btn t-12-regular">Go to <img src="assets/img/chevron-thematic.svg" alt=""></span>
+    </a>
+    <a class="thematic-card thematic-card--sport" href="#">
+      <span class="thematic-card__ellipse"><img src="assets/img/thematic-ellipse-sm.svg" alt=""></span>
+      <span class="thematic-card__art"><span class="thematic-card__img"><img src="assets/img/thematic-sport.png" alt=""></span></span>
+      <span class="thematic-card__badge"><img class="icon-20" src="assets/img/icon-sport.svg" alt="">Sport</span>
+      <span class="pill-btn t-12-regular">Go to <img src="assets/img/chevron-thematic.svg" alt=""></span>
+    </a>
+    <a class="thematic-card thematic-card--prediction" href="#">
+      <span class="thematic-card__ellipse"><img src="assets/img/thematic-ellipse-sm.svg" alt=""></span>
+      <span class="thematic-card__art"><span class="thematic-card__img"><img src="assets/img/thematic-prediction.png" alt=""></span></span>
+      <span class="thematic-card__badge"><span class="icon-20"><img class="icon-prediction" src="assets/img/icon-prediction.svg" alt=""></span>Prediction</span>
+      <span class="pill-btn t-12-regular">Go to <img src="assets/img/chevron-thematic.svg" alt=""></span>
+    </a>
+  </nav>
+
+  <!-- Slots -->
+  <section class="games"><div class="section-header "><h2 class="section-header__title">Slots</h2><a class="pill-btn t-12-regular" href="#">See All <img src="assets/img/chevron-slots.svg" alt=""></a></div><div class="games__row h-scroll" data-carousel><a class="game-tile game-tile--bordered" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a></div><div class="pagination" data-pagination><span class="pagination__bullet is-active"></span><span class="pagination__bullet"></span><span class="pagination__bullet"></span><span class="pagination__bullet"></span><span class="pagination__bullet"></span></div></section>
+
+  <!-- Casino live -->
+  <section class="games games--flush"><div class="section-header "><h2 class="section-header__title">Casino live</h2><a class="pill-btn t-12-regular" href="#">See All <img src="assets/img/chevron-slots.svg" alt=""></a></div><div class="games__row h-scroll" data-carousel><a class="game-tile game-tile--featured" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__dim"></div><div class="game-tile__slot"><div class="game-tile__play"><span class="btn btn--secondary"><img class="icon-20" src="assets/img/icon-play.svg" alt="Play"></span></div><div class="game-tile__label"><div class="game-tile__title"><p>Game title</p></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div><span class="game-tile__fav"><img src="assets/img/icon-favorite-game.svg" alt=""></span></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/live-casino-1.png" alt=""><img src="assets/img/live-casino-2.png" alt=""><div class="game-tile__blur"></div></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/live-casino-1.png" alt=""><img src="assets/img/live-casino-2.png" alt=""><div class="game-tile__blur"></div></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/live-casino-1.png" alt=""><img src="assets/img/live-casino-2.png" alt=""><div class="game-tile__blur"></div></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/live-casino-1.png" alt=""><img src="assets/img/live-casino-2.png" alt=""><div class="game-tile__blur"></div></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/live-casino-1.png" alt=""><img src="assets/img/live-casino-2.png" alt=""><div class="game-tile__blur"></div></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/live-casino-1.png" alt=""><img src="assets/img/live-casino-2.png" alt=""><div class="game-tile__blur"></div></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/live-casino-1.png" alt=""><img src="assets/img/live-casino-2.png" alt=""><div class="game-tile__blur"></div></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/live-casino-1.png" alt=""><img src="assets/img/live-casino-2.png" alt=""><div class="game-tile__blur"></div></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/live-casino-1.png" alt=""><img src="assets/img/live-casino-2.png" alt=""><div class="game-tile__blur"></div></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/live-casino-1.png" alt=""><img src="assets/img/live-casino-2.png" alt=""><div class="game-tile__blur"></div></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a></div><div class="pagination" data-pagination><span class="pagination__bullet is-active"></span><span class="pagination__bullet"></span><span class="pagination__bullet"></span><span class="pagination__bullet"></span><span class="pagination__bullet"></span></div></section>
+
+  <!-- Sport -->
+  <section class="sport">
+    <div class="section-header "><h2 class="section-header__title">Sport</h2><a class="pill-btn t-12-regular" href="#">See All <img src="assets/img/chevron.svg" alt=""></a></div>
+    <div class="events">
+      <div class="events__row h-scroll" data-carousel>
+        <article class="event-card"><div class="event-card__bg"><div class="event-card__union"><img src="assets/img/event-union.svg" alt=""></div><div class="event-card__glow"><img src="assets/img/event-ellipse.svg" alt=""></div></div><div class="event-card__promo"></div><div class="event-card__content"><div class="event-card__main"><div class="event-card__header"><p class="event-card__league t-10-medium">UEFA Champions league</p><p class="event-card__teams">Манчестер Юнайтед — Юнайтед</p></div><div class="event-card__score"><div class="team-logo"></div><div class="event-card__time"><span>Today </span><span class="sep">|</span><span>22:35</span></div><div class="team-logo team-logo--away"></div></div></div><div class="coefs"><button class="coef" type="button"><span class="coef__label t-10-medium">П1</span><span class="coef__value">1.24</span></button><button class="coef" type="button"><span class="coef__label t-10-medium">Х</span><span class="coef__value">1.50</span></button><button class="coef" type="button"><span class="coef__label t-10-medium">П2</span><span class="coef__value">2.10</span></button></div></div></article>
+        <article class="event-card"><div class="event-card__bg"><div class="event-card__union"><img src="assets/img/event-union.svg" alt=""></div><div class="event-card__glow"><img src="assets/img/event-ellipse.svg" alt=""></div></div><div class="event-card__promo"><div class="promo-tag"><div class="promo-tag__bg"><img src="assets/img/event-promo-bg.svg" alt=""></div><div class="promo-tag__content"><span class="promo-tag__icon"><img src="assets/img/icon-discount.svg" alt=""></span>Early Win</div></div></div><div class="event-card__content"><div class="event-card__main"><div class="event-card__header"><p class="event-card__league t-10-medium">UEFA Champions league</p><p class="event-card__teams">Манчестер Юнайтед — Юнайтед</p></div><div class="event-card__score"><div class="team-logo"></div><div class="event-card__time"><span>Today </span><span class="sep">|</span><span>22:35</span></div><div class="team-logo team-logo--away"></div></div></div><div class="coefs"><button class="coef" type="button"><span class="coef__label t-10-medium">П1</span><span class="coef__value">1.24</span></button><button class="coef" type="button"><span class="coef__label t-10-medium">Х</span><span class="coef__value">1.50</span></button><button class="coef" type="button"><span class="coef__label t-10-medium">П2</span><span class="coef__value">2.10</span></button></div></div></article>
+      </div>
+      <div class="pagination" data-pagination><span class="pagination__bullet is-active"></span><span class="pagination__bullet"></span><span class="pagination__bullet"></span></div>
+    </div>
+  </section>
+
+  <!-- Crash games -->
+  <section class="games games--flush"><div class="section-header "><h2 class="section-header__title">Crash Games</h2><a class="pill-btn t-12-regular" href="#">See All <img src="assets/img/chevron-slots.svg" alt=""></a></div><div class="games__row h-scroll" data-carousel><a class="game-tile game-tile--featured" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__dim"></div><div class="game-tile__slot"><div class="game-tile__play"><span class="btn btn--secondary"><img class="icon-20" src="assets/img/icon-play.svg" alt="Play"></span></div><div class="game-tile__label"><div class="game-tile__title"><p>Game title</p></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div><span class="game-tile__fav"><img src="assets/img/icon-favorite-game.svg" alt=""></span></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a><a class="game-tile" href="#"><div class="game-tile__image"><img src="assets/img/game-slot.png" alt=""></div><div class="game-tile__label"><div class="game-tile__logo-space"></div><div class="game-tile__provider"><img src="assets/img/provider-evolution.png" alt="Evolution"></div></div></a></div><div class="pagination" data-pagination><span class="pagination__bullet is-active"></span><span class="pagination__bullet"></span><span class="pagination__bullet"></span><span class="pagination__bullet"></span><span class="pagination__bullet"></span></div></section>
+
+  <!-- Providers -->
+  <section class="providers">
+    <div class="section-header section-header--px8"><h2 class="section-header__title">Providers</h2><a class="pill-btn t-12-regular" href="#">See All <img src="assets/img/chevron.svg" alt=""></a></div>
+    <div class="providers__column">
+      <div class="providers__shadow"><img src="assets/img/provider-shadow.png" alt=""></div>
+      <div class="providers__row h-scroll">
+        <a class="provider-tile" href="#"><div class="provider-tile__logo"><img src="assets/img/provider-logo-1.svg" alt=""></div><div class="provider-tile__stats"><img src="assets/img/icon-playing.svg" alt=""><span>489</span><span>playing</span></div></a>
+        <a class="provider-tile" href="#"><div class="provider-tile__logo"><img src="assets/img/provider-logo.svg" alt=""></div><div class="provider-tile__stats"><img src="assets/img/icon-playing.svg" alt=""><span>489</span><span>playing</span></div></a>
+        <a class="provider-tile" href="#"><div class="provider-tile__logo"><img src="assets/img/provider-logo.svg" alt=""></div><div class="provider-tile__stats"><img src="assets/img/icon-playing.svg" alt=""><span>489</span><span>playing</span></div></a>
+        <a class="provider-tile" href="#"><div class="provider-tile__logo"><img src="assets/img/provider-logo.svg" alt=""></div><div class="provider-tile__stats"><img src="assets/img/icon-playing.svg" alt=""><span>489</span><span>playing</span></div></a>
+        <a class="provider-tile provider-tile--gradient" href="#"><div class="provider-tile__logo"><img src="assets/img/provider-high5games.svg" alt=""></div><div class="provider-tile__stats"><img src="assets/img/icon-playing.svg" alt=""><span>489</span><span>playing</span></div></a>
+        <a class="provider-tile provider-tile--gradient" href="#"><div class="provider-tile__logo"><img src="assets/img/provider-logo.svg" alt=""></div><div class="provider-tile__stats"><img src="assets/img/icon-playing.svg" alt=""><span>489</span><span>playing</span></div></a>
+        <a class="provider-tile provider-tile--gradient" href="#"><div class="provider-tile__logo"><img src="assets/img/provider-logo.svg" alt=""></div><div class="provider-tile__stats"><img src="assets/img/icon-playing.svg" alt=""><span>489</span><span>playing</span></div></a>
+        <a class="provider-tile provider-tile--gradient" href="#"><div class="provider-tile__logo"><img src="assets/img/provider-pgsoft.svg" alt=""></div><div class="provider-tile__stats"><img src="assets/img/icon-playing.svg" alt=""><span>489</span><span>playing</span></div></a>
+        <a class="provider-tile provider-tile--gradient" href="#"><div class="provider-tile__logo"><img src="assets/img/provider-amatic.svg" alt=""></div><div class="provider-tile__stats"><img src="assets/img/icon-playing.svg" alt=""><span>489</span><span>playing</span></div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Registration / VIP banner -->
+  <section class="vip">
+    <div class="vip-banner">
+      <div class="vip-banner__card">
+        <div class="vip-banner__ellipse"><img src="assets/img/vip-ellipse.svg" alt=""></div>
+        <div class="vip-banner__image"><img src="assets/img/vip-image.png" alt=""></div>
+        <div class="vip-banner__text">
+          <p class="vip-banner__title">VIP Banner</p>
+          <p class="vip-banner__desc t-12-regular">Get up to 200% on your first crypto deposit</p>
+        </div>
+        <a class="btn btn--secondary vip-banner__btn" href="#"><img src="assets/img/icon-live.svg" alt=""><span>Claim Bonus</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prediction -->
+  <section class="prediction">
+    <div class="section-header "><h2 class="section-header__title">Prediction</h2><a class="pill-btn t-12-regular" href="#">See All <img src="assets/img/chevron.svg" alt=""></a></div>
+    <div class="prediction__body">
+      <div class="category-tabs">
+        <div class="category-tabs__line"></div>
+        <div class="category-tabs__menu h-scroll" data-tabs>
+          <button class="category-tab is-active" type="button"><img class="icon-20" src="assets/img/icon-top.svg" alt="">Top</button><button class="category-tab" type="button"><img class="icon-20" src="assets/img/icon-politics.svg" alt="">Politics</button><button class="category-tab" type="button"><img class="icon-20" src="assets/img/icon-tab-sport.svg" alt="">Sport</button><button class="category-tab" type="button"><img class="icon-20" src="assets/img/icon-tab-default.svg" alt="">Culture</button><button class="category-tab" type="button"><img class="icon-20" src="assets/img/icon-tab-default.svg" alt="">Tech</button><button class="category-tab" type="button"><img class="icon-20" src="assets/img/icon-tab-default.svg" alt="">Space</button><button class="category-tab" type="button"><img class="icon-20" src="assets/img/icon-tab-default.svg" alt="">Celebrities</button><button class="category-tab" type="button"><img class="icon-20" src="assets/img/icon-tab-default.svg" alt="">Crypto</button><button class="category-tab" type="button"><img class="icon-20" src="assets/img/icon-tab-default.svg" alt="">Other</button>
+        </div>
+        <div class="category-tabs__fade"></div>
+      </div>
+      <article class="polybet">
+        <div class="polybet__glow polybet__glow--green"><img src="assets/img/glow-green.svg" alt=""></div>
+        <div class="polybet__glow"><img src="assets/img/glow-red.svg" alt=""></div>
+        <div class="polybet__head">
+          <img class="polybet__avatar" src="assets/img/prediction-event.png" alt="">
+          <div class="polybet__head-text">
+            <p class="polybet__meta">Politics · 15 markets</p>
+            <p class="polybet__title">Donald Trump offers</p>
+          </div>
+        </div>
+        <div class="polybet__market">
+          <p class="polybet__question">Donald Trump’s Offer for Greenland<br>(Trillions of Dollars)</p>
+          <div class="polybet__options">
+            <div class="polybet__option">
+              <button class="polybet-btn polybet-btn--yes" type="button"><span>Yes</span><span>52%</span></button>
+              <div class="polybet__progress"><div class="progress"><div class="progress__indicator" style="right: 50%"></div></div><p class="polybet__coef">1,92</p></div>
+            </div>
+            <div class="polybet__option">
+              <button class="polybet-btn polybet-btn--no" type="button"><span>No</span><span>48%</span></button>
+              <div class="polybet__progress"><div class="progress progress--no"><div class="progress__indicator" style="right: 50%"></div></div><p class="polybet__coef">1,68</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="polybet__stats t-10-medium">
+          <div class="polybet__stat polybet__stat--volume"><img src="assets/img/icon-jackpot.svg" alt=""><span>Volume:</span><span>2.1M $</span></div>
+          <div class="polybet__stat polybet__stat--bets"><img src="assets/img/icon-people.svg" alt=""><span>Bets:</span><span>78 901</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Last activity -->
+  <section class="activity">
+    <div class="section-header section-header--px12"><h2 class="section-header__title">Last activity</h2></div>
+    <div class="activity__column">
+      <div class="page-tabs">
+        <div class="page-tabs__inner" data-tabs>
+          <button class="page-tab is-active" type="button">Latest bet</button>
+          <button class="page-tab" type="button">High roller</button>
+          <button class="page-tab" type="button">Wager cotest</button>
+        </div>
+      </div>
+      <div class="bets-table">
+        <div class="bets-table__row bets-table__row--head"><p class="c-game-h">Game</p><p class="c-player-h">Player</p><p class="c-multi-h">Multi</p><p class="c-profit-h">Profit</p></div>
+        <div class="bets-table__row"><div class="bets-table__game"><img src="assets/img/icon-play-sm.svg" alt=""><p class="c-game">Crazy777</p></div><p class="c-player">kryptonaut</p><p class="c-multi">×89.1</p><div class="bets-table__profit"><p>$22,275</p><img class="currency" src="assets/img/currency-eth.svg" alt=""></div></div><div class="bets-table__row"><div class="bets-table__game"><img src="assets/img/icon-play-sm.svg" alt=""><p class="c-game">Charge...</p></div><p class="c-player">moonwhale</p><p class="c-multi">×45.2</p><div class="bets-table__profit"><p>$4,520</p><img class="currency" src="assets/img/currency-t.png" alt=""></div></div><div class="bets-table__row"><div class="bets-table__game"><img src="assets/img/icon-play-sm.svg" alt=""><p class="c-game">Speed...</p></div><p class="c-player">satoshi_v</p><p class="c-multi">×12.4</p><div class="bets-table__profit"><p>$6,200</p><img class="currency" src="assets/img/currency-t.png" alt=""></div></div><div class="bets-table__row"><div class="bets-table__game"><img src="assets/img/icon-play-sm.svg" alt=""><p class="c-game">25 Coin...</p></div><p class="c-player">j***92</p><p class="c-multi">×33.7</p><div class="bets-table__profit"><p>$2,528</p><img class="currency" src="assets/img/currency-e.png" alt=""></div></div><div class="bets-table__row"><div class="bets-table__game"><img src="assets/img/icon-play-sm.svg" alt=""><p class="c-game">Gates o...</p></div><p class="c-player">m***07</p><p class="c-multi">×21.0</p><div class="bets-table__profit"><p>$4,200</p><img class="currency" src="assets/img/currency-usd.png" alt=""></div></div><div class="bets-table__row"><div class="bets-table__game"><img src="assets/img/icon-play-sm.svg" alt=""><p class="c-game">Gates o...</p></div><p class="c-player">a***21</p><p class="c-multi">×58.3</p><div class="bets-table__profit"><p>$2,915</p><img class="currency" src="assets/img/currency-eth.svg" alt=""></div></div><div class="bets-table__row"><div class="bets-table__game"><img src="assets/img/icon-play-sm.svg" alt=""><p class="c-game">Life an...</p></div><p class="c-player">t***55</p><p class="c-multi">×5.6</p><div class="bets-table__profit"><p>$5,600</p><img class="currency" src="assets/img/currency-t.png" alt=""></div></div><div class="bets-table__row"><div class="bets-table__game"><img src="assets/img/icon-play-sm.svg" alt=""><p class="c-game">Crazy777</p></div><p class="c-player">kryptonaut</p><p class="c-multi">×89.1</p><div class="bets-table__profit"><p>$22,275</p><img class="currency" src="assets/img/currency-usd.png" alt=""></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer HOME for 320-677px -->
+  <footer class="footer">
+    <div class="payments">
+      <div class="section-header section-header--px8"><h2 class="section-header__title">Payment methods</h2></div>
+      <div class="payments__box"><div class="payments__row"><img src="assets/img/pm-01.svg" alt=""><img src="assets/img/pm-02.svg" alt=""><img src="assets/img/pm-03.svg" alt=""><img src="assets/img/pm-04.svg" alt=""><img src="assets/img/pm-05.svg" alt=""><img src="assets/img/pm-06.svg" alt=""><img src="assets/img/pm-07.svg" alt=""><img src="assets/img/pm-08.svg" alt=""><img src="assets/img/pm-09.svg" alt=""><img src="assets/img/pm-10.svg" alt=""><img src="assets/img/pm-11.svg" alt=""></div></div>
+    </div>
+    <div class="footer__bottom">
+      <nav class="footer__links"><a href="#">About us</a><a href="#">Support</a><a href="#">Terms</a><a href="#">Responsible Gambling</a></nav>
+      <p class="footer__copy t-12-regular">© 2026 Metaverse Casino. All rights licensed under global regulatory bodies. Enjoy responsibly.</p>
+      <button class="btn btn--secondary lang-btn" type="button">EN<span class="lang-btn__icon"><img src="assets/img/icon-chevron-down.svg" alt=""></span></button>
+    </div>
+  </footer>
+
+  <!-- Bottom tab bar -->
+  <nav class="tab-bar">
+    <div class="tab-bar__tabs">
+      <a class="tab-bar__tab" href="#"><img class="icon-20" src="assets/img/tab-prediction.svg" alt=""><span>Prediction</span></a><a class="tab-bar__tab" href="#"><img class="icon-20" src="assets/img/tab-chat.svg" alt=""><span>Social Chat</span></a><a class="tab-bar__tab" href="#"><img class="icon-20" src="assets/img/tab-sport.svg" alt=""><span>Sport</span></a><a class="tab-bar__tab is-active" href="#"><img class="icon-20" src="assets/img/tab-casino.svg" alt=""><span>Casino</span></a><a class="tab-bar__tab" href="#"><img class="icon-20" src="assets/img/tab-prediction.svg" alt=""><span>Menu</span></a>
+    </div>
+  </nav>
+
+</div>
+<script src="js/main.js"></script>
+</body>
+</html>
