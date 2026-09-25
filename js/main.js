@@ -38,6 +38,68 @@
     });
   });
 
+  // Desktop menu: collapsed (72px) / opened (210px), remembered between visits.
+  var root = document.documentElement;
+  var toggles = document.querySelectorAll('[data-sidebar-toggle]');
+
+  function setSidebar(open) {
+    root.classList.toggle('sidebar-open', open);
+    Array.prototype.forEach.call(toggles, function (btn) {
+      btn.setAttribute('aria-expanded', String(open));
+    });
+    try {
+      localStorage.setItem('sidebar', open ? 'open' : 'collapsed');
+    } catch (e) {}
+  }
+
+  Array.prototype.forEach.call(toggles, function (btn) {
+    btn.setAttribute('aria-expanded', String(root.classList.contains('sidebar-open')));
+    btn.addEventListener('click', function (event) {
+      event.preventDefault();
+      setSidebar(!root.classList.contains('sidebar-open'));
+    });
+  });
+
+  // Logo in the opened menu collapses it back; search in the collapsed one opens it.
+  var logo = document.querySelector('.sidebar__logo-link');
+  if (logo) {
+    logo.addEventListener('click', function (event) {
+      if (!root.classList.contains('sidebar-open')) return;
+      event.preventDefault();
+      setSidebar(false);
+    });
+  }
+
+  var sbSearch = document.querySelector('.sb-search');
+  if (sbSearch) {
+    sbSearch.addEventListener('click', function () {
+      if (root.classList.contains('sidebar-open')) return;
+      setSidebar(true);
+      sbSearch.querySelector('input').focus();
+    });
+  }
+
+  // Sport groups in the opened menu.
+  document.querySelectorAll('[data-accordion]').forEach(function (group) {
+    var head = group.firstElementChild;
+    head.setAttribute('aria-expanded', String(group.classList.contains('is-open')));
+    head.addEventListener('click', function () {
+      if (!root.classList.contains('sidebar-open')) {
+        setSidebar(true);
+        return;
+      }
+      var open = group.classList.toggle('is-open');
+      head.setAttribute('aria-expanded', String(open));
+    });
+  });
+
+  // "Application" promo card in the menu footer.
+  document.querySelectorAll('[data-app-card-close]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      btn.closest('[data-app-card]').classList.add('is-closed');
+    });
+  });
+
   // Coefficients: toggle selection.
   document.querySelectorAll('.coef').forEach(function (coef) {
     coef.addEventListener('click', function () {

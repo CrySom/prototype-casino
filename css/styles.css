@@ -1,5 +1,8 @@
 /* ==========================================================================
-   Crypto casino — mobile home (Figma node 3049:261603, frame "320")
+   Crypto casino — home page (Figma file crypto-casino)
+   Mobile 320–1023px: frame "320" (3049:261603), fluid.
+   Desktop 1024px+: frames "1280" / "1920" (1398:34085, 1411:67717) and the
+   opened-menu variants (1418:88148, 1418:90887), see the block at the end.
    ========================================================================== */
 
 :root {
@@ -26,6 +29,7 @@
   --f-geist: 'Geist', system-ui, sans-serif;
   --f-manrope: 'Manrope', system-ui, sans-serif;
   --f-roboto-flex: 'Roboto Flex', system-ui, sans-serif;
+  --f-jost: 'Jost', system-ui, sans-serif;
 
   --radius-2: 2px;
   --radius-4: 4px;
@@ -78,9 +82,20 @@ a {
   flex-direction: column;
   gap: 8px;
   width: 100%;
-  max-width: 480px;
-  margin: 0 auto;
   background: var(--c-bg-4);
+}
+
+/* Parts that exist only in the desktop layout */
+.sidebar,
+.header__nav,
+.banner-d-carousel,
+.filter-btn__label,
+.game-tile--desktop-only,
+.promo-tag--desktop-only,
+.polybet.polybet--desktop-only,
+.pill-btn.payments__see-all,
+.payments__cards {
+  display: none;
 }
 
 /* Horizontal scrollers ----------------------------------------------------- */
@@ -518,6 +533,17 @@ a {
   opacity: 1;
 }
 
+.filter-btn__icon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.filter-btn__icon img {
+  width: 100%;
+  height: 100%;
+}
+
 .filter-panel__actions {
   display: flex;
   align-items: center;
@@ -780,6 +806,11 @@ a {
 .game-tile__play .btn {
   width: 32px;
   height: 32px;
+}
+
+.game-tile__play-icon {
+  width: 20px;
+  height: 20px;
 }
 
 .game-tile__title {
@@ -1378,6 +1409,10 @@ a {
   background-image: linear-gradient(-90deg, #1a1a1a 0%, rgba(26, 26, 26, 0) 86.77%);
 }
 
+.prediction__cards {
+  display: block;
+}
+
 .polybet {
   position: relative;
   display: flex;
@@ -1924,3 +1959,1127 @@ a {
 .tab-bar__icon-menu i:nth-child(1) { top: 25%; }
 .tab-bar__icon-menu i:nth-child(2) { top: 45.83%; }
 .tab-bar__icon-menu i:nth-child(3) { top: 66.67%; }
+
+/* ==========================================================================
+   Desktop 1024px+ (Figma "1280" / "1920", collapsed and opened menu)
+   Content is fluid between the frames: rows of fixed-size tiles scroll
+   horizontally, cards and banners stretch with the viewport.
+   ========================================================================== */
+@media (min-width: 1024px) {
+  .layout {
+    display: flex;
+    align-items: flex-start;
+    background: var(--c-bg-4);
+  }
+
+  .page {
+    flex: 1 1 0;
+    min-width: 0;
+    gap: 0;
+  }
+
+  .banner-carousel,
+  .tab-bar,
+  .header__logo,
+  .game-tile--mobile-only,
+  .game-tile--title-mobile-only .game-tile__label {
+    display: none;
+  }
+
+  .game-tile--desktop-only {
+    display: block;
+  }
+
+  .promo-tag--desktop-only {
+    display: block;
+  }
+
+  .polybet.polybet--desktop-only {
+    display: flex;
+  }
+
+  /* Section header: 16pt page subtitle, 24px side padding ---------------- */
+  .section-header {
+    padding: 12px 24px 8px;
+  }
+
+  .section-header__title {
+    font-weight: 800;
+    font-size: 16px;
+  }
+
+  /* ------------------------------------------------------------------------
+     Desktop menu (sidebar)
+     ------------------------------------------------------------------------ */
+  .sidebar {
+    --sb-w: 72px;
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    display: flex;
+    flex: 0 0 var(--sb-w);
+    flex-direction: column;
+    width: var(--sb-w);
+    height: 100vh;
+    background: var(--c-bg-3);
+    box-shadow: inset -1px 0 0 var(--c-line);
+  }
+
+  .sidebar-open .sidebar {
+    --sb-w: 210px;
+  }
+
+  .sidebar__logo {
+    position: relative;
+    flex: 0 0 68px;
+  }
+
+  .sidebar__logo-link {
+    position: absolute;
+    inset: 0;
+  }
+
+  .sidebar__logo-collapsed {
+    position: absolute;
+    top: 50%;
+    left: calc(50% + 0.29px);
+    width: 56.571px;
+    height: 37.714px;
+    transform: translate(-50%, -50%);
+  }
+
+  .sidebar__logo-full {
+    position: absolute;
+    top: 14.66px;
+    left: 17px;
+    width: 55.604px;
+    height: 37.069px;
+  }
+
+  .sidebar-open .sidebar__logo-collapsed,
+  .sidebar__logo-full {
+    display: none;
+  }
+
+  .sidebar-open .sidebar__logo-full {
+    display: block;
+  }
+
+  .sidebar__menu {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 4px;
+    min-height: 0;
+    margin-top: 6px;
+    padding: 0 8px 48px;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .sidebar__menu::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sidebar-open .sidebar__menu {
+    padding-right: 9px; /* 1px divider line */
+  }
+
+  .sb-search {
+    position: relative;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 12px;
+    background: var(--c-bg-1);
+    border: 1px solid var(--c-bg-6);
+    border-radius: var(--radius-4);
+    cursor: pointer;
+  }
+
+  .sb-search__input {
+    display: none;
+    flex: 1 0 0;
+    min-width: 1px;
+    height: 16px;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--c-white);
+    font-family: var(--f-geist);
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.25px;
+    text-overflow: ellipsis;
+  }
+
+  .sb-search__input::placeholder {
+    color: var(--c-accent);
+    opacity: 1;
+  }
+
+  .sidebar-open .sb-search {
+    justify-content: flex-start;
+    cursor: text;
+  }
+
+  .sidebar-open .sb-search__input {
+    display: block;
+  }
+
+  .sb-app {
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: var(--radius-2);
+  }
+
+  .sidebar-open .sb-app--toggle,
+  .sb-tabs {
+    display: none;
+  }
+
+  .sidebar-open .sb-tabs {
+    display: flex;
+  }
+
+  .sb-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 100%;
+    padding: 0 8px;
+    background: var(--c-bg-1);
+    font-family: var(--f-geist);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: left;
+    color: var(--c-txt-75);
+  }
+
+  .sb-cell:hover {
+    background: var(--c-bg-2);
+  }
+
+  .sb-cell__icon {
+    position: relative;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: var(--radius-4);
+  }
+
+  .sb-cell__icon img {
+    position: absolute;
+    inset: 20%;
+    width: 60%;
+    height: 60%;
+  }
+
+  .sb-cell__label,
+  .sb-cell__right,
+  .sb-group__items {
+    display: none;
+  }
+
+  .sidebar-open .sb-cell {
+    justify-content: space-between;
+  }
+
+  .sidebar-open .sb-cell__label {
+    display: block;
+    flex: 1 0 0;
+    min-width: 1px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .sidebar-open .sb-cell__right {
+    display: block;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+  }
+
+  .sb-cell__right img {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.2s ease;
+  }
+
+  .sb-group.is-open > .sb-cell .sb-cell__right img {
+    transform: rotate(180deg);
+  }
+
+  .sidebar-open .sb-group.is-open > .sb-group__items {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sb-cell--sub {
+    padding-left: 40px; /* 32px navigation row indent + 8px */
+  }
+
+  .sb-tabs {
+    flex-shrink: 0;
+    padding: 4px;
+    border-radius: var(--radius-2);
+    background: var(--c-bg-1);
+  }
+
+  .sb-tab {
+    display: flex;
+    flex: 1 0 0;
+    align-items: center;
+    justify-content: center;
+    min-width: 1px;
+    height: 32px;
+    padding: 7px 12px;
+    background: var(--c-bg-5);
+    font-family: var(--f-geist);
+    font-size: 12px;
+    line-height: 10px;
+    white-space: nowrap;
+    color: var(--c-secondary);
+  }
+
+  .sb-tab:first-child {
+    border-radius: var(--radius-4) 0 0 var(--radius-4);
+  }
+
+  .sb-tab:last-child {
+    border-radius: 0 var(--radius-4) var(--radius-4) 0;
+  }
+
+  .sb-tab.is-active {
+    background: var(--c-light-20);
+    font-weight: 700;
+    color: var(--c-brand);
+  }
+
+  /* Menu bottom down */
+  .sidebar__bottom {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .sidebar__shadow {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 1px;
+    height: 40px;
+    pointer-events: none;
+    background-image: linear-gradient(to bottom, rgba(15, 15, 15, 0), var(--c-bg-1));
+  }
+
+  .sidebar__bottom-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-right: 1px;
+    padding: 12px 16px;
+    background: var(--c-bg-1);
+  }
+
+  .sb-promo-app {
+    display: none;
+    position: relative;
+    width: 100%;
+    height: 89px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #181818;
+  }
+
+  .sidebar-open .sb-promo-app {
+    display: block;
+  }
+
+  .sidebar-open .sb-promo-app.is-closed {
+    display: none;
+  }
+
+  .sb-promo-app__text {
+    position: absolute;
+    top: 13px;
+    left: 12px;
+    width: 73px;
+    color: var(--c-white);
+  }
+
+  .sb-promo-app__title {
+    font-family: var(--f-manrope);
+    font-weight: 700;
+    font-size: 14px;
+    line-height: normal;
+  }
+
+  .sb-promo-app__sub {
+    font-family: var(--f-geist);
+    font-size: 10px;
+    line-height: 14px;
+  }
+
+  .sb-promo-app__ellipse {
+    position: absolute;
+    top: calc(50% + 44.5px);
+    left: calc(50% + 59px);
+    width: 60px;
+    height: 60px;
+    transform: translate(-50%, -50%);
+  }
+
+  .sb-promo-app__ellipse img {
+    position: absolute;
+    inset: -83.33%;
+    width: auto;
+    height: auto;
+  }
+
+  .sb-promo-app__phone {
+    position: absolute;
+    top: calc(50% + 24.5px);
+    left: calc(50% + 41px);
+    width: 52px;
+    height: 112px;
+    overflow: hidden;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: luminosity;
+  }
+
+  .sb-promo-app__phone img {
+    position: absolute;
+    top: -3.6%;
+    left: -11.23%;
+    width: 320.59%;
+    height: 106.96%;
+  }
+
+  .sb-promo-app__stores {
+    position: absolute;
+    top: 64px;
+    left: 12px;
+    display: flex;
+    gap: 2px;
+  }
+
+  .sb-promo-app__stores img {
+    width: 40px;
+    height: 13px;
+    object-fit: cover;
+  }
+
+  .sb-promo-app__stores img + img {
+    width: 39px;
+  }
+
+  .sb-promo-app__close {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: var(--radius-4);
+    background: var(--c-bg-7);
+  }
+
+  .sb-promo-app__close img {
+    width: 16px;
+    height: 16px;
+  }
+
+  .sb-btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .sb-btn {
+    gap: 6px;
+    height: 32px;
+    padding: 0 6px;
+    font-size: 12px;
+    line-height: 12px;
+  }
+
+  .sb-btn__label,
+  .sb-btn__support-full {
+    display: none;
+  }
+
+  .sb-btn__icon {
+    position: relative;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+  }
+
+  .sb-btn__icon img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .sb-btn__icon--flag {
+    mix-blend-mode: luminosity;
+    filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.5));
+  }
+
+  .sb-btn__icon--flag img {
+    inset: 12.5% 0;
+    height: 75%;
+    border-radius: var(--radius-2);
+  }
+
+  .sb-btn--support {
+    width: 32px;
+  }
+
+  .sidebar-open .sb-btns {
+    flex-direction: row;
+  }
+
+  /* Figma's menu footer is 228px wide (wider than the 210px menu), so the
+     20px side padding of these buttons is trimmed to fit. */
+  .sidebar-open .sb-btn {
+    flex: 1 0 0;
+    min-width: 1px;
+    padding: 0 12px;
+  }
+
+  .sidebar-open .sb-btn__label,
+  .sidebar-open .sb-btn__support-full {
+    display: block;
+  }
+
+  .sidebar-open .sb-btn__support-collapsed {
+    display: none;
+  }
+
+  .sidebar-open .sb-btn__icon--support img {
+    inset: -10% -20% -20.42%;
+    width: auto;
+    height: auto;
+  }
+
+  /* ------------------------------------------------------------------------
+     Header for web
+     ------------------------------------------------------------------------ */
+  .header {
+    height: 72px;
+  }
+
+  .header__nav {
+    position: absolute;
+    top: 50%;
+    left: 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    transform: translateY(-50%);
+  }
+
+  .header__nav-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--f-geist);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    white-space: nowrap;
+    color: var(--c-txt-75);
+  }
+
+  .header__nav-icon {
+    position: relative;
+    width: 40px;
+    height: 40px;
+  }
+
+  .header__nav-icon img {
+    position: absolute;
+    inset: 20%;
+    width: 60%;
+    height: 60%;
+  }
+
+  .header__btns {
+    right: 24px;
+    max-width: none;
+  }
+
+  .header__btns .btn--m {
+    height: 40px;
+    padding: 0 24px;
+    font-size: 14px;
+    line-height: 14px;
+  }
+
+  /* ------------------------------------------------------------------------
+     Banner container tablet-desktop
+     ------------------------------------------------------------------------ */
+  .banner-d-carousel {
+    position: relative;
+    display: block;
+    margin: 0 24px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .banner-d-carousel__track {
+    display: flex;
+  }
+
+  .banner-d {
+    position: relative;
+    flex: 0 0 100%;
+    height: 260px;
+    overflow: hidden;
+    background: var(--c-bg-1);
+    /* Art is laid out against a 1160px-wide frame; narrower banners keep
+       the art glued to the right edge, wider ones stretch it like Figma. */
+    --shift: min(0px, 100% - 1160px);
+  }
+
+  .banner-d__layer {
+    position: absolute;
+  }
+
+  .banner-d__layer > span {
+    position: absolute;
+  }
+
+  .banner-d__layer img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .bd-vector1 {
+    top: -179.45%;
+    bottom: -81.63%;
+    left: calc(696.02px + var(--shift));
+    right: -40px;
+  }
+
+  .bd-vector1 > span {
+    inset: -8.28% -78.1px -8.3% -79.2px;
+  }
+
+  .bd-ellipse {
+    top: 31.55%;
+    bottom: -86.83%;
+    left: calc(864.08px + var(--shift));
+    right: 124.2px;
+  }
+
+  .bd-ellipse > span {
+    inset: -270.7px;
+  }
+
+  .bd-photo {
+    top: -18.23%;
+    bottom: -20.13%;
+    left: calc(min(50%, 100% - 580px) + 200.61px);
+    aspect-ratio: 1498 / 1050;
+    transform: translateX(-50%);
+  }
+
+  .bd-photo img {
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+  }
+
+  /* Figma uses a progressive blur here (the exported value is 10px): the
+     hand with the phone is blurred, the face stays sharp. */
+  .bd-photo img:first-child {
+    -webkit-mask-image: linear-gradient(to right, transparent 12%, #000 42%);
+    mask-image: linear-gradient(to right, transparent 12%, #000 42%);
+  }
+
+  .bd-photo__blur {
+    filter: blur(10.045px);
+    -webkit-mask-image: linear-gradient(to right, #000 12%, transparent 42%);
+    mask-image: linear-gradient(to right, #000 12%, transparent 42%);
+  }
+
+  .bd-vector3 {
+    top: -7.09%;
+    bottom: 16.07%;
+    left: calc(699.88px + var(--shift));
+    right: 335.72px;
+  }
+
+  .bd-vector3 > span {
+    inset: -18.94% -44.8px -18.94% -38.1px;
+  }
+
+  .banner-d__text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 520px;
+    height: 260px;
+    overflow: hidden;
+    color: var(--c-white);
+  }
+
+  .banner-d__subtitle {
+    position: absolute;
+    top: 32px;
+    left: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 24px;
+  }
+
+  .banner-d__logo {
+    width: 108px;
+    height: 20px;
+  }
+
+  .banner-d__divider {
+    width: 1px;
+    height: 24px;
+    background: var(--c-white);
+  }
+
+  .banner-d__subtitle p {
+    font-family: var(--f-jost);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 26px;
+    white-space: nowrap;
+  }
+
+  .banner-d__main {
+    position: absolute;
+    top: 60px;
+    left: 40px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .banner-d__title {
+    font-family: var(--f-geist);
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 32px;
+  }
+
+  .banner-d__prize {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    white-space: nowrap;
+  }
+
+  .banner-d__prize-label {
+    font-family: var(--f-geist);
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  .banner-d__btn {
+    position: absolute;
+    top: 180px;
+    left: 40px;
+    gap: 8px;
+    height: 40px;
+    padding: 0 24px;
+    font-size: 14px;
+    line-height: 14px;
+  }
+
+  .banner-d__btn span:last-child {
+    padding-top: 1px;
+  }
+
+  .banner-d__btn-icon {
+    position: relative;
+    width: 24px;
+    height: 24px;
+  }
+
+  .banner-d__btn-icon img {
+    position: absolute;
+    inset: 0 0 -5.33%;
+    width: 100%;
+    height: auto;
+  }
+
+  .pagination--banner {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    width: 80px;
+    padding: 0;
+    transform: translateX(-50%);
+  }
+
+  .pagination--banner .pagination__bullet {
+    flex: 0 0 16px;
+  }
+
+  .pagination--banner .pagination__bullet:last-child {
+    flex-basis: 4px;
+  }
+
+  .pagination--banner .pagination__bullet.is-active {
+    flex: 1 0 0;
+  }
+
+  /* ------------------------------------------------------------------------
+     Filter panel
+     ------------------------------------------------------------------------ */
+  .filter-panel {
+    gap: 8px;
+    height: 56px;
+    margin-top: 1px;
+    padding: 8px 16px 8px 24px;
+  }
+
+  .filter-btn {
+    gap: 6px;
+    width: auto;
+    padding: 0 20px;
+    font-size: 12px;
+    line-height: 12px;
+    color: var(--c-white);
+  }
+
+  .filter-btn__label {
+    display: block;
+  }
+
+  .filter-btn__icon img {
+    position: absolute;
+    width: auto;
+    height: auto;
+  }
+
+  .filter-btn__icon--providers img {
+    inset: -3.12% -12.89% -23.12% -13.33%;
+  }
+
+  .filter-btn__icon--favorites img {
+    inset: -1.47% -14.48% -23.34%;
+  }
+
+  /* ------------------------------------------------------------------------
+     Thematic sections: Casino takes 540px at 1280 and half the row at 1920
+     ------------------------------------------------------------------------ */
+  .thematic {
+    display: flex;
+    gap: 8px;
+    padding: 16px 24px;
+  }
+
+  .thematic-card {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 148px;
+  }
+
+  .thematic-card--casino {
+    flex: 0 0 min(max(540px, 55.63% - 105.4px), 100% - 416px);
+  }
+
+  .thematic-card__ellipse img {
+    inset: -87.5% -55.12%;
+  }
+
+  .thematic-card--casino .thematic-card__ellipse img {
+    inset: -87.5% -28.46%;
+  }
+
+  .thematic-card__img {
+    width: 216px;
+    height: 216px;
+  }
+
+  /* ------------------------------------------------------------------------
+     Games grid (Slots / Casino live / Crash games)
+     ------------------------------------------------------------------------ */
+  .games,
+  .games--flush {
+    gap: 4px;
+    padding: 16px 16px 0;
+  }
+
+  /* Slots grow from 180x248 tiles / 16px padding at 1280 to 192x297 / 24px
+     at 1920 (other rows keep 180x248). */
+  .games--first {
+    padding: 0 clamp(16px, 16px + (100vw - 1280px) * 0.0125, 24px);
+  }
+
+  .games--first .game-tile {
+    flex-basis: clamp(180px, 180px + (100vw - 1280px) * 0.01875, 192px);
+    width: auto;
+    height: clamp(248px, 248px + (100vw - 1280px) * 0.07734, 297.47px);
+  }
+
+  .games .section-header {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .games__row {
+    gap: 12px;
+  }
+
+  .game-tile {
+    flex: 0 0 180px;
+    width: 180px;
+    height: 248px;
+  }
+
+  .game-tile__play .btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Figma's background blur here has no fill, so it renders nothing. */
+  .game-tile__blur {
+    display: none;
+  }
+
+  .game-tile__play .btn--decorative {
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    box-shadow: inset 2px 2px 4px rgba(15, 15, 15, 0.25), inset -1px -1px 4px rgba(255, 255, 255, 0.1);
+  }
+
+  .game-tile__play-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .game-tile__fav--20 {
+    width: 20px;
+    height: 20px;
+  }
+
+  .game-tile__fav--16 {
+    width: 16px;
+    height: 16px;
+  }
+
+  .game-tile__title p {
+    top: 0;
+    font-size: 16px;
+  }
+
+  /* ------------------------------------------------------------------------
+     Sport — top events: three cards share the row
+     ------------------------------------------------------------------------ */
+  .sport {
+    padding: 0;
+  }
+
+  .events {
+    padding: 0 24px;
+  }
+
+  .event-card {
+    flex: 1 0 288px;
+    width: auto;
+  }
+
+  /* ------------------------------------------------------------------------
+     Providers
+     ------------------------------------------------------------------------ */
+  .providers {
+    padding: 8px 24px 12px;
+  }
+
+  .providers .section-header {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .providers__row {
+    padding: 0;
+  }
+
+  .providers__shadow {
+    display: none;
+  }
+
+  .provider-tile--gradient {
+    background-image: none;
+  }
+
+  .provider-tile--gradient::after {
+    display: none;
+  }
+
+  /* ------------------------------------------------------------------------
+     Prediction: four widgets fill the row, 304px minimum each
+     ------------------------------------------------------------------------ */
+  .prediction {
+    padding: 0 24px;
+  }
+
+  .prediction .section-header {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .category-tabs {
+    width: 100%;
+  }
+
+  .category-tab.is-active {
+    background: rgba(248, 248, 248, 0.2);
+  }
+
+  .prediction__cards {
+    display: flex;
+    gap: 8px;
+  }
+
+  .polybet {
+    flex: 1 0 304px;
+    width: auto;
+    /* 220px at 1280, 256px at 1920 */
+    height: clamp(220px, 220px + (100vw - 1280px) * 0.05625, 256px);
+  }
+
+  /* ------------------------------------------------------------------------
+     Last activity
+     ------------------------------------------------------------------------ */
+  .activity {
+    padding: 0 24px 40px;
+  }
+
+  .activity .section-header {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .activity__column {
+    padding: 0;
+  }
+
+  /* ------------------------------------------------------------------------
+     Footer
+     ------------------------------------------------------------------------ */
+  .footer {
+    padding: 0 24px;
+  }
+
+  .payments__header {
+    padding: 12px 8px 8px;
+  }
+
+  .payments__header .section-header__title {
+    flex: 0 0 auto;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .pill-btn.payments__see-all {
+    display: inline-flex;
+  }
+
+  .payments__box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin: 0;
+  }
+
+  .payments__row {
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .payments__cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .payments__cards > span {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .payments__cards span > span {
+    position: absolute;
+  }
+
+  .payments__cards img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .pay-visa {
+    width: 48px;
+    height: 16px;
+    overflow: hidden;
+  }
+
+  .pay-visa__1 { inset: 4.99% 51.65% 5.84% 35.18%; }
+  .pay-visa__2 { inset: 5.08% 63.03% 5.89% 8.39%; }
+  .pay-visa__3 { inset: 4.23% 80.73% 49.14% 0.35%; }
+  .pay-visa__4 { inset: 3.46% 27.34% 4.51% 48.35%; }
+  .pay-visa__5 { inset: 5.09% 0 5.79% 70.92%; }
+
+  .pay-mastercard {
+    width: 39px;
+    height: 23.088px;
+  }
+
+  .pay-apple {
+    width: 49px;
+    height: 20px;
+  }
+
+  .pay-google {
+    width: 54px;
+    height: 20px;
+    overflow: hidden;
+  }
+
+  .pay-google__g {
+    inset: -3.83% 67.53% 12.88% -1.41%;
+    -webkit-mask: url('../assets/img/pay-google-mask.svg') 0.762px 0.765px / 16.436px 16.667px no-repeat;
+    mask: url('../assets/img/pay-google-mask.svg') 0.762px 0.765px / 16.436px 16.667px no-repeat luminance;
+  }
+
+  .pay-google__p { inset: 4.17% 41.09% 22.21% 40.63%; }
+  .pay-google__a { inset: 23.7% 21.99% 20.57% 60.68%; }
+  .pay-google__y { inset: 25.35% 0 0 79.77%; }
+
+  .footer__bottom {
+    box-shadow: none;
+    border-top: 1px solid var(--c-bg-3);
+  }
+}
