@@ -13,7 +13,8 @@ The page is fluid:
   collapses it; once toggled, the choice is kept in `localStorage`. Between the frames rows of
   fixed-size tiles scroll horizontally and cards/banners stretch.
 
-- `index.html` – markup
+- `index.html` – home page; `casino.html`, `sport.html`, `prediction.html` – game halls
+- `css/halls.css` – styles of the game halls
 - `css/styles.css` – styles (design tokens as CSS variables on `:root`)
 - `js/main.js` – carousel pagination, tabs, coefficient selection
 - `assets/img/` – images and icons exported from Figma
@@ -85,3 +86,29 @@ Known differences from Figma:
   38px blur and are therefore almost invisible.
 
 Open `index.html` in a browser (mobile viewport, 320–480 px).
+
+Game halls (Figma file "Entrance - Sign Up - Log In": Casino `823:268537`,
+Sport `823:268844`, Prediction `823:269180`). The thematic cards of the home
+page, the Casino / Sport / Prediction tabs of the menu and the bottom tab bar
+link to them; the logo leads back home. All pages are generated from the same
+parts (menu, header, footer, pop-ups).
+
+- **Casino** – category tabs, game grids of whole rows (5 columns, 6 from
+  ~1240px of content) with "Load more", tile labels (New / Exclusive /
+  Freespins), category chips, Casino Live, bonuses & tournaments with a
+  running countdown. From 1920 the content is a centred 1280px column.
+- **Prediction** – bet menu, markets in 1/2/3 columns filtered by the
+  category tabs, betslip with stake / Max / potential winnings (on mobile the
+  stake form opens under the tapped outcome), welcome bonus widget.
+- **Sport** – bet menu, sport tabs, left column (time filter, tournaments,
+  countries, sports), tips, live leagues, express betslip (picks multiply the
+  odds, quick amounts, one pick per event; on mobile it is a bottom sheet
+  opened from the floating "Betslip" button), Live TV, side banners; mobile
+  blocks: top events, popular live, hot bets, jackpot, popular sport, trends,
+  express of the day with its own stake form.
+
+Differences from Figma: texts are in English and currencies are $; the desktop
+category chips of Casino use the mobile tile layout (the desktop Figma tiles
+are 40px high and clip their content); the bonus counters keep the 20% opacity
+of Figma and light up on hover; team crests in the sport cards are the two club
+logos used on the home page.

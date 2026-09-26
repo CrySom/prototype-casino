@@ -567,6 +567,10 @@
     }, 1000);
   }
 
+  var money = function (n) {
+    return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' $';
+  };
+
   // Betting pages: one pick at a time. Desktop fills the betslip in the
   // right column, mobile opens the stake form under the tapped row.
   var betButtons = document.querySelectorAll('[data-bet]');
@@ -576,9 +580,6 @@
     var amounts = document.querySelectorAll('[data-bet-amount]');
     var picked = null;
     var BALANCE = 1200;
-    var money = function (n) {
-      return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' $';
-    };
     var setText = function (sel, text) {
       document.querySelectorAll(sel).forEach(function (el) { el.textContent = text; });
     };
@@ -673,6 +674,162 @@
   document.querySelectorAll('[data-bonus-close]').forEach(function (btn) {
     btn.addEventListener('click', function () {
       btn.closest('[data-bonus-card]').hidden = true;
+    });
+  });
+
+  // Sport betslip: an express of the picked outcomes (one per event). The
+  // total odds multiply, the stake and quick amounts give the potential win.
+  var sslip = document.querySelector('[data-sslip]');
+  if (sslip) {
+    var picksEl = sslip.querySelector('[data-sslip-picks]');
+    var emptyEl = sslip.querySelector('[data-sslip-empty]');
+    var totalEl = sslip.querySelector('[data-sslip-total]');
+    var bonusEl = sslip.querySelector('[data-sslip-bonus]');
+    var amountEl = sslip.querySelector('[data-sslip-amount]');
+    var placeEl = sslip.querySelector('[data-sslip-place]');
+    var side = sslip.closest('.hall-side');
+    var fab = document.querySelector('[data-sslip-fab]');
+    var picks = [];
+    var SPORT_BALANCE = 1200;
+    var esc = function (t) { return t.replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+
+    var renderSlip = function () {
+      document.querySelectorAll('[data-sbet]').forEach(function (b) {
+        b.classList.toggle('is-selected', picks.some(function (p) { return p.btn === b; }));
+      });
+      picksEl.innerHTML = picks.map(function (p, i) {
+        return '<div class="betslip__pick"><div class="betslip__event">' + (p.live ? '<span class="betslip__event-icon"><img src="assets/img/bs-live.svg" alt=""></span>' : '') +
+          '<span class="betslip__event-icon"><img src="assets/img/bet-market.svg" alt=""></span><p>' + esc(p.event) + '</p></div>' +
+          '<p class="betslip__market">' + esc(p.market) + '</p><div class="betslip__outcome"><span>' + esc(p.outcome) + '</span><span>' + p.coef.toFixed(2) + '</span></div>' +
+          '<button class="betslip__remove" type="button" aria-label="Remove" data-sslip-remove="' + i + '"><img src="assets/img/bet-close.svg" alt=""></button></div>';
+      }).join('');
+      emptyEl.hidden = picks.length > 0;
+      var total = picks.reduce(function (t, p) { return t * p.coef; }, 1);
+      totalEl.textContent = picks.length ? total.toFixed(2) : '—';
+      bonusEl.textContent = picks.length >= 2 ? 'Express bonus +5% added' : 'Add ' + (2 - picks.length) + ' outcome' + (picks.length === 1 ? '' : 's') + ', get a bonus';
+      placeEl.disabled = !picks.length || !(parseFloat(amountEl.value) > 0);
+      var amount = parseFloat(amountEl.value) || 0;
+      placeEl.textContent = picks.length && amount ? 'Place a bet · ' + money(amount * total) : 'Place a bet';
+      if (fab) {
+        fab.hidden = DESKTOP.matches || !picks.length;
+        fab.querySelector('[data-sslip-count]').textContent = picks.length;
+        fab.querySelector('[data-sslip-fab-total]').textContent = picks.length ? total.toFixed(2) : '';
+      }
+      if (!picks.length && side) side.classList.remove('is-open');
+    };
+
+    document.querySelectorAll('[data-sbet]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var event = btn.getAttribute('data-event');
+        var existing = picks.findIndex(function (p) { return p.event === event; });
+        var same = existing >= 0 && picks[existing].btn === btn;
+        if (existing >= 0) picks.splice(existing, 1);
+        if (!same) {
+          picks.push({
+            btn: btn, event: event, market: btn.getAttribute('data-market'), outcome: btn.getAttribute('data-outcome'),
+            coef: parseFloat(btn.getAttribute('data-coef')), live: btn.hasAttribute('data-live')
+          });
+        }
+        renderSlip();
+      });
+    });
+    picksEl.addEventListener('click', function (event) {
+      var rm = event.target.closest('[data-sslip-remove]');
+      if (!rm) return;
+      picks.splice(Number(rm.getAttribute('data-sslip-remove')), 1);
+      renderSlip();
+    });
+    amountEl.addEventListener('input', renderSlip);
+    sslip.querySelectorAll('[data-sbet-quick]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var v = btn.getAttribute('data-sbet-quick');
+        amountEl.value = v === 'max' ? SPORT_BALANCE : v;
+        renderSlip();
+      });
+    });
+    sslip.querySelector('[data-sslip-clear]').addEventListener('click', function () {
+      picks = [];
+      renderSlip();
+    });
+    placeEl.addEventListener('click', function () {
+      placeEl.textContent = 'Bet placed';
+      placeEl.classList.add('is-done');
+      setTimeout(function () {
+        placeEl.classList.remove('is-done');
+        picks = [];
+        renderSlip();
+      }, 1400);
+    });
+    if (fab) {
+      fab.addEventListener('click', function () { side.classList.toggle('is-open'); });
+      document.addEventListener('click', function (event) {
+        if (side.classList.contains('is-open') && !side.contains(event.target) && !fab.contains(event.target) &&
+            !event.target.closest('[data-sbet]')) side.classList.remove('is-open');
+      });
+    }
+    DESKTOP.addEventListener('change', renderSlip);
+
+    // Start with two picks, as in Figma.
+    var initial = document.querySelectorAll('.leagues [data-sbet]');
+    if (DESKTOP.matches && initial.length > 4) {
+      initial[0].click();
+      initial[4].click();
+    } else {
+      renderSlip();
+    }
+  }
+
+  // Toggles, collapsible leagues / countries / express cards.
+  document.querySelectorAll('[data-toggle]').forEach(function (t) {
+    t.addEventListener('click', function () {
+      t.setAttribute('aria-checked', String(t.getAttribute('aria-checked') !== 'true'));
+    });
+  });
+  document.querySelectorAll('[data-league]').forEach(function (league) {
+    league.querySelector('.league__toggle').addEventListener('click', function () {
+      league.classList.toggle('is-open');
+    });
+  });
+  document.querySelectorAll('[data-country]').forEach(function (country) {
+    country.querySelector('.scountry__head').addEventListener('click', function () {
+      country.classList.toggle('is-open');
+    });
+  });
+
+  // Express of the day (mobile): stake, quick amounts, bonus and potential win.
+  document.querySelectorAll('[data-express]').forEach(function (card) {
+    var total = parseFloat(card.getAttribute('data-total'));
+    var input = card.querySelector('[data-x-amount]');
+    var update = function () {
+      var amount = parseFloat(input.value) || 0;
+      card.querySelector('[data-x-bonus]').textContent = money(amount * total * 0.15 / 10);
+      card.querySelector('[data-x-win]').textContent = money(amount * total);
+    };
+    card.querySelector('.express__head').addEventListener('click', function () { card.classList.toggle('is-open'); });
+    input.addEventListener('input', update);
+    card.querySelectorAll('[data-x-quick]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var v = btn.getAttribute('data-x-quick');
+        input.value = v === 'Max' ? 1200 : v;
+        update();
+      });
+    });
+    var place = card.querySelector('[data-x-place]');
+    place.addEventListener('click', function () {
+      place.textContent = 'Bet placed';
+      place.classList.add('is-done');
+      setTimeout(function () { place.textContent = 'Place a bet'; place.classList.remove('is-done'); }, 1400);
+    });
+    update();
+  });
+
+  // "Load more" on the sport page: repeat the cards of the block above.
+  document.querySelectorAll('[data-sport-more]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var list = btn.previousElementSibling;
+      Array.prototype.slice.call(list.children, 0, 2).forEach(function (card) {
+        list.appendChild(card.cloneNode(true));
+      });
     });
   });
 

@@ -1,0 +1,18 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="79" height="168" viewBox="0 0 79 168" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="glow">
+<path id="status glow" d="M0 0C20.9521 -6.84719e-07 41.0461 8.84998 55.8614 24.603C70.6768 40.3561 79 61.7218 79 84C79 106.278 70.6768 127.644 55.8615 143.397C41.0461 159.15 20.9521 168 2.06758e-05 168L0 0Z" fill="url(#paint0_radial_0_653)" fill-opacity="0.3"/>
+<rect id="Rectangle 8371" x="0.25" y="131.75" width="94.5" height="0.5" transform="rotate(-90 0.25 131.75)" stroke="url(#paint1_linear_0_653)" stroke-width="0.5"/>
+</g>
+<defs>
+<radialGradient id="paint0_radial_0_653" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1.12455e-05 84) scale(79 140.455)">
+<stop stop-color="#E8E8E8"/>
+<stop offset="0.6" stop-color="#E8E8E8" stop-opacity="0"/>
+<stop offset="1" stop-color="#0F0F0F" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="paint1_linear_0_653" x1="0" y1="133" x2="95" y2="133" gradientUnits="userSpaceOnUse">
+<stop stop-color="#E8E8E8" stop-opacity="0"/>
+<stop offset="0.5" stop-color="#E8E8E8" stop-opacity="0.5"/>
+<stop offset="1" stop-color="#E8E8E8" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>

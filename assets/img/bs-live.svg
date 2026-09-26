@@ -1,0 +1,15 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Live" clip-path="url(#clip0_0_374)">
+<circle id="Ellipse 35" opacity="0.6" cx="8" cy="8" r="7.33333" fill="url(#paint0_radial_0_374)"/>
+<circle id="Ellipse 33" cx="8" cy="8" r="2" fill="#F8F8F8"/>
+</g>
+<defs>
+<radialGradient id="paint0_radial_0_374" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(8 8) rotate(90) scale(7.33333)">
+<stop stop-color="#F8F8F8"/>
+<stop offset="1" stop-color="#F8F8F8" stop-opacity="0"/>
+</radialGradient>
+<clipPath id="clip0_0_374">
+<rect width="16" height="16" fill="white"/>
+</clipPath>
+</defs>
+</svg>
