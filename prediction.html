@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prediction — Crypto Casino</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Jost:wght@700&amp;family=Manrope:wght@700;800&amp;family=Roboto+Flex:opsz,wdth,wght,GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC@8..144,25..151,100..1000,-200..150,27..175,323..603,25..135,649..854,-305..-98,560..788,416..570,528..760&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/halls.css">
+<script>(function(){var s=null;try{s=localStorage.getItem('sidebar-state')}catch(e){}if(s?s==='open':window.innerWidth>1280)document.documentElement.classList.add('sidebar-open');try{if(localStorage.getItem('auth')==='1')document.documentElement.classList.add('is-auth')}catch(e){}})()</script>
+</head>
+<body>
+<div class="layout">
+
+  <!-- Desktop menu (1024px+): collapsed 72px / opened 210px -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__logo">
+      <a class="sidebar__logo-link" href="index.html" aria-label="Home"><img class="sidebar__logo-collapsed" src="assets/img/sb-logo-collapsed.svg" alt=""><img class="sidebar__logo-full" src="assets/img/sb-logo.svg" alt=""></a>
+    </div>
+    <nav class="sidebar__menu">
+      <label class="sb-search"><img class="icon-20" src="assets/img/icon-search.svg" alt=""><input class="sb-search__input" type="search" placeholder="Search games, providers, categories"></label>
+      <div class="sb-app sb-app--toggle"><button class="sb-cell" type="button" data-sidebar-toggle aria-controls="sidebar" aria-expanded="false" title="Open menu"><span class="sb-cell__icon"><img src="assets/img/sb-more.svg" alt=""></span></button></div>
+      <div class="sb-tabs"><a class="sb-tab" href="casino.html">Casino</a><a class="sb-tab" href="#">Sport</a><a class="sb-tab is-active" href="prediction.html">Prediction</a></div>
+      <div class="sb-app auth-only"><a class="sb-cell" href="#" title="Favorite Events"><span class="sb-cell__icon"><img src="assets/img/sb-favorites.svg" alt=""></span><span class="sb-cell__label">Favorite Events</span><span class="sb-cell__right"><span class="sb-badge">12</span></span></a><a class="sb-cell" href="#" title="My Bets"><span class="sb-cell__icon"><img src="assets/img/sb-bets.svg" alt=""></span><span class="sb-cell__label">My Bets</span></a></div>
+      <div class="sb-app"><a class="sb-cell" href="#" title="Sport"><span class="sb-cell__icon"><img src="assets/img/sb-sport.svg" alt=""></span><span class="sb-cell__label">Sport</span></a><a class="sb-cell" href="#" title="Live"><span class="sb-cell__icon"><img src="assets/img/sb-live.svg" alt=""></span><span class="sb-cell__label">Live</span></a><a class="sb-cell" href="#" title="E-sports"><span class="sb-cell__icon"><img src="assets/img/sb-esports.svg" alt=""></span><span class="sb-cell__label">E-sports</span></a><a class="sb-cell" href="#" title="V-sports"><span class="sb-cell__icon"><img src="assets/img/sb-vsports.svg" alt=""></span><span class="sb-cell__label">V-sports</span></a></div>
+      <div class="sb-app"><div class="sb-group" data-accordion><button class="sb-cell" type="button" title="TOP Sport"><span class="sb-cell__icon"><img src="assets/img/sb-top-sport.svg" alt=""></span><span class="sb-cell__label">TOP Sport</span><span class="sb-cell__right"><img src="assets/img/sb-chevron.svg" alt=""></span></button></div><div class="sb-group is-open" data-accordion><button class="sb-cell" type="button" title="Soccer"><span class="sb-cell__icon"><img src="assets/img/sb-soccer.svg" alt=""></span><span class="sb-cell__label">Soccer</span><span class="sb-cell__right"><img src="assets/img/sb-chevron.svg" alt=""></span></button><div class="sb-group__items"><a class="sb-cell sb-cell--sub" href="#" title="Live &amp; Upcoming"><span class="sb-cell__icon"><img src="assets/img/sb-live-results.svg" alt=""></span><span class="sb-cell__label">Live &amp; Upcoming</span></a><a class="sb-cell sb-cell--sub" href="#" title="Outrights"><span class="sb-cell__icon"><img src="assets/img/sb-game.svg" alt=""></span><span class="sb-cell__label">Outrights</span></a><a class="sb-cell sb-cell--sub" href="#" title="Premier League"><span class="sb-cell__icon"><img src="assets/img/sb-flag.png" alt=""></span><span class="sb-cell__label">Premier League</span></a><a class="sb-cell sb-cell--sub" href="#" title="La Liga"><span class="sb-cell__icon"><img src="assets/img/sb-flag.png" alt=""></span><span class="sb-cell__label">La Liga</span></a><a class="sb-cell sb-cell--sub" href="#" title="Serie A"><span class="sb-cell__icon"><img src="assets/img/sb-flag.png" alt=""></span><span class="sb-cell__label">Serie A</span></a><a class="sb-cell sb-cell--sub" href="#" title="View All"><span class="sb-cell__icon"><img src="assets/img/sb-view-all.svg" alt=""></span><span class="sb-cell__label">View All</span></a></div></div><div class="sb-group" data-accordion><button class="sb-cell" type="button" title="Tennis"><span class="sb-cell__icon"><img src="assets/img/sb-tennis.svg" alt=""></span><span class="sb-cell__label">Tennis</span><span class="sb-cell__right"><img src="assets/img/sb-chevron.svg" alt=""></span></button></div><div class="sb-group" data-accordion><button class="sb-cell" type="button" title="Baseball"><span class="sb-cell__icon"><img src="assets/img/sb-baseball.svg" alt=""></span><span class="sb-cell__label">Baseball</span><span class="sb-cell__right"><img src="assets/img/sb-chevron.svg" alt=""></span></button></div><div class="sb-group" data-accordion><button class="sb-cell" type="button" title="Cricket"><span class="sb-cell__icon"><img src="assets/img/sb-cricket.svg" alt=""></span><span class="sb-cell__label">Cricket</span><span class="sb-cell__right"><img src="assets/img/sb-chevron.svg" alt=""></span></button></div><div class="sb-group" data-accordion><button class="sb-cell" type="button" title="Basketball"><span class="sb-cell__icon"><img src="assets/img/sb-basketball.svg" alt=""></span><span class="sb-cell__label">Basketball</span><span class="sb-cell__right"><img src="assets/img/sb-chevron.svg" alt=""></span></button></div><div class="sb-group" data-accordion><button class="sb-cell" type="button" title="Dota 2"><span class="sb-cell__icon"><img src="assets/img/sb-dota.svg" alt=""></span><span class="sb-cell__label">Dota 2</span><span class="sb-cell__right"><img src="assets/img/sb-chevron.svg" alt=""></span></button></div><div class="sb-group" data-accordion><button class="sb-cell" type="button" title="American Football"><span class="sb-cell__icon"><img src="assets/img/sb-football.svg" alt=""></span><span class="sb-cell__label">American Football</span><span class="sb-cell__right"><img src="assets/img/sb-chevron.svg" alt=""></span></button></div><div class="sb-group" data-accordion><button class="sb-cell" type="button" title="CS2"><span class="sb-cell__icon"><img src="assets/img/sb-cs2.svg" alt=""></span><span class="sb-cell__label">CS2</span><span class="sb-cell__right"><img src="assets/img/sb-chevron.svg" alt=""></span></button></div><div class="sb-group" data-accordion><button class="sb-cell" type="button" title="League of Legends"><span class="sb-cell__icon"><img src="assets/img/sb-lol.svg" alt=""></span><span class="sb-cell__label">League of Legends</span><span class="sb-cell__right"><img src="assets/img/sb-chevron.svg" alt=""></span></button></div></div>
+      <div class="sb-app"><a class="sb-cell" href="#" title="Promotions"><span class="sb-cell__icon"><img src="assets/img/sb-promo.svg" alt=""></span><span class="sb-cell__label">Promotions</span><span class="sb-cell__right"><img src="assets/img/sb-arrow.svg" alt=""></span></a><a class="sb-cell" href="#" title="Tournaments"><span class="sb-cell__icon"><img src="assets/img/sb-tournament.svg" alt=""></span><span class="sb-cell__label">Tournaments</span><span class="sb-cell__right"><img src="assets/img/sb-arrow.svg" alt=""></span></a><a class="sb-cell" href="#" title="Quests Hub"><span class="sb-cell__icon"><img src="assets/img/sb-quests.svg" alt=""></span><span class="sb-cell__label">Quests Hub</span><span class="sb-cell__right"><img src="assets/img/sb-arrow.svg" alt=""></span></a><a class="sb-cell" href="#" title="Referral System"><span class="sb-cell__icon"><img src="assets/img/sb-referral.svg" alt=""></span><span class="sb-cell__label">Referral System</span><span class="sb-cell__right"><img src="assets/img/sb-arrow.svg" alt=""></span></a><a class="sb-cell" href="#" title="VIP Club"><span class="sb-cell__icon"><img src="assets/img/sb-vip.svg" alt=""></span><span class="sb-cell__label">VIP Club</span><span class="sb-cell__right"><img src="assets/img/sb-arrow.svg" alt=""></span></a></div>
+      <div class="sb-app"><a class="sb-cell" href="#" title="Chat"><span class="sb-cell__icon"><img src="assets/img/sb-chat.svg" alt=""></span><span class="sb-cell__label">Chat</span></a><a class="sb-cell" href="#" title="Responsible Gambling"><span class="sb-cell__icon"><img src="assets/img/sb-responsible.svg" alt=""></span><span class="sb-cell__label">Responsible Gambling</span></a></div>
+    </nav>
+    <div class="sidebar__bottom">
+      <div class="sidebar__shadow"></div>
+      <div class="sidebar__bottom-inner">
+        <div class="sb-promo-app" data-app-card>
+          <div class="sb-promo-app__text"><p class="sb-promo-app__title">Aplication</p><p class="sb-promo-app__sub">Extra Reward</p></div>
+          <span class="sb-promo-app__ellipse"><img src="assets/img/sb-app-ellipse.svg" alt=""></span>
+          <span class="sb-promo-app__phone"><img src="assets/img/sb-app-phone.png" alt=""></span>
+          <span class="sb-promo-app__stores"><img src="assets/img/sb-google-play.png" alt="Google Play"><img src="assets/img/sb-app-store.png" alt="App Store"></span>
+          <button class="sb-promo-app__close" type="button" aria-label="Close" data-app-card-close><img src="assets/img/sb-close.svg" alt=""></button>
+        </div>
+        <div class="sb-btns">
+          <button class="btn btn--secondary sb-btn sb-btn--support" type="button" aria-label="Support 24/7"><span class="sb-btn__icon sb-btn__icon--support"><img class="sb-btn__support-collapsed" src="assets/img/sb-support-collapsed.svg" alt=""><img class="sb-btn__support-full" src="assets/img/sb-support.svg" alt=""></span><span class="sb-btn__label">24/7</span></button>
+          <button class="btn btn--secondary sb-btn sb-btn--lang" type="button" aria-label="Language"><span class="sb-btn__icon sb-btn__icon--flag"><img src="assets/img/sb-flag-en.svg" alt=""></span><span class="sb-btn__label">EN</span></button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+<div class="page page--hall page--bet">
+
+  <!-- Header for web -->
+  <header class="header">
+    <a class="header__logo" href="index.html" aria-label="Home"><img src="assets/img/logo.svg" alt=""></a>
+    <nav class="header__nav"><a class="header__nav-item" href="#"><span class="header__nav-icon"><img src="assets/img/sb-promo.svg" alt=""></span><span>Promo</span></a><a class="header__nav-item" href="#"><span class="header__nav-icon"><img src="assets/img/hdr-tournament.svg" alt=""></span><span>Tournament</span></a><a class="header__nav-item" href="#"><span class="header__nav-icon"><img src="assets/img/sb-vip.svg" alt=""></span><span>VIP</span></a></nav>
+    <div class="header__btns guest-only">
+      <a class="btn btn--m btn--secondary" href="#signup" data-modal-open="signup">Sign up</a>
+      <a class="btn btn--m btn--primary" href="#login" data-modal-open="login">Sign in</a>
+    </div>
+    <div class="header__user auth-only">
+      <div class="balance">
+        <button class="balance__amount" type="button" aria-label="Balance"><span class="balance__icon"><img src="assets/img/hdr-eye.svg" alt=""></span><span class="balance__sum">1200.000000</span><span class="balance__currency"><img src="assets/img/hdr-usdt.svg" alt="USDT"></span><span class="balance__icon"><img src="assets/img/hdr-chevron.svg" alt=""></span></button>
+        <button class="balance__wallet" type="button" aria-label="Wallet"><img src="assets/img/hdr-wallet.svg" alt=""></button>
+      </div>
+      <button class="header__icon-btn" type="button" aria-label="Notifications"><img src="assets/img/hdr-bell.svg" alt=""></button>
+      <div class="header__profile">
+        <button class="header__icon-btn" type="button" aria-label="Profile" aria-expanded="false" data-profile-toggle><img src="assets/img/hdr-avatar.svg" alt=""></button>
+        <div class="profile-menu" hidden data-profile-menu>
+          <p class="profile-menu__name">Player #25432543</p>
+          <button class="profile-menu__item" type="button" data-logout>Log out</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Prediction hall (Figma 823:269180: mobile 823:269182, 1280 823:269194, 1920 823:269251) -->
+  <nav class="bet-menu" aria-label="Betting menu"><div class="bet-menu__main"><span class="bet-menu__search"><img src="assets/img/bm-search.svg" alt=""></span><span class="bet-menu__search-label">Search</span></div><span class="bet-menu__slant"><img src="assets/img/bm-slant.svg" alt=""></span><div class="bet-menu__links"><a class="bet-menu__link" href="#">Calendar</a><a class="bet-menu__link" href="#">Bet History</a><a class="bet-menu__link" href="#">Check Bet</a><a class="bet-menu__link" href="#">Results</a></div><button class="bet-menu__settings" type="button">Settings<span class="bet-menu__info"><img src="assets/img/bm-info.svg" alt=""></span><span class="bet-menu__chevron"><img src="assets/img/bm-chevron.svg" alt=""></span></button></nav>
+  <div class="hall-cols">
+    <div class="hall-main">
+      <div class="page-head"><h1 class="page-head__title">Predictions</h1></div>
+      <div class="hall-main__tabs" data-market-filter><div class="hall-tabs"><div class="hall-tabs__menu h-scroll" data-tabs><button class="hall-tab is-active" type="button"><span class="hall-tab__icon"><img src="assets/img/icon-top.svg" alt=""></span>Top</button><button class="hall-tab" type="button"><span class="hall-tab__icon"><img src="assets/img/icon-politics.svg" alt=""></span>Politics</button><button class="hall-tab" type="button"><span class="hall-tab__icon"><img src="assets/img/icon-tab-sport.svg" alt=""></span>Sport</button><button class="hall-tab" type="button"><span class="hall-tab__icon"><img src="assets/img/icon-tab-default.svg" alt=""></span>Culture</button><button class="hall-tab" type="button"><span class="hall-tab__icon"><img src="assets/img/icon-tab-default.svg" alt=""></span>Tech</button><button class="hall-tab" type="button"><span class="hall-tab__icon"><img src="assets/img/icon-tab-default.svg" alt=""></span>Space</button><button class="hall-tab" type="button"><span class="hall-tab__icon"><img src="assets/img/icon-tab-default.svg" alt=""></span>Celebrities</button><button class="hall-tab" type="button"><span class="hall-tab__icon"><img src="assets/img/icon-tab-default.svg" alt=""></span>Crypto</button><button class="hall-tab" type="button"><span class="hall-tab__icon"><img src="assets/img/icon-tab-default.svg" alt=""></span>Other</button></div><button class="hall-tabs__next" type="button" aria-label="Scroll" data-scroll-next><img src="assets/img/gh-chevron.svg" alt=""></button></div></div>
+      <div class="markets" data-markets>
+        <article class="market" data-market-cat="Politics">
+          <div class="market__head">
+            <img class="market__cover" src="assets/img/prediction-event.png" alt="">
+            <h3 class="market__title">Donald Trump offers</h3>
+            <a class="market__open" href="#" aria-label="Open market"><img src="assets/img/mk-chevron.svg" alt=""></a>
+          </div>
+          <p class="market__cat">Politics</p>
+          <div class="market__content"><div class="market__row"><p class="market__label">Donald Trump’s Offer for Greenland (Trillions of Dollars)</p><div class="market__outcomes"><div class="outcome outcome--positive"><button class="outcome__btn" type="button" data-bet data-bet-event-text="Donald Trump’s Offer for Greenland (Trillions of Dollars)" data-bet-market-text="Donald Trump offers" data-bet-outcome-text="Yes" data-coef="1.92"><span class="outcome__label">Yes</span><span class="outcome__coef">1.92</span></button><span class="outcome__pct">52%</span></div><div class="outcome outcome--negative"><button class="outcome__btn" type="button" data-bet data-bet-event-text="Donald Trump’s Offer for Greenland (Trillions of Dollars)" data-bet-market-text="Donald Trump offers" data-bet-outcome-text="No" data-coef="2.08"><span class="outcome__label">No</span><span class="outcome__coef">2.08</span></button><span class="outcome__pct">48%</span></div></div></div></div>
+          <div class="market__stats"><span class="market__stat"><img src="assets/img/icon-jackpot.svg" alt="">Volume: <b>2.1M $</b></span><span class="market__stat market__stat--bets"><img src="assets/img/icon-people.svg" alt="">Bets: 78 901</span></div>
+        </article>
+        <article class="market" data-market-cat="Culture">
+          <div class="market__head">
+            <img class="market__cover" src="assets/img/mk-eurovision.png" alt="">
+            <h3 class="market__title">Who will be the Eurovision Song Contest 2026 winner?</h3>
+            <a class="market__open" href="#" aria-label="Open market"><img src="assets/img/mk-chevron.svg" alt=""></a>
+          </div>
+          <p class="market__cat">Culture</p>
+          <div class="market__content"><div class="market__row"><p class="market__label">Finland</p><div class="market__outcomes"><div class="outcome outcome--positive"><button class="outcome__btn" type="button" data-bet data-bet-event-text="Finland" data-bet-market-text="Who will be the Eurovision Song Contest 2026 winner?" data-bet-outcome-text="Yes" data-coef="1.56"><span class="outcome__label">Yes</span><span class="outcome__coef">1.56</span></button><span class="outcome__pct">64%</span></div></div></div><div class="market__row"><p class="market__label">France</p><div class="market__outcomes"><div class="outcome outcome--positive"><button class="outcome__btn" type="button" data-bet data-bet-event-text="France" data-bet-market-text="Who will be the Eurovision Song Contest 2026 winner?" data-bet-outcome-text="Yes" data-coef="1.19"><span class="outcome__label">Yes</span><span class="outcome__coef">1.19</span></button><span class="outcome__pct">84%</span></div></div></div><div class="market__row"><p class="market__label">Denmark</p><div class="market__outcomes"><div class="outcome outcome--positive"><button class="outcome__btn" type="button" data-bet data-bet-event-text="Denmark" data-bet-market-text="Who will be the Eurovision Song Contest 2026 winner?" data-bet-outcome-text="Yes" data-coef="3.12"><span class="outcome__label">Yes</span><span class="outcome__coef">3.12</span></button><span class="outcome__pct">32%</span></div></div></div><a class="market__more" href="#">View all markets <img src="assets/img/chevron-slots.svg" alt=""></a></div>
+          <div class="market__stats"><span class="market__stat"><img src="assets/img/icon-jackpot.svg" alt="">Volume: <b>2.1M $</b></span><span class="market__stat market__stat--bets"><img src="assets/img/icon-people.svg" alt="">Bets: 78 901</span></div>
+        </article>
+        <article class="market" data-market-cat="Sport">
+          <div class="market__head">
+            <img class="market__cover" src="assets/img/mk-f1.png" alt="">
+            <h3 class="market__title">F1 Drivers’ Champion</h3>
+            <a class="market__open" href="#" aria-label="Open market"><img src="assets/img/mk-chevron.svg" alt=""></a>
+          </div>
+          <p class="market__cat">Sport</p>
+          <div class="market__content"><div class="market__row"><p class="market__label">George Russell</p><div class="market__outcomes"><div class="outcome outcome--positive"><button class="outcome__btn" type="button" data-bet data-bet-event-text="George Russell" data-bet-market-text="F1 Drivers’ Champion" data-bet-outcome-text="Yes" data-coef="1.92"><span class="outcome__label">Yes</span><span class="outcome__coef">1.92</span></button><span class="outcome__pct">52%</span></div><div class="outcome outcome--negative"><button class="outcome__btn" type="button" data-bet data-bet-event-text="George Russell" data-bet-market-text="F1 Drivers’ Champion" data-bet-outcome-text="No" data-coef="2.08"><span class="outcome__label">No</span><span class="outcome__coef">2.08</span></button><span class="outcome__pct">48%</span></div></div></div><div class="market__row"><p class="market__label">Max Verstappen</p><div class="market__outcomes"><div class="outcome outcome--positive"><button class="outcome__btn" type="button" data-bet data-bet-event-text="Max Verstappen" data-bet-market-text="F1 Drivers’ Champion" data-bet-outcome-text="Yes" data-coef="5.55"><span class="outcome__label">Yes</span><span class="outcome__coef">5.55</span></button><span class="outcome__pct">18%</span></div><div class="outcome outcome--negative"><button class="outcome__btn" type="button" data-bet data-bet-event-text="Max Verstappen" data-bet-market-text="F1 Drivers’ Champion" data-bet-outcome-text="No" data-coef="1.22"><span class="outcome__label">No</span><span class="outcome__coef">1.22</span></button><span class="outcome__pct">82%</span></div></div></div></div>
+          <div class="market__stats"><span class="market__stat"><img src="assets/img/icon-jackpot.svg" alt="">Volume: <b>3.3M $</b></span><span class="market__stat market__stat--bets"><img src="assets/img/icon-people.svg" alt="">Bets: 96 015</span></div>
+        </article>
+        <article class="market" data-market-cat="Sport">
+          <div class="market__head">
+            <img class="market__cover" src="assets/img/mk-ronaldo.png" alt="">
+            <h3 class="market__title">Football Milestones</h3>
+            <a class="market__open" href="#" aria-label="Open market"><img src="assets/img/mk-chevron.svg" alt=""></a>
+          </div>
+          <p class="market__cat">Sport</p>
+          <div class="market__content"><div class="market__row"><p class="market__label">Cristiano Ronaldo to score 1,000 career goals?</p><div class="market__outcomes"><div class="outcome outcome--positive"><button class="outcome__btn" type="button" data-bet data-bet-event-text="Cristiano Ronaldo to score 1,000 career goals?" data-bet-market-text="Football Milestones" data-bet-outcome-text="Yes" data-coef="1.10"><span class="outcome__label">Yes</span><span class="outcome__coef">1.10</span></button><span class="outcome__pct">96%</span></div><div class="outcome outcome--negative"><button class="outcome__btn" type="button" data-bet data-bet-event-text="Cristiano Ronaldo to score 1,000 career goals?" data-bet-market-text="Football Milestones" data-bet-outcome-text="No" data-coef="12.60"><span class="outcome__label">No</span><span class="outcome__coef">12.60</span></button><span class="outcome__pct">4%</span></div></div></div></div>
+          <div class="market__stats"><span class="market__stat"><img src="assets/img/icon-jackpot.svg" alt="">Volume: <b>1.7M $</b></span><span class="market__stat market__stat--bets"><img src="assets/img/icon-people.svg" alt="">Bets: 40 118</span></div>
+        </article>
+        <article class="market" data-market-cat="Crypto">
+          <div class="market__head">
+            <img class="market__cover" src="assets/img/thematic-casino.png" alt="">
+            <h3 class="market__title">Bitcoin price</h3>
+            <a class="market__open" href="#" aria-label="Open market"><img src="assets/img/mk-chevron.svg" alt=""></a>
+          </div>
+          <p class="market__cat">Crypto</p>
+          <div class="market__content"><div class="market__row"><p class="market__label">Will Bitcoin close above $150,000 this year?</p><div class="market__outcomes"><div class="outcome outcome--positive"><button class="outcome__btn" type="button" data-bet data-bet-event-text="Will Bitcoin close above $150,000 this year?" data-bet-market-text="Bitcoin price" data-bet-outcome-text="Yes" data-coef="1.64"><span class="outcome__label">Yes</span><span class="outcome__coef">1.64</span></button><span class="outcome__pct">61%</span></div><div class="outcome outcome--negative"><button class="outcome__btn" type="button" data-bet data-bet-event-text="Will Bitcoin close above $150,000 this year?" data-bet-market-text="Bitcoin price" data-bet-outcome-text="No" data-coef="2.56"><span class="outcome__label">No</span><span class="outcome__coef">2.56</span></button><span class="outcome__pct">39%</span></div></div></div></div>
+          <div class="market__stats"><span class="market__stat"><img src="assets/img/icon-jackpot.svg" alt="">Volume: <b>8.9M $</b></span><span class="market__stat market__stat--bets"><img src="assets/img/icon-people.svg" alt="">Bets: 210 087</span></div>
+        </article>
+        <article class="market" data-market-cat="Sport">
+          <div class="market__head">
+            <img class="market__cover" src="assets/img/thematic-sport.png" alt="">
+            <h3 class="market__title">Champions League winner</h3>
+            <a class="market__open" href="#" aria-label="Open market"><img src="assets/img/mk-chevron.svg" alt=""></a>
+          </div>
+          <p class="market__cat">Sport</p>
+          <div class="market__content"><div class="market__row"><p class="market__label">Real Madrid</p><div class="market__outcomes"><div class="outcome outcome--positive"><button class="outcome__btn" type="button" data-bet data-bet-event-text="Real Madrid" data-bet-market-text="Champions League winner" data-bet-outcome-text="Yes" data-coef="2.63"><span class="outcome__label">Yes</span><span class="outcome__coef">2.63</span></button><span class="outcome__pct">38%</span></div><div class="outcome outcome--negative"><button class="outcome__btn" type="button" data-bet data-bet-event-text="Real Madrid" data-bet-market-text="Champions League winner" data-bet-outcome-text="No" data-coef="1.45"><span class="outcome__label">No</span><span class="outcome__coef">1.45</span></button><span class="outcome__pct">62%</span></div></div></div><div class="market__row"><p class="market__label">Arsenal</p><div class="market__outcomes"><div class="outcome outcome--positive"><button class="outcome__btn" type="button" data-bet data-bet-event-text="Arsenal" data-bet-market-text="Champions League winner" data-bet-outcome-text="Yes" data-coef="4.35"><span class="outcome__label">Yes</span><span class="outcome__coef">4.35</span></button><span class="outcome__pct">23%</span></div><div class="outcome outcome--negative"><button class="outcome__btn" type="button" data-bet data-bet-event-text="Arsenal" data-bet-market-text="Champions League winner" data-bet-outcome-text="No" data-coef="1.30"><span class="outcome__label">No</span><span class="outcome__coef">1.30</span></button><span class="outcome__pct">77%</span></div></div></div></div>
+          <div class="market__stats"><span class="market__stat"><img src="assets/img/icon-jackpot.svg" alt="">Volume: <b>5.4M $</b></span><span class="market__stat market__stat--bets"><img src="assets/img/icon-people.svg" alt="">Bets: 120 344</span></div>
+        </article>
+        <article class="market" data-market-cat="Tech">
+          <div class="market__head">
+            <img class="market__cover" src="assets/img/thematic-prediction.png" alt="">
+            <h3 class="market__title">AI race</h3>
+            <a class="market__open" href="#" aria-label="Open market"><img src="assets/img/mk-chevron.svg" alt=""></a>
+          </div>
+          <p class="market__cat">Tech</p>
+          <div class="market__content"><div class="market__row"><p class="market__label">Will a new AI model top the leaderboard in June?</p><div class="market__outcomes"><div class="outcome outcome--positive"><button class="outcome__btn" type="button" data-bet data-bet-event-text="Will a new AI model top the leaderboard in June?" data-bet-market-text="AI race" data-bet-outcome-text="Yes" data-coef="1.43"><span class="outcome__label">Yes</span><span class="outcome__coef">1.43</span></button><span class="outcome__pct">70%</span></div><div class="outcome outcome--negative"><button class="outcome__btn" type="button" data-bet data-bet-event-text="Will a new AI model top the leaderboard in June?" data-bet-market-text="AI race" data-bet-outcome-text="No" data-coef="3.33"><span class="outcome__label">No</span><span class="outcome__coef">3.33</span></button><span class="outcome__pct">30%</span></div></div></div></div>
+          <div class="market__stats"><span class="market__stat"><img src="assets/img/icon-jackpot.svg" alt="">Volume: <b>1.2M $</b></span><span class="market__stat market__stat--bets"><img src="assets/img/icon-people.svg" alt="">Bets: 45 620</span></div>
+        </article>
+        <article class="market" data-market-cat="Politics">
+          <div class="market__head">
+            <img class="market__cover" src="assets/img/banner-player.png" alt="">
+            <h3 class="market__title">US Midterms</h3>
+            <a class="market__open" href="#" aria-label="Open market"><img src="assets/img/mk-chevron.svg" alt=""></a>
+          </div>
+          <p class="market__cat">Politics</p>
+          <div class="market__content"><div class="market__row"><p class="market__label">Republicans keep the House</p><div class="market__outcomes"><div class="outcome outcome--positive"><button class="outcome__btn" type="button" data-bet data-bet-event-text="Republicans keep the House" data-bet-market-text="US Midterms" data-bet-outcome-text="Yes" data-coef="1.75"><span class="outcome__label">Yes</span><span class="outcome__coef">1.75</span></button><span class="outcome__pct">57%</span></div><div class="outcome outcome--negative"><button class="outcome__btn" type="button" data-bet data-bet-event-text="Republicans keep the House" data-bet-market-text="US Midterms" data-bet-outcome-text="No" data-coef="2.33"><span class="outcome__label">No</span><span class="outcome__coef">2.33</span></button><span class="outcome__pct">43%</span></div></div></div><div class="market__row"><p class="market__label">Democrats win the Senate</p><div class="market__outcomes"><div class="outcome outcome--positive"><button class="outcome__btn" type="button" data-bet data-bet-event-text="Democrats win the Senate" data-bet-market-text="US Midterms" data-bet-outcome-text="Yes" data-coef="2.04"><span class="outcome__label">Yes</span><span class="outcome__coef">2.04</span></button><span class="outcome__pct">49%</span></div><div class="outcome outcome--negative"><button class="outcome__btn" type="button" data-bet data-bet-event-text="Democrats win the Senate" data-bet-market-text="US Midterms" data-bet-outcome-text="No" data-coef="1.96"><span class="outcome__label">No</span><span class="outcome__coef">1.96</span></button><span class="outcome__pct">51%</span></div></div></div></div>
+          <div class="market__stats"><span class="market__stat"><img src="assets/img/icon-jackpot.svg" alt="">Volume: <b>12.4M $</b></span><span class="market__stat market__stat--bets"><img src="assets/img/icon-people.svg" alt="">Bets: 301 552</span></div>
+        </article>
+        <article class="market" data-market-cat="Culture">
+          <div class="market__head">
+            <img class="market__cover" src="assets/img/vip-image.png" alt="">
+            <h3 class="market__title">Oscars 2027</h3>
+            <a class="market__open" href="#" aria-label="Open market"><img src="assets/img/mk-chevron.svg" alt=""></a>
+          </div>
+          <p class="market__cat">Culture</p>
+          <div class="market__content"><div class="market__row"><p class="market__label">Will a sci-fi film win Best Picture?</p><div class="market__outcomes"><div class="outcome outcome--positive"><button class="outcome__btn" type="button" data-bet data-bet-event-text="Will a sci-fi film win Best Picture?" data-bet-market-text="Oscars 2027" data-bet-outcome-text="Yes" data-coef="4.34"><span class="outcome__label">Yes</span><span class="outcome__coef">4.34</span></button><span class="outcome__pct">23%</span></div><div class="outcome outcome--negative"><button class="outcome__btn" type="button" data-bet data-bet-event-text="Will a sci-fi film win Best Picture?" data-bet-market-text="Oscars 2027" data-bet-outcome-text="No" data-coef="1.30"><span class="outcome__label">No</span><span class="outcome__coef">1.30</span></button><span class="outcome__pct">77%</span></div></div></div></div>
+          <div class="market__stats"><span class="market__stat"><img src="assets/img/icon-jackpot.svg" alt="">Volume: <b>620K $</b></span><span class="market__stat market__stat--bets"><img src="assets/img/icon-people.svg" alt="">Bets: 14 902</span></div>
+        </article>
+      </div>
+      <div class="inline-bet" data-inline-bet hidden>
+        <div class="bet-amount"><label class="bet-amount__field"><span class="bet-amount__label">Bet amount</span><input class="bet-amount__input" type="number" min="1" value="100" inputmode="decimal" data-bet-amount><span class="bet-amount__coin"><img src="assets/img/bet-coin.png" alt="USDT"></span></label><button class="bet-amount__max" type="button" data-bet-max>Max</button></div>
+        <div class="inline-bet__win"><span>Potential winnings</span><span data-bet-win>142 $</span></div>
+        <button class="btn betslip__place inline-bet__place" type="button" data-bet-place>Place a bet</button>
+      </div>
+      <nav class="crumbs" aria-label="Breadcrumbs"><a href="index.html" aria-label="Home"><img src="assets/img/bc-home.svg" alt=""></a><span class="crumbs__sep">/</span><a href="#">Sport</a><span class="crumbs__sep">/</span><a href="#">Polybet</a></nav>
+  <!-- Footer (logged in, Figma 630:31540) -->
+  <footer class="footer-legal">
+    <div class="footer-legal__group" data-footer-group>
+      <button class="footer-legal__title" type="button" aria-expanded="false">Online Casino Casino_name<span class="footer-legal__chevron"><img src="assets/img/footer-chevron.svg" alt=""></span></button>
+      <div class="footer-legal__panel"><p>Casino_name is an online casino with slots, live casino, sports betting and prediction markets. Play responsibly.</p></div>
+    </div>
+    <div class="footer-legal__group footer-legal__group--policies is-open" data-footer-group>
+      <button class="footer-legal__title" type="button" aria-expanded="true">Legal Policies<span class="footer-legal__chevron"><img src="assets/img/footer-chevron.svg" alt=""></span></button>
+      <ul class="footer-legal__list"><li><a href="#">Terms and Conditions</a></li><li><a href="#">Responsible Gaming Policy</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Bonus and Tournament Policy</a></li><li><a href="#">AML Policy</a></li></ul>
+    </div>
+    <div class="footer-legal__bottom">
+      <div class="footer-legal__text">
+        <p>[Brand Name] is operated by FELICAS B.V. registered under No 163070 at Schottegatweg Oost 10 Unit 1-9, Bon Bini Business Center, Curacao. FELICAS B.V. is licensed and regulated by Curacao Gaming Authority to offer games of chance under license number OGL/2024/891/0830 since 22.11.2024 for an indefinite period.</p>
+        <p>Gambling is strictly prohibited for individuals under the age of 18. For responsible gaming resources, please visit Responsible <a href="#">Gaming Policy</a>.</p>
+        <p>Contact us at: <a href="#">support@[brand-domain]</a></p>
+      </div>
+      <div class="footer-legal__badges">
+        <div class="footer-legal__rg">
+          <span class="footer-legal__18">18+</span>
+          <span class="footer-legal__play">Please<br>Play responsibly</span>
+          <span class="footer-legal__sep"></span>
+          <span class="footer-legal__ga"><img src="assets/img/gambleaware.svg" alt="GambleAware"></span>
+        </div>
+        <div class="footer-legal__seal">CGA License seal<br>150x85 px</div>
+      </div>
+    </div>
+  </footer>
+
+    </div>
+    <aside class="hall-side">
+      <section class="betslip" aria-label="Betslip" data-betslip>
+      <div class="betslip__head"><h2 class="betslip__title">Betslip</h2></div>
+      <div class="betslip__empty" data-betslip-empty hidden><p>Your betslip is empty</p><p>Tap an outcome to add it here</p></div>
+      <div class="betslip__body" data-betslip-body>
+        <div class="betslip__pick">
+          <div class="betslip__event"><span class="betslip__event-icon"><img src="assets/img/bet-market.svg" alt=""></span><p data-bet-event>Donald Trump’s Offer for Greenland (Trillions of Dollars)</p></div>
+          <p class="betslip__market" data-bet-market>Total</p>
+          <div class="betslip__outcome"><span data-bet-outcome>Yes</span><span data-bet-coef>1.42</span></div>
+          <button class="betslip__remove" type="button" aria-label="Remove" data-bet-remove><img src="assets/img/bet-close.svg" alt=""></button>
+        </div>
+        <div class="betslip__form">
+          <div class="bet-amount"><label class="bet-amount__field"><span class="bet-amount__label">Bet amount</span><input class="bet-amount__input" type="number" min="1" value="100" inputmode="decimal" data-bet-amount><span class="bet-amount__coin"><img src="assets/img/bet-coin.png" alt="USDT"></span></label><button class="bet-amount__max" type="button" data-bet-max>Max</button></div>
+          <div class="betslip__info">
+            <div class="betslip__row"><span>Total Odds</span><span class="betslip__odds" data-bet-total>1.42</span></div>
+            <div class="betslip__row"><span>Potential Winnings</span><span class="betslip__win" data-bet-win>142 $</span></div>
+          </div>
+          <button class="btn betslip__place" type="button" data-bet-place>Place a bet</button>
+        </div>
+      </div>
+    </section>
+      <section class="bonus-card" aria-label="Welcome bonus" data-bonus-card>
+      <div class="bonus-card__art"><img src="assets/img/bonus-art.png" alt=""></div>
+      <button class="bonus-card__close" type="button" aria-label="Hide" data-bonus-close><img src="assets/img/bonus-close.svg" alt=""></button>
+      <div class="bonus-card__content">
+        <h2 class="bonus-card__title">Welcome BONUS</h2>
+        <div class="bonus-card__timer"><p class="bonus-card__hint">Expires in</p><div class="countdown" data-countdown><span class="countdown__unit"><span class="countdown__num is-dim">00</span><span class="countdown__label">d</span></span><span class="countdown__sep">:</span><span class="countdown__unit"><span class="countdown__num">08</span><span class="countdown__label">h</span></span><span class="countdown__sep">:</span><span class="countdown__unit"><span class="countdown__num">07</span><span class="countdown__label">min</span></span><span class="countdown__sep">:</span><span class="countdown__unit"><span class="countdown__num">41</span><span class="countdown__label">sec</span></span></div></div>
+        <div class="bonus-card__progress">
+          <div class="bonus-card__bar"><span style="width: 17%"></span></div>
+          <div class="bonus-card__wagered"><span>Wagered:</span><span><b>17 000 $</b> / 100 000 $</span></div>
+        </div>
+        <div class="bonus-card__rows"><div class="bonus-card__row"><span>Bonus amount</span><span>3 500 $</span></div><div class="bonus-card__row"><span>Wager</span><span>x4</span></div><div class="bonus-card__row"><span>Wagering limit</span><span>100 000 $</span></div></div>
+        <div class="bonus-card__btns"><a class="btn bonus-card__play" href="casino.html">Wager</a><button class="bonus-card__decline" type="button" data-bonus-close>Decline bonus</button></div>
+      </div>
+    </section>
+    </aside>
+  </div>
+  <!-- Bottom tab bar (mobile) -->
+  <nav class="tab-bar">
+    <div class="tab-bar__tabs">
+      <a class="tab-bar__tab is-active" href="prediction.html"><span class="icon-20 tab-bar__icon-prediction"><img src="assets/img/tab-prediction.svg" alt=""></span><span>Prediction</span></a><a class="tab-bar__tab" href="#"><img class="icon-20" src="assets/img/tab-chat.png" alt=""><span>Social Chat</span></a><a class="tab-bar__tab" href="#"><img class="icon-20" src="assets/img/tab-sport.svg" alt=""><span>Sport</span></a><a class="tab-bar__tab" href="casino.html"><img class="icon-20" src="assets/img/tab-casino.svg" alt=""><span>Casino</span></a><a class="tab-bar__tab" href="#"><span class="icon-20 tab-bar__icon-menu" aria-hidden="true"><i></i><i></i><i></i></span><span>Menu</span></a>
+    </div>
+  </nav>
+
+</div>
+</div>
+  <!-- Log in / Sign up pop-up (Figma "Entrance - Sign Up - Log In": log in 14:29988,
+       94:85822, 14:30508, 94:90151; sign up 87:45267, 76:80830, 86:44644).
+       Prototype: a click / tap on a field fills it with demo data. -->
+  <div class="modal" id="auth" hidden>
+    <div class="modal__backdrop" data-modal-close></div>
+    <form class="reg-card" data-auth="login" role="dialog" aria-modal="true" aria-labelledby="login-title" novalidate hidden>
+      <div class="reg-card__header">
+        <h2 class="reg-card__title" id="login-title">Log in</h2>
+        <button class="reg-card__close" type="button" aria-label="Close" data-modal-close><img src="assets/img/reg-close.svg" alt=""></button>
+      </div>
+      <div class="page-tabs reg-tabs">
+        <div class="page-tabs__inner"><button class="page-tab is-active" type="button" data-auth-tab="login">Log in</button><button class="page-tab" type="button" data-auth-tab="signup">Sign up</button></div>
+      </div>
+      <div class="reg-card__fields">
+        <div class="reg-field reg-field--email" data-reg-field="email" data-value="a.bravo@gmail.com" role="button" tabindex="0"><span class="reg-field__icon reg-field__icon--email"><img src="assets/img/reg-email.svg" alt=""></span><span class="reg-field__content"><span class="reg-field__label">Email</span><span class="reg-field__value"></span></span></div><div class="reg-field reg-field--password" data-reg-field="password" data-value="Bravo1965!pass" role="button" tabindex="0"><span class="reg-field__icon reg-field__icon--password"><img src="assets/img/reg-lock.svg" alt=""></span><span class="reg-field__content"><span class="reg-field__label">Password</span><span class="reg-field__value"></span></span><span class="reg-field__eye" data-reg-eye role="button" tabindex="0" aria-label="Show password"><img src="assets/img/reg-eye.svg" alt=""></span></div>
+      </div>
+      <a class="reg-card__link" href="#">Forgot your password?<img src="assets/img/reg-link-underline-forgot.svg" alt=""></a>
+      <button class="btn reg-card__submit" type="submit" disabled>Log In</button>
+      <div class="reg-card__divider"><span><img src="assets/img/reg-divider.svg" alt=""></span><p>or log in directly with</p><span><img src="assets/img/reg-divider.svg" alt=""></span></div>
+      <div class="reg-social"><button class="reg-social__btn" type="button" aria-label="Google"><span class="reg-social__icon reg-social__icon--16"><img src="assets/img/reg-google.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Wallet"><span class="reg-social__icon "><img src="assets/img/reg-wallet.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="MetaMask"><span class="reg-social__icon reg-social__icon--metamask"><img src="assets/img/reg-metamask.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Telegram"><span class="reg-social__icon "><img src="assets/img/reg-telegram.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Apple"><span class="reg-social__icon "><img src="assets/img/reg-apple.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Instagram"><span class="reg-social__icon "><img src="assets/img/reg-instagram.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Facebook"><span class="reg-social__icon "><img src="assets/img/reg-facebook.svg" alt=""></span></button></div>
+    </form>
+    <form class="reg-card" data-auth="signup" role="dialog" aria-modal="true" aria-labelledby="signup-title" novalidate hidden>
+      <div class="reg-card__header">
+        <h2 class="reg-card__title" id="signup-title">Create account</h2>
+        <button class="reg-card__close" type="button" aria-label="Close" data-modal-close><img src="assets/img/reg-close.svg" alt=""></button>
+      </div>
+      <div class="page-tabs reg-tabs">
+        <div class="page-tabs__inner"><button class="page-tab" type="button" data-auth-tab="login">Log in</button><button class="page-tab is-active" type="button" data-auth-tab="signup">Sign up</button></div>
+      </div>
+      <div class="reg-card__fields">
+        <div class="reg-field reg-field--email" data-reg-field="email" data-value="a.bravo@gmail.com" role="button" tabindex="0"><span class="reg-field__icon reg-field__icon--email"><img src="assets/img/reg-email.svg" alt=""></span><span class="reg-field__content"><span class="reg-field__label">Email</span><span class="reg-field__value"></span></span></div><div class="reg-field reg-field--password" data-reg-field="password" data-value="Bravo1965!casino" role="button" tabindex="0"><span class="reg-field__icon reg-field__icon--password"><img src="assets/img/reg-lock.svg" alt=""></span><span class="reg-field__content"><span class="reg-field__label">Password</span><span class="reg-field__value"></span></span><span class="reg-field__eye" data-reg-eye role="button" tabindex="0" aria-label="Show password"><img src="assets/img/reg-eye.svg" alt=""></span></div><div class="reg-field reg-field--birth" data-reg-field="birth" data-value="23.05.1965" role="button" tabindex="0"><span class="reg-field__icon reg-field__icon--birth"><img src="assets/img/reg-calendar.svg" alt=""></span><span class="reg-field__content"><span class="reg-field__label">Date of Birth*</span><span class="reg-field__value"></span></span></div><div class="reg-field reg-field--promo" data-reg-field="promo" data-value="CasinoTOP" role="button" tabindex="0" hidden><span class="reg-field__content"><span class="reg-field__label">Promo code (optional)</span><span class="reg-field__value"></span></span></div>
+      </div>
+      <button class="reg-card__link" type="button" data-reg-promo>I have a promocode<img src="assets/img/reg-link-underline.svg" alt=""></button><div class="reg-card__checks">
+        <label class="reg-check reg-check--top"><input class="reg-check__input" type="checkbox" id="reg-terms"><span class="reg-check__box"><img class="reg-check__off" src="assets/img/reg-checkbox-off.svg" alt=""><img class="reg-check__on" src="assets/img/reg-checkbox-on.svg" alt=""></span><span class="reg-check__text">I&#39;m 18+ and I&#39;ve read the <a href="#">terms and conditions</a> and <a href="#">privacy policy</a></span></label>
+        <label class="reg-check"><input class="reg-check__input" type="checkbox" id="reg-news" checked><span class="reg-check__box"><img class="reg-check__off" src="assets/img/reg-checkbox-off.svg" alt=""><img class="reg-check__on" src="assets/img/reg-checkbox-on.svg" alt=""></span><span class="reg-check__text">Receive newsletters about promotions by email and SMS</span></label>
+      </div>
+      <button class="btn reg-card__submit" type="submit" disabled>Registration</button>
+      <div class="reg-card__divider"><span><img src="assets/img/reg-divider.svg" alt=""></span><p>or log in directly with</p><span><img src="assets/img/reg-divider.svg" alt=""></span></div>
+      <div class="reg-social"><button class="reg-social__btn" type="button" aria-label="Google"><span class="reg-social__icon reg-social__icon--16"><img src="assets/img/reg-google.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Wallet"><span class="reg-social__icon "><img src="assets/img/reg-wallet.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="MetaMask"><span class="reg-social__icon reg-social__icon--metamask"><img src="assets/img/reg-metamask.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Telegram"><span class="reg-social__icon "><img src="assets/img/reg-telegram.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Apple"><span class="reg-social__icon "><img src="assets/img/reg-apple.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Instagram"><span class="reg-social__icon "><img src="assets/img/reg-instagram.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Facebook"><span class="reg-social__icon "><img src="assets/img/reg-facebook.svg" alt=""></span></button></div>
+    </form>
+  </div>
+
+  <!-- Story viewer (Figma 630:32054 "Story Slide"). A tap on the left / right
+       half goes back / forward, each slide plays for 5 seconds. -->
+  <div class="story-view" id="story" role="dialog" aria-modal="true" aria-label="Story" hidden>
+    <div class="story-view__backdrop" data-story-close></div>
+    <div class="story-view__slide">
+      <img class="story-view__image" src="assets/img/story-slide.png" alt="">
+      <div class="story-view__content">
+        <div class="story-view__top">
+          <div class="story-view__steps" data-story-steps><span class="story-view__step"><i></i></span><span class="story-view__step"><i></i></span><span class="story-view__step"><i></i></span><span class="story-view__step"><i></i></span><span class="story-view__step"><i></i></span></div>
+          <div class="story-view__bar"><button class="story-view__close" type="button" aria-label="Close" data-story-close><img src="assets/img/story-close.svg" alt=""></button></div>
+        </div>
+        <div class="story-view__nav"><button type="button" aria-label="Previous" data-story-prev></button><button type="button" aria-label="Next" data-story-next></button></div>
+        <div class="story-view__bottom">
+          <div class="story-view__text">
+            <p class="story-view__title" data-story-title>Title Example</p>
+            <p class="story-view__desc">Text example: when you exchange cryptocurrency, it is treated as a deposit; therefore, a wagering requirement applies to withdrawals.</p>
+          </div>
+          <a class="btn story-view__btn" href="#"><img src="assets/img/story-wallet.svg" alt=""><span>Deposit</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

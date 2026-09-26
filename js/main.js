@@ -567,6 +567,115 @@
     }, 1000);
   }
 
+  // Betting pages: one pick at a time. Desktop fills the betslip in the
+  // right column, mobile opens the stake form under the tapped row.
+  var betButtons = document.querySelectorAll('[data-bet]');
+  if (betButtons.length) {
+    var slip = document.querySelector('[data-betslip]');
+    var inline = document.querySelector('[data-inline-bet]');
+    var amounts = document.querySelectorAll('[data-bet-amount]');
+    var picked = null;
+    var BALANCE = 1200;
+    var money = function (n) {
+      return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' $';
+    };
+    var setText = function (sel, text) {
+      document.querySelectorAll(sel).forEach(function (el) { el.textContent = text; });
+    };
+    var recalc = function () {
+      var amount = parseFloat(amounts[0].value) || 0;
+      var coef = picked ? parseFloat(picked.getAttribute('data-coef')) : 0;
+      setText('[data-bet-win]', money(amount * coef));
+    };
+    var pick = function (btn, openInline) {
+      if (picked) picked.classList.remove('is-selected');
+      picked = btn;
+      if (slip) {
+        slip.querySelector('[data-betslip-empty]').hidden = !!btn;
+        slip.querySelector('[data-betslip-body]').hidden = !btn;
+      }
+      if (!btn) {
+        if (inline) inline.hidden = true;
+        return;
+      }
+      btn.classList.add('is-selected');
+      setText('[data-bet-event]', btn.getAttribute('data-bet-event-text'));
+      setText('[data-bet-market]', btn.getAttribute('data-bet-market-text'));
+      setText('[data-bet-outcome]', btn.getAttribute('data-bet-outcome-text'));
+      setText('[data-bet-coef]', btn.getAttribute('data-coef'));
+      setText('[data-bet-total]', btn.getAttribute('data-coef'));
+      if (inline && openInline) {
+        var row = btn.closest('.market__row, .ev-row');
+        row.parentNode.insertBefore(inline, row.nextSibling);
+        inline.hidden = false;
+      }
+      recalc();
+    };
+
+    betButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (btn === picked) pick(null);
+        else pick(btn, !DESKTOP.matches);
+      });
+    });
+    amounts.forEach(function (input) {
+      input.addEventListener('input', function () {
+        amounts.forEach(function (other) { if (other !== input) other.value = input.value; });
+        recalc();
+      });
+    });
+    document.querySelectorAll('[data-bet-max]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        amounts.forEach(function (input) { input.value = BALANCE; });
+        recalc();
+      });
+    });
+    document.querySelectorAll('[data-bet-remove]').forEach(function (btn) {
+      btn.addEventListener('click', function () { pick(null); });
+    });
+    document.querySelectorAll('[data-bet-place]').forEach(function (btn) {
+      var label = btn.textContent;
+      btn.addEventListener('click', function () {
+        if (!picked) return;
+        btn.textContent = 'Bet placed';
+        btn.classList.add('is-done');
+        setTimeout(function () {
+          btn.textContent = label;
+          btn.classList.remove('is-done');
+          pick(null);
+        }, 1400);
+      });
+    });
+    // On desktop the betslip starts with the first outcome, as in Figma.
+    if (DESKTOP.matches) pick(betButtons[0], false);
+    else pick(null);
+  }
+
+  // Prediction hall: the category tabs filter the markets ("Top" shows all).
+  var marketFilter = document.querySelector('[data-market-filter]');
+  if (marketFilter) {
+    var markets = document.querySelectorAll('[data-market-cat]');
+    marketFilter.addEventListener('click', function (event) {
+      var tab = event.target.closest('.hall-tab');
+      if (!tab) return;
+      var cat = tab.textContent.trim();
+      var any = Array.prototype.some.call(markets, function (m) { return m.getAttribute('data-market-cat') === cat; });
+      markets.forEach(function (m) {
+        m.hidden = cat !== 'Top' && any && m.getAttribute('data-market-cat') !== cat;
+        m.classList.remove('is-swapping');
+        void m.offsetWidth;
+        m.classList.add('is-swapping');
+      });
+    });
+  }
+
+  // Welcome bonus widget: close / decline hide it.
+  document.querySelectorAll('[data-bonus-close]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      btn.closest('[data-bonus-card]').hidden = true;
+    });
+  });
+
   // Coefficients: toggle selection.
   document.querySelectorAll('.coef').forEach(function (coef) {
     coef.addEventListener('click', function () {
