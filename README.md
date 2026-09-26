@@ -149,7 +149,7 @@ English names and currency symbols; the game card on desktop and the game page
 from 768px have no Figma layout and follow the mobile one.
 
 Profile (`profile.html`, built from the provided mockup with the Style Guide
-Molecules "Profile components"): reached from the avatar menu in the header;
+Molecules "Profile components"): the avatar in the header opens it;
 the Menu tab of the bottom bar is active on it.
 
 - **Personal data** – player card with the level avatar, VIP progress and
