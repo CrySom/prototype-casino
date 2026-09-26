@@ -903,6 +903,7 @@
         im.src = IMGP + cur.icon;
         im.alt = cur.code;
       });
+      document.querySelectorAll('[data-balance-code]').forEach(function (el) { el.textContent = cur.code; });
 
       // Dropdown
       var q = dropSearch.value.trim().toLowerCase();
@@ -946,7 +947,7 @@
       document.querySelector('[data-wrecent-block]').hidden = !wstate.recent.length || !!fq;
     };
 
-    var balanceBox = document.querySelector('.header .balance');
+    var balanceBox = document.querySelector('[data-balance-box]');
     var dropToggle = document.querySelector('[data-balance-toggle]');
     var setDrop = function (open) {
       wdrop.hidden = !open;
@@ -1046,6 +1047,107 @@
       });
     });
     renderWallet();
+  }
+
+  // Play flow: a game tile opens the game card (Demo / Play, game currency);
+  // the game page gets a demo label, a close button and a favourite star.
+  var favKey = 'game-fav';
+  var isFav = function () { try { return localStorage.getItem(favKey) === '1'; } catch (e) { return false; } };
+  var setFav = function (on) {
+    try { localStorage.setItem(favKey, on ? '1' : '0'); } catch (e) {}
+    document.querySelectorAll('[data-gp-fav], [data-game-fav]').forEach(function (b) {
+      b.classList.toggle('is-active', on);
+      b.setAttribute('aria-pressed', String(on));
+      b.setAttribute('aria-label', on ? 'Remove from favorites' : 'Add to favorites');
+    });
+  };
+  document.querySelectorAll('[data-gp-fav], [data-game-fav]').forEach(function (b) {
+    b.addEventListener('click', function () { setFav(!isFav()); });
+  });
+  setFav(isFav());
+
+  var gp = document.querySelector('[data-gpreview]');
+  if (gp) {
+    var gpList = gp.querySelector('[data-gp-list]');
+    var gpToggle = gp.querySelector('[data-gp-toggle]');
+    var gpLast = null;
+    var setGpList = function (open) {
+      gpList.hidden = !open;
+      gpToggle.setAttribute('aria-expanded', String(open));
+      gp.classList.toggle('is-list', open);
+    };
+    var openGp = function () {
+      gpLast = document.activeElement;
+      // Mobile: the card drops down under the header while it is on screen.
+      var hdr = document.querySelector('.header');
+      gp.style.top = (!DESKTOP.matches && hdr ? Math.max(0, hdr.getBoundingClientRect().bottom) : 0) + 'px';
+      gp.hidden = false;
+      root.classList.add('modal-open');
+      gp.querySelector('.wmodal__close').focus();
+    };
+    var closeGp = function (keepFocus) {
+      if (gp.hidden) return;
+      gp.hidden = true;
+      setGpList(false);
+      root.classList.remove('modal-open');
+      if (!keepFocus && gpLast) gpLast.focus({ preventScroll: true });
+    };
+    var selectGameCurrency = function (code) {
+      var row = gpList.querySelector('[data-gp-cur="' + code + '"]');
+      if (!row) return;
+      gpList.querySelectorAll('[data-gp-cur]').forEach(function (r) {
+        r.classList.toggle('is-active', r === row);
+        r.setAttribute('aria-selected', String(r === row));
+      });
+      gp.querySelector('[data-gp-sym]').textContent = row.getAttribute('data-gp-sym');
+      gp.querySelector('[data-gp-code]').textContent = code;
+    };
+
+    document.addEventListener('click', function (event) {
+      var tile = event.target.closest('a[data-game]');
+      if (!tile || event.defaultPrevented) return;
+      event.preventDefault();
+      openGp();
+    });
+    gp.querySelectorAll('[data-gp-close]').forEach(function (b) {
+      b.addEventListener('click', function () { closeGp(); });
+    });
+    gp.querySelectorAll('[data-modal-open]').forEach(function (b) {
+      b.addEventListener('click', function () { closeGp(true); });
+    });
+    gpToggle.addEventListener('click', function () { setGpList(gpList.hidden); });
+    gpList.addEventListener('click', function (event) {
+      var row = event.target.closest('[data-gp-cur]');
+      if (!row) return;
+      var code = row.getAttribute('data-gp-cur');
+      selectGameCurrency(code);
+      try { localStorage.setItem('game-currency', code); } catch (e) {}
+      setGpList(false);
+      gpToggle.focus();
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key !== 'Escape' || gp.hidden) return;
+      if (!gpList.hidden) {
+        setGpList(false);
+        gpToggle.focus();
+      } else {
+        closeGp();
+      }
+    });
+    try { selectGameCurrency(localStorage.getItem('game-currency') || 'EUR'); } catch (e) {}
+  }
+
+  var slotHeader = document.querySelector('.slot-header');
+  if (slotHeader) {
+    slotHeader.querySelector('[data-game-demo]').hidden = !/[?&]demo=1\b/.test(location.search);
+    slotHeader.querySelector('[data-game-close]').addEventListener('click', function (event) {
+      var sameSite = false;
+      try { sameSite = !!document.referrer && new URL(document.referrer).origin === location.origin; } catch (e) {}
+      if (sameSite && history.length > 1) {
+        event.preventDefault();
+        history.back();
+      }
+    });
   }
 
   // Coefficients: toggle selection.

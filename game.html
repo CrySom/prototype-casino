@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hot Fruits 100 — Crypto Casino</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Jost:wght@700&amp;family=Manrope:wght@700;800&amp;family=Roboto+Flex:opsz,wdth,wght,GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC@8..144,25..151,100..1000,-200..150,27..175,323..603,25..135,649..854,-305..-98,560..788,416..570,528..760&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/wallet.css">
+<link rel="stylesheet" href="css/play.css">
+<script>(function(){var s=null;try{s=localStorage.getItem('sidebar-state')}catch(e){}if(s?s==='open':window.innerWidth>1280)document.documentElement.classList.add('sidebar-open');try{if(localStorage.getItem('auth')==='1')document.documentElement.classList.add('is-auth');if((JSON.parse(localStorage.getItem('wallet-state')||'{}')).hidden)document.documentElement.classList.add('is-balance-hidden')}catch(e){}})()</script>
+</head>
+<body class="game-body">
+<div class="gpage">
+  <!-- Header for Slots (461:61998 guest, 461:62005 logged in) -->
+  <header class="slot-header">
+    <a class="slot-header__logo guest-only" href="index.html" aria-label="Home"><img src="assets/img/logo.svg" alt=""></a>
+    <a class="slot-header__icon auth-only" href="casino.html" aria-label="Close game" data-game-close><img src="assets/img/gp-close.svg" alt=""></a>
+    <span class="slot-header__demo" hidden data-game-demo>Demo</span>
+    <div class="slot-header__btns guest-only">
+      <a class="btn btn--m btn--secondary" href="#login" data-modal-open="login">Sign in</a>
+      <a class="btn btn--m btn--primary" href="#signup" data-modal-open="signup">Sign up</a>
+    </div>
+    <div class="slot-header__btns auth-only">
+      <div class="balance slot-balance" data-balance-box>
+        <button class="slot-balance__toggle" type="button" aria-label="Currencies" aria-expanded="false" data-balance-toggle>
+          <span class="balance__currency"><img src="assets/img/currency-t.png" alt="USDT"></span>
+          <span class="slot-balance__code" data-balance-code>USDT</span>
+          <span class="balance__chevron"><img src="assets/img/hdr-chevron.svg" alt=""></span>
+        </button>
+        <button class="slot-balance__wallet" type="button" aria-label="Wallet" data-wallet-open><img src="assets/img/gp-wallet.svg" alt=""></button>
+      </div>
+      <button class="slot-header__fav" type="button" aria-label="Add to favorites" aria-pressed="false" data-game-fav><img src="assets/img/gp-star.svg" alt=""></button>
+    </div>
+  </header>
+
+  <main class="gpage__game">
+    <img class="gpage__screen" src="assets/img/gp-slot.jpg" alt="Hot Fruits 100 by Amatic">
+  </main>
+</div>
+  <!-- Log in / Sign up pop-up (Figma "Entrance - Sign Up - Log In": log in 14:29988,
+       94:85822, 14:30508, 94:90151; sign up 87:45267, 76:80830, 86:44644).
+       Prototype: a click / tap on a field fills it with demo data. -->
+  <div class="modal" id="auth" hidden>
+    <div class="modal__backdrop" data-modal-close></div>
+    <form class="reg-card" data-auth="login" role="dialog" aria-modal="true" aria-labelledby="login-title" novalidate hidden>
+      <div class="reg-card__header">
+        <h2 class="reg-card__title" id="login-title">Log in</h2>
+        <button class="reg-card__close" type="button" aria-label="Close" data-modal-close><img src="assets/img/reg-close.svg" alt=""></button>
+      </div>
+      <div class="page-tabs reg-tabs">
+        <div class="page-tabs__inner"><button class="page-tab is-active" type="button" data-auth-tab="login">Log in</button><button class="page-tab" type="button" data-auth-tab="signup">Sign up</button></div>
+      </div>
+      <div class="reg-card__fields">
+        <div class="reg-field reg-field--email" data-reg-field="email" data-value="a.bravo@gmail.com" role="button" tabindex="0"><span class="reg-field__icon reg-field__icon--email"><img src="assets/img/reg-email.svg" alt=""></span><span class="reg-field__content"><span class="reg-field__label">Email</span><span class="reg-field__value"></span></span></div><div class="reg-field reg-field--password" data-reg-field="password" data-value="Bravo1965!pass" role="button" tabindex="0"><span class="reg-field__icon reg-field__icon--password"><img src="assets/img/reg-lock.svg" alt=""></span><span class="reg-field__content"><span class="reg-field__label">Password</span><span class="reg-field__value"></span></span><span class="reg-field__eye" data-reg-eye role="button" tabindex="0" aria-label="Show password"><img src="assets/img/reg-eye.svg" alt=""></span></div>
+      </div>
+      <a class="reg-card__link" href="#">Forgot your password?<img src="assets/img/reg-link-underline-forgot.svg" alt=""></a>
+      <button class="btn reg-card__submit" type="submit" disabled>Log In</button>
+      <div class="reg-card__divider"><span><img src="assets/img/reg-divider.svg" alt=""></span><p>or log in directly with</p><span><img src="assets/img/reg-divider.svg" alt=""></span></div>
+      <div class="reg-social"><button class="reg-social__btn" type="button" aria-label="Google"><span class="reg-social__icon reg-social__icon--16"><img src="assets/img/reg-google.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Wallet"><span class="reg-social__icon "><img src="assets/img/reg-wallet.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="MetaMask"><span class="reg-social__icon reg-social__icon--metamask"><img src="assets/img/reg-metamask.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Telegram"><span class="reg-social__icon "><img src="assets/img/reg-telegram.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Apple"><span class="reg-social__icon "><img src="assets/img/reg-apple.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Instagram"><span class="reg-social__icon "><img src="assets/img/reg-instagram.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Facebook"><span class="reg-social__icon "><img src="assets/img/reg-facebook.svg" alt=""></span></button></div>
+    </form>
+    <form class="reg-card" data-auth="signup" role="dialog" aria-modal="true" aria-labelledby="signup-title" novalidate hidden>
+      <div class="reg-card__header">
+        <h2 class="reg-card__title" id="signup-title">Create account</h2>
+        <button class="reg-card__close" type="button" aria-label="Close" data-modal-close><img src="assets/img/reg-close.svg" alt=""></button>
+      </div>
+      <div class="page-tabs reg-tabs">
+        <div class="page-tabs__inner"><button class="page-tab" type="button" data-auth-tab="login">Log in</button><button class="page-tab is-active" type="button" data-auth-tab="signup">Sign up</button></div>
+      </div>
+      <div class="reg-card__fields">
+        <div class="reg-field reg-field--email" data-reg-field="email" data-value="a.bravo@gmail.com" role="button" tabindex="0"><span class="reg-field__icon reg-field__icon--email"><img src="assets/img/reg-email.svg" alt=""></span><span class="reg-field__content"><span class="reg-field__label">Email</span><span class="reg-field__value"></span></span></div><div class="reg-field reg-field--password" data-reg-field="password" data-value="Bravo1965!casino" role="button" tabindex="0"><span class="reg-field__icon reg-field__icon--password"><img src="assets/img/reg-lock.svg" alt=""></span><span class="reg-field__content"><span class="reg-field__label">Password</span><span class="reg-field__value"></span></span><span class="reg-field__eye" data-reg-eye role="button" tabindex="0" aria-label="Show password"><img src="assets/img/reg-eye.svg" alt=""></span></div><div class="reg-field reg-field--birth" data-reg-field="birth" data-value="23.05.1965" role="button" tabindex="0"><span class="reg-field__icon reg-field__icon--birth"><img src="assets/img/reg-calendar.svg" alt=""></span><span class="reg-field__content"><span class="reg-field__label">Date of Birth*</span><span class="reg-field__value"></span></span></div><div class="reg-field reg-field--promo" data-reg-field="promo" data-value="CasinoTOP" role="button" tabindex="0" hidden><span class="reg-field__content"><span class="reg-field__label">Promo code (optional)</span><span class="reg-field__value"></span></span></div>
+      </div>
+      <button class="reg-card__link" type="button" data-reg-promo>I have a promocode<img src="assets/img/reg-link-underline.svg" alt=""></button><div class="reg-card__checks">
+        <label class="reg-check reg-check--top"><input class="reg-check__input" type="checkbox" id="reg-terms"><span class="reg-check__box"><img class="reg-check__off" src="assets/img/reg-checkbox-off.svg" alt=""><img class="reg-check__on" src="assets/img/reg-checkbox-on.svg" alt=""></span><span class="reg-check__text">I&#39;m 18+ and I&#39;ve read the <a href="#">terms and conditions</a> and <a href="#">privacy policy</a></span></label>
+        <label class="reg-check"><input class="reg-check__input" type="checkbox" id="reg-news" checked><span class="reg-check__box"><img class="reg-check__off" src="assets/img/reg-checkbox-off.svg" alt=""><img class="reg-check__on" src="assets/img/reg-checkbox-on.svg" alt=""></span><span class="reg-check__text">Receive newsletters about promotions by email and SMS</span></label>
+      </div>
+      <button class="btn reg-card__submit" type="submit" disabled>Registration</button>
+      <div class="reg-card__divider"><span><img src="assets/img/reg-divider.svg" alt=""></span><p>or log in directly with</p><span><img src="assets/img/reg-divider.svg" alt=""></span></div>
+      <div class="reg-social"><button class="reg-social__btn" type="button" aria-label="Google"><span class="reg-social__icon reg-social__icon--16"><img src="assets/img/reg-google.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Wallet"><span class="reg-social__icon "><img src="assets/img/reg-wallet.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="MetaMask"><span class="reg-social__icon reg-social__icon--metamask"><img src="assets/img/reg-metamask.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Telegram"><span class="reg-social__icon "><img src="assets/img/reg-telegram.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Apple"><span class="reg-social__icon "><img src="assets/img/reg-apple.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Instagram"><span class="reg-social__icon "><img src="assets/img/reg-instagram.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Facebook"><span class="reg-social__icon "><img src="assets/img/reg-facebook.svg" alt=""></span></button></div>
+    </form>
+  </div>
+
+  <!-- Balance dropdown (Figma "Wallet" 334:418761: Balance Dropdown 334:419346) -->
+  <div class="wdrop" id="wallet-drop" hidden data-wdrop>
+    <div class="wsearch"><label class="wsearch__field"><img src="assets/img/wl-search.svg" alt=""><input type="search" placeholder="Search currencies" autocomplete="off" data-wdrop-search></label><span class="wsearch__tools"><button type="button" aria-label="Sort"><img src="assets/img/wl-list.svg" alt=""></button><button type="button" aria-label="Favorites"><img src="assets/img/wl-star.svg" alt=""></button></span></div>
+    <div class="wlist" data-wdrop-list></div>
+    <div class="wempty" hidden data-w-empty><img src="assets/img/currency-usd.png" alt=""><p class="wempty__title">No currencies found</p><p class="wempty__text">Try searching by a different currency name or code.</p></div>
+    <div class="wdrop__btns">
+      <button class="btn btn--secondary wbtn" type="button" data-wallet-open>Wallet</button>
+      <button class="btn btn--secondary wbtn" type="button" data-wsettings-open>Balance Settings</button>
+    </div>
+    <a class="btn wbtn wbtn--primary" href="#"><img src="assets/img/wl-deposit.svg" alt=""><span>Deposit</span></a>
+  </div>
+
+  <!-- Wallet (334:419971) -->
+  <div class="wmodal" id="wallet" hidden data-wmodal="wallet">
+    <div class="wmodal__backdrop" data-wmodal-close></div>
+    <section class="wmodal__card wmodal__card--wallet" role="dialog" aria-modal="true" aria-label="Wallet">
+      <div class="wmodal__head"><h2 class="wmodal__title">Wallet</h2><button class="wmodal__close" type="button" aria-label="Close" data-wmodal-close><img src="assets/img/wl-close.svg" alt=""></button></div>
+      <div class="wtabs" data-tabs><button class="wtab is-active" type="button" data-wtab="wallet">Wallet</button><button class="wtab" type="button" data-wtab="buy">Buy Crypto</button><button class="wtab" type="button" data-wtab="swap">Swap</button></div>
+      <div class="wpane" data-wpane="wallet">
+        <div class="wtotal">
+          <p class="wtotal__label">Total Real Balance<button class="wtotal__eye" type="button" aria-label="Hide balance" data-balance-eye><img class="balance__eye-off" src="assets/img/wl-eye-off.svg" alt=""><img class="balance__eye-on" src="assets/img/hdr-eye.svg" alt=""></button></p>
+          <div class="wtotal__row"><p class="wtotal__sum" data-wallet-total>$1,250.00</p><button class="wtotal__fiat" type="button" data-wfiat-open><span data-wallet-fiat>USD</span><img src="assets/img/wl-chevron.svg" alt=""></button></div>
+        </div>
+        <div class="wactions"><a class="btn btn--secondary wbtn" href="#"><img src="assets/img/wl-withdraw.svg" alt=""><span>Withdraw</span></a><a class="btn wbtn wbtn--primary" href="#"><img src="assets/img/wl-deposit.svg" alt=""><span>Deposit</span></a></div>
+        <div class="wtable"><div class="wtable__head"><span>Currencies</span><span>Balance</span></div><div class="wlist" data-wallet-list></div></div>
+      </div>
+      <div class="wpane wpane--soon" data-wpane="buy" hidden><p>Buy crypto with a bank card or other payment methods.</p><p>This screen is not part of the prototype yet.</p></div>
+      <div class="wpane wpane--soon" data-wpane="swap" hidden><p>Swap one currency for another at the current rate.</p><p>This screen is not part of the prototype yet.</p></div>
+    </section>
+  </div>
+
+  <!-- Balance Settings (334:420233) -->
+  <div class="wmodal wmodal--sheet" id="balance-settings" hidden data-wmodal="settings">
+    <div class="wmodal__backdrop" data-wmodal-close></div>
+    <section class="wmodal__card" role="dialog" aria-modal="true" aria-label="Balance Settings">
+      <div class="wmodal__head"><h2 class="wmodal__title">Balance Settings</h2><button class="wmodal__close" type="button" aria-label="Close" data-wmodal-close><img src="assets/img/wl-close.svg" alt=""></button></div>
+      <div class="wcells">
+        <label class="wcell"><span class="wcell__icon"><img src="assets/img/wl-eye-off-24.svg" alt=""></span><span class="wcell__text"><span>Hide Zero Balances</span><small>Currencies with zero balances will be hidden from the list.</small></span>
+          <input class="wcell__check" type="checkbox" data-whide-zero><span class="wcell__box"><img class="reg-check__off" src="assets/img/reg-checkbox-off.svg" alt=""><img class="reg-check__on" src="assets/img/reg-checkbox-on.svg" alt=""></span></label>
+        <button class="wcell" type="button" data-wfiat-open><span class="wcell__icon"><img src="assets/img/wl-settings.svg" alt=""></span><span class="wcell__text"><span>Display Crypto in Fiat</span><small data-wfiat-hint>All bets &amp; transactions will be settled in the crypto equivalent</small></span>
+          <span class="wcell__nav"><img src="assets/img/wl-nav.svg" alt=""></span></button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Display Crypto in Fiat (334:420346) -->
+  <div class="wmodal wmodal--sheet" id="display-fiat" hidden data-wmodal="fiat">
+    <div class="wmodal__backdrop" data-wmodal-close></div>
+    <section class="wmodal__card" role="dialog" aria-modal="true" aria-label="Display Crypto in Fiat">
+      <div class="wmodal__head"><h2 class="wmodal__title">Display Crypto in Fiat</h2><button class="wmodal__close" type="button" aria-label="Close" data-wmodal-close><img src="assets/img/wl-close.svg" alt=""></button></div>
+      <div class="wsearch"><label class="wsearch__field"><img src="assets/img/wl-search.svg" alt=""><input type="search" placeholder="Search currencies" autocomplete="off" data-wfiat-search></label><span class="wsearch__tools"><button type="button" aria-label="Sort"><img src="assets/img/wl-list.svg" alt=""></button><button type="button" aria-label="Favorites"><img src="assets/img/wl-star.svg" alt=""></button></span></div>
+      <div class="wrecent" data-wrecent-block><p class="wsub">Recently used currencies</p><div class="wrecent__chips" data-wrecent></div></div>
+      <p class="wsub">Fiat currency</p>
+      <div class="wlist wlist--fiat" data-wfiat-list></div>
+      <div class="wempty" hidden data-w-empty><img src="assets/img/currency-usd.png" alt=""><p class="wempty__title">No currencies found</p><p class="wempty__text">Try searching by a different currency name or code.</p></div>
+    </section>
+  </div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

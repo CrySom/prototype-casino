@@ -1,0 +1,516 @@
+/* Play flow (Figma "Entrance - Sign Up - Log In", Game Page 389:253407):
+   game card opened from a game tile, game page with the slot header. */
+
+/* Game card ------------------------------------------------------------------ */
+.gpreview[hidden],
+.gplist[hidden],
+.slot-header__demo[hidden] {
+  display: none;
+}
+
+.gpreview {
+  position: fixed;
+  inset: 0;
+  z-index: 115;
+  display: flex;
+  flex-direction: column;
+}
+
+.gpreview__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(18, 18, 18, 0.85);
+}
+
+.gpreview__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-height: 100%;
+  padding: 12px 24px;
+  overflow-y: auto;
+  background: var(--c-bg-2);
+  animation: gp-down 0.2s ease;
+}
+
+.gpreview.is-list .gpreview__card {
+  flex: 1 1 auto;
+}
+
+@keyframes gp-down {
+  from { transform: translateY(-16px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+.gpreview__head {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.gpreview__head .wmodal__close {
+  width: 26px;
+  height: 26px;
+}
+
+.gpreview__game {
+  display: flex;
+  gap: 12px;
+}
+
+/* Tile: the Figma "hovered" game tile */
+.gpreview__tile {
+  position: relative;
+  flex-shrink: 0;
+  width: 114px;
+  height: 157px;
+  overflow: hidden;
+  border-radius: var(--radius-2);
+}
+
+.gpreview__img,
+.gpreview__dim {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.gpreview__img {
+  object-fit: cover;
+}
+
+.gpreview__dim {
+  background: rgba(18, 18, 18, 0.65);
+}
+
+.gpreview__fav {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 16px;
+  height: 16px;
+  opacity: 0.6;
+  transition: opacity 0.15s ease;
+}
+
+.gpreview__fav.is-active,
+.gpreview__fav:hover {
+  opacity: 1;
+}
+
+.gpreview__fav img {
+  width: 16px;
+  height: 16px;
+}
+
+.gpreview__play {
+  position: absolute;
+  top: 50.5px;
+  left: 37px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+}
+
+.gpreview__play img {
+  width: 24px;
+  height: 24px;
+}
+
+.gpreview__label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 0;
+}
+
+.gpreview__title {
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--f-roboto-flex);
+  font-weight: 1000;
+  font-size: 16px;
+  line-height: 16px;
+  text-align: center;
+  text-transform: uppercase;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-variation-settings: 'GRAD' 73, 'XOPQ' 83, 'XTRA' 440, 'YOPQ' 79, 'YTAS' 750, 'YTDE' -197, 'YTFI' 738, 'YTLC' 570, 'YTUC' 760, 'wdth' 100, 'opsz' 45;
+}
+
+.gpreview__label .game-tile__provider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 41px;
+  height: 17px;
+}
+
+.gpreview__label .game-tile__provider img {
+  width: 41px;
+  height: 8px;
+  object-fit: cover;
+}
+
+.gpreview__info {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  min-width: 0;
+  padding: 12px 0;
+}
+
+.gpreview__text {
+  flex: 1 1 auto;
+}
+
+.gpreview__name {
+  margin: 0;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.15px;
+}
+
+.gpreview__provider {
+  margin: 0;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--c-secondary);
+}
+
+.gpreview__btns {
+  display: flex;
+  gap: 10px;
+}
+
+.gpbtn {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 40px;
+  padding: 0 12px;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+/* Game currency field */
+.gpreview__currency {
+  padding: 4px 0;
+}
+
+.gpfield {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  height: 48px;
+  padding: 0 12px;
+  border: 1px solid var(--c-bg-6);
+  border-radius: var(--radius-4);
+  background: var(--c-bg-1);
+  text-align: left;
+  transition: border-color 0.15s ease;
+}
+
+.gpfield:hover,
+.gpfield[aria-expanded="true"] {
+  border-color: var(--c-accent);
+}
+
+.gpfield__label {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--c-txt-75);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gpfield__value {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--c-txt-75);
+  white-space: nowrap;
+}
+
+.gpfield__code {
+  font-weight: 400;
+  color: var(--c-white);
+}
+
+.gpfield__chevron,
+.gpfield__chevron img {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.gpfield__chevron img {
+  transition: transform 0.2s ease;
+}
+
+.gpfield[aria-expanded="true"] .gpfield__chevron img {
+  transform: rotate(180deg);
+}
+
+/* Currency list */
+.gplist {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: -4px;
+}
+
+.gprow .wrow__icon img {
+  width: 24px;
+  height: 24px;
+}
+
+.gprow__check {
+  display: flex;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.gprow__check img {
+  width: 16px;
+  height: 16px;
+}
+
+.gprow .reg-check__on,
+.gprow.is-active .reg-check__off {
+  display: none;
+}
+
+.gprow.is-active .reg-check__on {
+  display: block;
+}
+
+.gprow.is-active {
+  background: none;
+}
+
+.gprow.is-active:hover {
+  background: var(--c-bg-4);
+}
+
+/* Desktop: a centred card */
+@media (min-width: 1024px) {
+  .gpreview {
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .gpreview__card {
+    max-width: 480px;
+    max-height: calc(100vh - 48px);
+    border: 1px solid var(--c-bg-3);
+    border-radius: var(--radius-2);
+    animation: none;
+  }
+
+  .gpreview.is-list .gpreview__card {
+    flex: 0 1 auto;
+  }
+}
+
+/* Game page -------------------------------------------------------------------- */
+.game-body {
+  background: var(--c-bg-1);
+}
+
+.gpage {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+}
+
+.slot-header {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 4px 8px;
+  background: var(--c-bg-4);
+}
+
+.slot-header__logo {
+  display: flex;
+  align-items: center;
+  width: 36px;
+  height: 28px;
+}
+
+.slot-header__logo img {
+  width: 36px;
+  height: 24px;
+}
+
+.slot-header__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-2);
+}
+
+.slot-header__icon img,
+.slot-balance__wallet img,
+.slot-header__fav img {
+  width: 20px;
+  height: 20px;
+}
+
+.slot-header__demo {
+  padding: 2px 6px;
+  border-radius: var(--radius-2);
+  background: var(--c-bg-7);
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 12px;
+  text-transform: uppercase;
+}
+
+.slot-header__btns {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.slot-header__btns.auth-only {
+  gap: 8px;
+}
+
+.slot-balance__toggle {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 90px;
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-4) 0 0 var(--radius-4);
+  background: var(--c-bg-1);
+  transition: border-color 0.15s ease;
+}
+
+.slot-balance.is-open .slot-balance__toggle {
+  border-color: var(--c-secondary);
+}
+
+.slot-balance .balance__currency {
+  margin-left: 0;
+}
+
+.slot-balance .balance__chevron {
+  display: flex;
+  width: 16px;
+  height: 16px;
+}
+
+.slot-balance .balance__chevron img {
+  width: 16px;
+  height: 16px;
+}
+
+.slot-balance__code {
+  flex: 1 1 auto;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: left;
+}
+
+.slot-balance__wallet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 0 var(--radius-4) var(--radius-4) 0;
+  background: var(--c-brand);
+}
+
+.slot-header__fav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(15, 15, 15, 0);
+  border-radius: var(--radius-4);
+  background: var(--c-bg-7);
+  transition: background-color 0.15s ease;
+}
+
+.slot-header__fav img {
+  transition: filter 0.15s ease;
+}
+
+.slot-header__fav.is-active {
+  background: var(--c-brand);
+}
+
+.slot-header__fav.is-active img {
+  filter: grayscale(1) invert(1);
+}
+
+.gpage__game {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--c-bg-1);
+}
+
+.gpage__screen {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: top;
+}
+
+.game-body .wdrop {
+  top: 40px;
+}
+
+/* Tablet and desktop: the whole game is shown, header grows */
+@media (min-width: 768px) {
+  .gpage__screen {
+    object-position: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  .slot-header {
+    height: 56px;
+    padding: 12px 16px;
+  }
+
+  .game-body .wdrop {
+    top: 56px;
+    right: 16px;
+  }
+
+  .gpage__game {
+    padding: 16px;
+  }
+}
