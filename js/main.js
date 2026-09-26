@@ -499,6 +499,74 @@
     });
   }
 
+  // Game hall grids (desktop): show whole rows only; "Load more" adds as many
+  // rows as the section starts with (demo tiles are copies of the first ones).
+  var DESKTOP = window.matchMedia('(min-width: 1024px)');
+  var hallGrids = [];
+  document.querySelectorAll('.hall-games').forEach(function (section) {
+    var grid = section.querySelector('.hall-games__grid');
+    var rows = Number(grid.getAttribute('data-grid-rows')) || 1;
+    var base = grid.children.length;
+    var state = { grid: grid, rows: rows, pages: 1 };
+
+    state.layout = function () {
+      var tiles = grid.children;
+      if (!DESKTOP.matches) {
+        grid.classList.remove('is-laid-out');
+        Array.prototype.forEach.call(tiles, function (t) { t.classList.remove('is-hidden'); });
+        return;
+      }
+      var cols = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+      var need = cols * rows * state.pages;
+      while (grid.children.length < need) {
+        grid.appendChild(grid.children[1 + (grid.children.length % (base - 1))].cloneNode(true));
+      }
+      Array.prototype.forEach.call(grid.children, function (t, i) {
+        t.classList.toggle('is-hidden', i >= need);
+      });
+      grid.classList.add('is-laid-out');
+    };
+
+    section.querySelector('[data-load-more]').addEventListener('click', function () {
+      state.pages += 1;
+      state.layout();
+    });
+    hallGrids.push(state);
+  });
+
+  if (hallGrids.length) {
+    var relayout = function () {
+      hallGrids.forEach(function (g) { g.layout(); });
+    };
+    relayout();
+    window.addEventListener('resize', relayout);
+    // The menu width changes the number of columns too.
+    new MutationObserver(relayout).observe(root, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  // Category tabs: the arrow scrolls the row.
+  document.querySelectorAll('[data-scroll-next]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      btn.parentElement.querySelector('.h-scroll').scrollBy({ left: 240, behavior: 'smooth' });
+    });
+  });
+
+  // Tournament countdowns (demo: all run from the same time).
+  var countdowns = document.querySelectorAll('[data-countdown]');
+  if (countdowns.length) {
+    var left = 8 * 3600 + 7 * 60 + 41;
+    var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+    setInterval(function () {
+      left = left > 0 ? left - 1 : 8 * 3600;
+      var parts = [Math.floor(left / 86400), Math.floor(left / 3600) % 24, Math.floor(left / 60) % 60, left % 60];
+      Array.prototype.forEach.call(countdowns, function (cd) {
+        Array.prototype.forEach.call(cd.querySelectorAll('.countdown__num'), function (el, i) {
+          el.textContent = pad(parts[i]);
+        });
+      });
+    }, 1000);
+  }
+
   // Coefficients: toggle selection.
   document.querySelectorAll('.coef').forEach(function (coef) {
     coef.addEventListener('click', function () {

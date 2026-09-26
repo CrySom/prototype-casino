@@ -1,0 +1,13 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="41.5" height="41" viewBox="0 0 41.5 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Icon Container">
+<path id="Rectangle 161125973" d="M20.625 19.375L38.2929 1.70711C38.9229 1.07714 40 1.52331 40 2.41421V39C40 39.5523 39.5523 40 39 40H2.41421C1.52331 40 1.07714 38.9229 1.70711 38.2929L20.625 19.375Z" fill="#F8F8F8"/>
+<g id="call_made">
+<mask id="mask0_0_107" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="17" y="17" width="25" height="24">
+<rect id="Bounding box" width="24" height="24" transform="matrix(1 0 0 -1 17.5 41)" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_0_107)">
+<path id="call_made_2" d="M23.0537 22L22 23.0538L33.4462 34.5H26.5V36H36V26.5H34.5V33.4462L23.0537 22Z" fill="#121212"/>
+</g>
+</g>
+</g>
+</svg>
