@@ -1985,6 +1985,19 @@ a {
   background: var(--c-accent);
 }
 
+/* Icon colour follows the tab state (the exported glyphs are baked in one colour). */
+.tab-bar__tab img {
+  filter: brightness(0) invert(0.396);
+}
+
+.tab-bar__tab.is-active img {
+  filter: brightness(0) invert(1);
+}
+
+.tab-bar__tab.is-active .tab-bar__icon-menu i {
+  background: var(--c-brand);
+}
+
 .tab-bar__icon-menu i:nth-child(1) { top: 25%; }
 .tab-bar__icon-menu i:nth-child(2) { top: 45.83%; }
 .tab-bar__icon-menu i:nth-child(3) { top: 66.67%; }
