@@ -53,7 +53,7 @@
     <nav class="header__nav"><a class="header__nav-item" href="#"><span class="header__nav-icon"><img src="assets/img/sb-promo.svg" alt=""></span><span>Promo</span></a><a class="header__nav-item" href="#"><span class="header__nav-icon"><img src="assets/img/hdr-tournament.svg" alt=""></span><span>Tournament</span></a><a class="header__nav-item" href="#"><span class="header__nav-icon"><img src="assets/img/sb-vip.svg" alt=""></span><span>VIP</span></a></nav>
     <div class="header__btns">
       <a class="btn btn--m btn--secondary" href="#signup" data-modal-open="signup">Sign up</a>
-      <a class="btn btn--m btn--primary" href="#signup" data-modal-open="signup">Sign in</a>
+      <a class="btn btn--m btn--primary" href="#login" data-modal-open="login">Sign in</a>
     </div>
   </header>
 
@@ -344,29 +344,39 @@
 
 </div>
 </div>
-  <!-- Registration (Figma "registration-card": 87:45267, 76:80830, 86:44644).
+  <!-- Log in / Sign up pop-up (Figma "Entrance - Sign Up - Log In": log in 14:29988,
+       94:85822, 14:30508, 94:90151; sign up 87:45267, 76:80830, 86:44644).
        Prototype: a click / tap on a field fills it with demo data. -->
-  <div class="modal" id="signup" hidden>
+  <div class="modal" id="auth" hidden>
     <div class="modal__backdrop" data-modal-close></div>
-    <form class="reg-card" role="dialog" aria-modal="true" aria-labelledby="reg-title" novalidate>
+    <form class="reg-card" data-auth="login" role="dialog" aria-modal="true" aria-labelledby="login-title" novalidate hidden>
       <div class="reg-card__header">
-        <h2 class="reg-card__title" id="reg-title">Create account</h2>
+        <h2 class="reg-card__title" id="login-title">Log in</h2>
         <button class="reg-card__close" type="button" aria-label="Close" data-modal-close><img src="assets/img/reg-close.svg" alt=""></button>
       </div>
       <div class="page-tabs reg-tabs">
-        <div class="page-tabs__inner" data-tabs>
-          <button class="page-tab" type="button">Log in</button>
-          <button class="page-tab is-active" type="button">Sign up</button>
-        </div>
+        <div class="page-tabs__inner"><button class="page-tab is-active" type="button" data-auth-tab="login">Log in</button><button class="page-tab" type="button" data-auth-tab="signup">Sign up</button></div>
       </div>
       <div class="reg-card__fields">
-        <div class="reg-field reg-field--email" data-reg-field="email" data-value="a.bravo@gmail.com" role="button" tabindex="0"><span class="reg-field__icon reg-field__icon--email"><img src="assets/img/reg-email.svg" alt=""></span><span class="reg-field__content"><span class="reg-field__label">Email</span><span class="reg-field__value"></span></span></div>
-        <div class="reg-field reg-field--password" data-reg-field="password" data-value="Bravo1965!casino" role="button" tabindex="0"><span class="reg-field__icon reg-field__icon--password"><img src="assets/img/reg-lock.svg" alt=""></span><span class="reg-field__content"><span class="reg-field__label">Password</span><span class="reg-field__value"></span></span><span class="reg-field__eye" data-reg-eye role="button" tabindex="0" aria-label="Show password"><img src="assets/img/reg-eye.svg" alt=""></span></div>
-        <div class="reg-field reg-field--birth" data-reg-field="birth" data-value="23.05.1965" role="button" tabindex="0"><span class="reg-field__icon reg-field__icon--birth"><img src="assets/img/reg-calendar.svg" alt=""></span><span class="reg-field__content"><span class="reg-field__label">Date of Birth*</span><span class="reg-field__value"></span></span></div>
-        <div class="reg-field reg-field--promo" data-reg-field="promo" data-value="CasinoTOP" role="button" tabindex="0" hidden><span class="reg-field__content"><span class="reg-field__label">Promo code (optional)</span><span class="reg-field__value"></span></span></div>
+        <div class="reg-field reg-field--email" data-reg-field="email" data-value="a.bravo@gmail.com" role="button" tabindex="0"><span class="reg-field__icon reg-field__icon--email"><img src="assets/img/reg-email.svg" alt=""></span><span class="reg-field__content"><span class="reg-field__label">Email</span><span class="reg-field__value"></span></span></div><div class="reg-field reg-field--password" data-reg-field="password" data-value="Bravo1965!pass" role="button" tabindex="0"><span class="reg-field__icon reg-field__icon--password"><img src="assets/img/reg-lock.svg" alt=""></span><span class="reg-field__content"><span class="reg-field__label">Password</span><span class="reg-field__value"></span></span><span class="reg-field__eye" data-reg-eye role="button" tabindex="0" aria-label="Show password"><img src="assets/img/reg-eye.svg" alt=""></span></div>
       </div>
-      <button class="reg-card__promo-link" type="button" data-reg-promo><span>I have a promocode</span><img src="assets/img/reg-link-underline.svg" alt=""></button>
-      <div class="reg-card__checks">
+      <a class="reg-card__link" href="#">Forgot your password?<img src="assets/img/reg-link-underline-forgot.svg" alt=""></a>
+      <button class="btn reg-card__submit" type="submit" disabled>Log In</button>
+      <div class="reg-card__divider"><span><img src="assets/img/reg-divider.svg" alt=""></span><p>or log in directly with</p><span><img src="assets/img/reg-divider.svg" alt=""></span></div>
+      <div class="reg-social"><button class="reg-social__btn" type="button" aria-label="Google"><span class="reg-social__icon reg-social__icon--16"><img src="assets/img/reg-google.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Wallet"><span class="reg-social__icon "><img src="assets/img/reg-wallet.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="MetaMask"><span class="reg-social__icon reg-social__icon--metamask"><img src="assets/img/reg-metamask.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Telegram"><span class="reg-social__icon "><img src="assets/img/reg-telegram.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Apple"><span class="reg-social__icon "><img src="assets/img/reg-apple.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Instagram"><span class="reg-social__icon "><img src="assets/img/reg-instagram.svg" alt=""></span></button><button class="reg-social__btn" type="button" aria-label="Facebook"><span class="reg-social__icon "><img src="assets/img/reg-facebook.svg" alt=""></span></button></div>
+    </form>
+    <form class="reg-card" data-auth="signup" role="dialog" aria-modal="true" aria-labelledby="signup-title" novalidate hidden>
+      <div class="reg-card__header">
+        <h2 class="reg-card__title" id="signup-title">Create account</h2>
+        <button class="reg-card__close" type="button" aria-label="Close" data-modal-close><img src="assets/img/reg-close.svg" alt=""></button>
+      </div>
+      <div class="page-tabs reg-tabs">
+        <div class="page-tabs__inner"><button class="page-tab" type="button" data-auth-tab="login">Log in</button><button class="page-tab is-active" type="button" data-auth-tab="signup">Sign up</button></div>
+      </div>
+      <div class="reg-card__fields">
+        <div class="reg-field reg-field--email" data-reg-field="email" data-value="a.bravo@gmail.com" role="button" tabindex="0"><span class="reg-field__icon reg-field__icon--email"><img src="assets/img/reg-email.svg" alt=""></span><span class="reg-field__content"><span class="reg-field__label">Email</span><span class="reg-field__value"></span></span></div><div class="reg-field reg-field--password" data-reg-field="password" data-value="Bravo1965!casino" role="button" tabindex="0"><span class="reg-field__icon reg-field__icon--password"><img src="assets/img/reg-lock.svg" alt=""></span><span class="reg-field__content"><span class="reg-field__label">Password</span><span class="reg-field__value"></span></span><span class="reg-field__eye" data-reg-eye role="button" tabindex="0" aria-label="Show password"><img src="assets/img/reg-eye.svg" alt=""></span></div><div class="reg-field reg-field--birth" data-reg-field="birth" data-value="23.05.1965" role="button" tabindex="0"><span class="reg-field__icon reg-field__icon--birth"><img src="assets/img/reg-calendar.svg" alt=""></span><span class="reg-field__content"><span class="reg-field__label">Date of Birth*</span><span class="reg-field__value"></span></span></div><div class="reg-field reg-field--promo" data-reg-field="promo" data-value="CasinoTOP" role="button" tabindex="0" hidden><span class="reg-field__content"><span class="reg-field__label">Promo code (optional)</span><span class="reg-field__value"></span></span></div>
+      </div>
+      <button class="reg-card__link" type="button" data-reg-promo>I have a promocode<img src="assets/img/reg-link-underline.svg" alt=""></button><div class="reg-card__checks">
         <label class="reg-check reg-check--top"><input class="reg-check__input" type="checkbox" id="reg-terms"><span class="reg-check__box"><img class="reg-check__off" src="assets/img/reg-checkbox-off.svg" alt=""><img class="reg-check__on" src="assets/img/reg-checkbox-on.svg" alt=""></span><span class="reg-check__text">I&#39;m 18+ and I&#39;ve read the <a href="#">terms and conditions</a> and <a href="#">privacy policy</a></span></label>
         <label class="reg-check"><input class="reg-check__input" type="checkbox" id="reg-news" checked><span class="reg-check__box"><img class="reg-check__off" src="assets/img/reg-checkbox-off.svg" alt=""><img class="reg-check__on" src="assets/img/reg-checkbox-on.svg" alt=""></span><span class="reg-check__text">Receive newsletters about promotions by email and SMS</span></label>
       </div>

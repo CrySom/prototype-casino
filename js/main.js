@@ -138,77 +138,144 @@
     });
   }
 
-  // Registration pop-up. Prototype: a click / tap on a field fills it with the
-  // demo value from data-value; the button enables once email, password,
-  // date of birth and the 18+ checkbox are done.
-  var modal = document.getElementById('signup');
+  // Log in / Sign up pop-up. Prototype: a click / tap on a field fills it with
+  // the demo value from data-value. "Log In" enables once email and password
+  // are filled; "Registration" also needs the date of birth and the 18+ box.
+  var modal = document.getElementById('auth');
   if (modal) {
-    var form = modal.querySelector('form');
-    var fields = modal.querySelectorAll('[data-reg-field]');
-    var submit = modal.querySelector('.reg-card__submit');
-    var terms = modal.querySelector('#reg-terms');
-    var promoLink = modal.querySelector('[data-reg-promo]');
-    var eye = modal.querySelector('[data-reg-eye]');
+    var cards = modal.querySelectorAll('[data-auth]');
     var lastFocus = null;
+    var REQUIRED = { login: ['email', 'password'], signup: ['email', 'password', 'birth'] };
 
-    function fieldText(field) {
-      var value = field.getAttribute('data-value');
-      if (field.getAttribute('data-reg-field') === 'password' && !(eye && eye.classList.contains('is-on'))) {
-        return value.replace(/./g, '*');
+    function setupCard(card) {
+      var kind = card.getAttribute('data-auth');
+      var fields = card.querySelectorAll('[data-reg-field]');
+      var submit = card.querySelector('.reg-card__submit');
+      var terms = card.querySelector('#reg-terms');
+      var promoLink = card.querySelector('[data-reg-promo]');
+      var eye = card.querySelector('[data-reg-eye]');
+
+      function fieldText(field) {
+        var value = field.getAttribute('data-value');
+        if (field.getAttribute('data-reg-field') === 'password' && !(eye && eye.classList.contains('is-on'))) {
+          return value.replace(/./g, '*');
+        }
+        return value;
       }
-      return value;
-    }
 
-    function focusField(field) {
-      Array.prototype.forEach.call(fields, function (f) {
-        f.classList.toggle('is-focused', f === field);
+      function focusField(field) {
+        Array.prototype.forEach.call(fields, function (f) {
+          f.classList.toggle('is-focused', f === field);
+        });
+      }
+
+      function updateSubmit() {
+        var filled = REQUIRED[kind].every(function (name) {
+          return card.querySelector('[data-reg-field="' + name + '"]').classList.contains('is-filled');
+        });
+        submit.disabled = !(filled && (!terms || terms.checked));
+      }
+
+      function fill(field) {
+        field.classList.add('is-filled');
+        field.querySelector('.reg-field__value').textContent = fieldText(field);
+        focusField(field);
+        updateSubmit();
+      }
+
+      Array.prototype.forEach.call(fields, function (field) {
+        field.addEventListener('click', function (event) {
+          if (event.target.closest('[data-reg-eye]')) return;
+          fill(field);
+        });
+        field.addEventListener('keydown', function (event) {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            fill(field);
+          }
+        });
       });
-    }
 
-    function fill(field) {
-      field.classList.add('is-filled');
-      field.querySelector('.reg-field__value').textContent = fieldText(field);
-      focusField(field);
-      updateSubmit();
-    }
-
-    function updateSubmit() {
-      var required = ['email', 'password', 'birth'].every(function (name) {
-        return modal.querySelector('[data-reg-field="' + name + '"]').classList.contains('is-filled');
+      // Clicking outside the fields drops the focus ring.
+      card.addEventListener('click', function (event) {
+        if (!event.target.closest('[data-reg-field]')) focusField(null);
       });
-      submit.disabled = !(required && terms.checked);
-    }
 
-    function reset() {
-      Array.prototype.forEach.call(fields, function (f) {
-        f.classList.remove('is-filled', 'is-focused');
-        f.querySelector('.reg-field__value').textContent = '';
+      if (eye) {
+        eye.addEventListener('click', function () {
+          eye.classList.toggle('is-on');
+          var field = eye.closest('[data-reg-field]');
+          if (field.classList.contains('is-filled')) {
+            field.querySelector('.reg-field__value').textContent = fieldText(field);
+          }
+        });
+      }
+
+      if (promoLink) {
+        promoLink.addEventListener('click', function () {
+          promoLink.hidden = true;
+          var promo = card.querySelector('[data-reg-field="promo"]');
+          promo.hidden = false;
+          promo.focus();
+        });
+      }
+
+      if (terms) terms.addEventListener('change', updateSubmit);
+
+      card.addEventListener('submit', function (event) {
+        event.preventDefault();
+        if (!submit.disabled) closeModal();
       });
-      modal.querySelector('[data-reg-field="promo"]').hidden = true;
-      promoLink.hidden = false;
-      if (eye) eye.classList.remove('is-on');
-      form.reset();
-      updateSubmit();
+
+      card.resetCard = function () {
+        Array.prototype.forEach.call(fields, function (f) {
+          f.classList.remove('is-filled', 'is-focused');
+          f.querySelector('.reg-field__value').textContent = '';
+        });
+        var promo = card.querySelector('[data-reg-field="promo"]');
+        if (promo) promo.hidden = true;
+        if (promoLink) promoLink.hidden = false;
+        if (eye) eye.classList.remove('is-on');
+        card.reset();
+        updateSubmit();
+      };
     }
 
-    function openModal() {
+    function showCard(kind) {
+      Array.prototype.forEach.call(cards, function (card) {
+        card.hidden = card.getAttribute('data-auth') !== kind;
+      });
+      modal.querySelector('[data-auth="' + kind + '"] .reg-card__close').focus();
+    }
+
+    function openModal(kind) {
       lastFocus = document.activeElement;
       modal.hidden = false;
       root.classList.add('modal-open');
-      modal.querySelector('.reg-card__close').focus();
+      showCard(kind);
     }
 
     function closeModal() {
       modal.hidden = true;
       root.classList.remove('modal-open');
-      reset();
+      Array.prototype.forEach.call(cards, function (card) {
+        card.resetCard();
+      });
       if (lastFocus) lastFocus.focus();
     }
 
-    document.querySelectorAll('[data-modal-open="signup"]').forEach(function (btn) {
+    Array.prototype.forEach.call(cards, setupCard);
+
+    document.querySelectorAll('[data-modal-open]').forEach(function (btn) {
       btn.addEventListener('click', function (event) {
         event.preventDefault();
-        openModal();
+        openModal(btn.getAttribute('data-modal-open'));
+      });
+    });
+
+    modal.querySelectorAll('[data-auth-tab]').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        showCard(tab.getAttribute('data-auth-tab'));
       });
     });
 
@@ -218,48 +285,6 @@
 
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape' && !modal.hidden) closeModal();
-    });
-
-    Array.prototype.forEach.call(fields, function (field) {
-      field.addEventListener('click', function (event) {
-        if (event.target.closest('[data-reg-eye]')) return;
-        fill(field);
-      });
-      field.addEventListener('keydown', function (event) {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          fill(field);
-        }
-      });
-    });
-
-    // Clicking outside the fields drops the focus ring.
-    form.addEventListener('click', function (event) {
-      if (!event.target.closest('[data-reg-field]')) focusField(null);
-    });
-
-    if (eye) {
-      eye.addEventListener('click', function () {
-        eye.classList.toggle('is-on');
-        var field = eye.closest('[data-reg-field]');
-        if (field.classList.contains('is-filled')) {
-          field.querySelector('.reg-field__value').textContent = fieldText(field);
-        }
-      });
-    }
-
-    promoLink.addEventListener('click', function () {
-      promoLink.hidden = true;
-      var promo = modal.querySelector('[data-reg-field="promo"]');
-      promo.hidden = false;
-      promo.focus();
-    });
-
-    terms.addEventListener('change', updateSubmit);
-
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-      if (!submit.disabled) closeModal();
     });
   }
 

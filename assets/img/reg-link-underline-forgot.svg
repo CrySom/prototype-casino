@@ -1,0 +1,8 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="132" height="1" viewBox="0 0 132 1" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Rectangle 183">
+<mask id="path-1-inside-1_0_173" fill="white">
+<path d="M0 0H132V1H0V0Z"/>
+</mask>
+<path d="M0 0V-1C-0.552285 -1 -1 -0.552285 -1 0L0 0ZM132 0H133C133 -0.552285 132.552 -1 132 -1V0ZM132 1V2C132.552 2 133 1.55228 133 1H132ZM0 1H-1C-1 1.55228 -0.552285 2 0 2L0 1ZM0 0V1H132V0V-1H0V0ZM132 0H131V1H132H133V0H132ZM132 1V0H0V1V2H132V1ZM0 1H1V0H0H-1V1H0Z" fill="white" mask="url(#path-1-inside-1_0_173)"/>
+</g>
+</svg>

@@ -153,3 +153,4 @@ reg-telegram.svg            https://www.figma.com/api/mcp/asset/5c307674-e929-40
 reg-apple.svg               https://www.figma.com/api/mcp/asset/5c307674-e929-40fd-b226-da365cf60958/2ee56.svg
 reg-instagram.svg           https://www.figma.com/api/mcp/asset/5c307674-e929-40fd-b226-da365cf60958/5a7b5.svg
 reg-facebook.svg            https://www.figma.com/api/mcp/asset/5c307674-e929-40fd-b226-da365cf60958/81112.svg
+reg-link-underline-forgot.svg https://www.figma.com/api/mcp/asset/d1fd2227-da31-4a9f-b8e1-44ed81b3e853/afda8.svg
