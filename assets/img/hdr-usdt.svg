@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Tether (USDT)">
+<path id="Vector" d="M8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16Z" fill="url(#paint0_linear_0_351)"/>
+<path id="Vector_2" d="M8.8304 7.0152V6.0704H10.98V4.58H5.0144V6.0704H7.1696V7.0152C5.364 7.1024 4.0088 7.4648 4.0088 7.8952C4.0088 8.3256 5.3624 8.6896 7.1696 8.7752V11.8952H8.8304V8.7752C10.636 8.6888 11.9912 8.3264 11.9912 7.8952C11.9912 7.464 10.64 7.1024 8.8304 7.0152ZM8 8.5C6.0448 8.5 4.46 8.1976 4.46 7.8336C4.46 7.5208 5.6144 7.2576 7.168 7.1872V8.2544C7.4352 8.2664 7.7128 8.2736 7.9984 8.2736C8.284 8.2736 8.5632 8.2664 8.8288 8.2544V7.1872C10.3824 7.2576 11.5368 7.5208 11.5368 7.8336C11.54 8.2016 9.9552 8.5 8 8.5Z" fill="white"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_351" x1="8" y1="16" x2="8" y2="0" gradientUnits="userSpaceOnUse">
+<stop stop-color="#17755D"/>
+<stop offset="1" stop-color="#68CCB2"/>
+</linearGradient>
+</defs>
+</svg>

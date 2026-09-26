@@ -50,6 +50,27 @@ needs the date of birth and the 18+ checkbox. The input icons come from the
 empty frames, because Figma exports the filled frames with the wrong
 (instance-swapped) icons.
 
+Logged-in page (same Figma file: mobile `630:31363`, tablet `630:31750`,
+desktop `630:31482`, story `630:32054`). A successful "Log In" or
+"Registration" adds `html.is-auth` (kept in `localStorage`, key `auth`); the
+avatar menu in the header has "Log out". Logged in, the page is the same home
+page with:
+
+- header: balance (USDT), wallet, notifications and profile instead of
+  Sign up / Sign in;
+- stories row and player card (VIP progress) instead of the promo banners;
+  a story opens full screen on mobile and as a 402×874 card on desktop,
+  plays 5 slides of 5 s, taps on the left / right half go back / forward;
+- "Continue" and "Originals" rows before Slots, table names on the Casino
+  live tiles;
+- "Favorite Events" and "My Bets" at the top of the desktop menu;
+- the legal footer (policies, licence text, 18+, GambleAware, licence seal
+  placeholder) instead of the payment methods footer; no VIP banner on
+  mobile.
+
+`player-avatar.svg` combines the avatar circle and the masked silhouette
+from the player card (Figma exports them as separate layers with a mask).
+
 Team crests in the Sport cards (`team-manchester-united.svg`,
 `team-newcastle-united.svg`) are not from Figma (the design has an empty
 placeholder there): they are the club logos from Wikipedia, shown in

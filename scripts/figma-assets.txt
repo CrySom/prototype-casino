@@ -154,3 +154,21 @@ reg-apple.svg               https://www.figma.com/api/mcp/asset/5c307674-e929-40
 reg-instagram.svg           https://www.figma.com/api/mcp/asset/5c307674-e929-40fd-b226-da365cf60958/5a7b5.svg
 reg-facebook.svg            https://www.figma.com/api/mcp/asset/5c307674-e929-40fd-b226-da365cf60958/81112.svg
 reg-link-underline-forgot.svg https://www.figma.com/api/mcp/asset/d1fd2227-da31-4a9f-b8e1-44ed81b3e853/afda8.svg
+
+# Logged-in page (file jAqjGyzDwS5zsKQxwGZMTE)
+hdr-eye.svg                 https://www.figma.com/api/mcp/asset/8f74408b-e5e3-4eb2-b280-a579c0ca3cfe/cc36a.svg
+hdr-usdt.svg                https://www.figma.com/api/mcp/asset/8f74408b-e5e3-4eb2-b280-a579c0ca3cfe/83ac5.svg
+hdr-chevron.svg             https://www.figma.com/api/mcp/asset/8f74408b-e5e3-4eb2-b280-a579c0ca3cfe/2daeb.svg
+hdr-wallet.svg              https://www.figma.com/api/mcp/asset/8f74408b-e5e3-4eb2-b280-a579c0ca3cfe/59c4e.svg
+hdr-bell.svg                https://www.figma.com/api/mcp/asset/8f74408b-e5e3-4eb2-b280-a579c0ca3cfe/e6671.svg
+hdr-avatar.svg              https://www.figma.com/api/mcp/asset/8f74408b-e5e3-4eb2-b280-a579c0ca3cfe/d33f4.svg
+story-ring.svg              https://www.figma.com/api/mcp/asset/fe2d786e-72d6-4a81-8b9d-b508a10df242/b54b7.svg
+story-ring-alt.svg          https://www.figma.com/api/mcp/asset/fe2d786e-72d6-4a81-8b9d-b508a10df242/6bd9a.svg
+story-slide.png             https://www.figma.com/api/mcp/asset/082e0f4a-1146-484b-8401-9c577de66f71/eae96.png
+story-close.svg             https://www.figma.com/api/mcp/asset/082e0f4a-1146-484b-8401-9c577de66f71/ab3c6.svg
+story-wallet.svg            https://www.figma.com/api/mcp/asset/082e0f4a-1146-484b-8401-9c577de66f71/d1584.svg
+pc-nav.svg                  https://www.figma.com/api/mcp/asset/8108def1-0215-47f3-85ec-f41850bcee8a/8b1a4.svg
+player-avatar.svg           composed from circle_bg + "Avatar image/default man" (742:77770)
+footer-chevron.svg          https://www.figma.com/api/mcp/asset/cc9d7204-06bb-4f1b-8480-a6d0d411a9f9/b5638.svg
+gambleaware.svg             https://www.figma.com/api/mcp/asset/cc9d7204-06bb-4f1b-8480-a6d0d411a9f9/58e6e.svg
+sb-favorites.svg, sb-bets.svg  flt-favorites.svg / flt-providers.svg recoloured to #B2B2B2

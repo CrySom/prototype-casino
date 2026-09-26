@@ -138,6 +138,117 @@
     });
   }
 
+  // Logged-in state: html.is-auth swaps the header buttons for the balance /
+  // profile controls and shows the player widgets. Kept between visits.
+  function setAuth(on) {
+    root.classList.toggle('is-auth', on);
+    try {
+      if (on) localStorage.setItem('auth', '1');
+      else localStorage.removeItem('auth');
+    } catch (e) {}
+  }
+
+  var profileToggle = document.querySelector('[data-profile-toggle]');
+  var profileMenu = document.querySelector('[data-profile-menu]');
+  if (profileToggle && profileMenu) {
+    var setProfileMenu = function (open) {
+      profileMenu.hidden = !open;
+      profileToggle.setAttribute('aria-expanded', String(open));
+    };
+    profileToggle.addEventListener('click', function () {
+      setProfileMenu(profileMenu.hidden);
+    });
+    document.addEventListener('click', function (event) {
+      if (!profileMenu.hidden && !event.target.closest('.header__profile')) setProfileMenu(false);
+    });
+    profileMenu.querySelector('[data-logout]').addEventListener('click', function () {
+      setProfileMenu(false);
+      setAuth(false);
+      window.scrollTo(0, 0);
+    });
+  }
+
+  // Footer groups ("Online Casino", "Legal Policies").
+  document.querySelectorAll('[data-footer-group]').forEach(function (group) {
+    var head = group.querySelector('.footer-legal__title');
+    head.addEventListener('click', function () {
+      head.setAttribute('aria-expanded', String(group.classList.toggle('is-open')));
+    });
+  });
+
+  // Stories: a story plays its slides (5 s each); a tap on the left / right
+  // half of the slide goes back / forward, the last slide closes the viewer.
+  var storyView = document.getElementById('story');
+  if (storyView) {
+    var steps = storyView.querySelectorAll('.story-view__step');
+    var storyTitle = storyView.querySelector('[data-story-title]');
+    var storyIndex = 0;
+    var storyFocus = null;
+
+    var showStep = function (i) {
+      if (i < 0) i = 0;
+      if (i >= steps.length) {
+        closeStory();
+        return;
+      }
+      storyIndex = i;
+      Array.prototype.forEach.call(steps, function (step, n) {
+        step.classList.remove('is-active');
+        step.classList.toggle('is-done', n < i);
+      });
+      void steps[i].offsetWidth; // restart the progress animation
+      steps[i].classList.add('is-active');
+    };
+
+    var openStory = function (story) {
+      storyFocus = story;
+      storyTitle.textContent = story.querySelector('.story__label').textContent;
+      storyView.hidden = false;
+      root.classList.add('modal-open');
+      showStep(0);
+      storyView.querySelector('.story-view__close').focus();
+    };
+
+    var closeStory = function () {
+      storyView.hidden = true;
+      root.classList.remove('modal-open');
+      Array.prototype.forEach.call(steps, function (step) {
+        step.classList.remove('is-active', 'is-done');
+      });
+      if (storyFocus) {
+        storyFocus.classList.add('is-seen');
+        storyFocus.focus();
+      }
+    };
+
+    Array.prototype.forEach.call(steps, function (step, n) {
+      step.firstElementChild.addEventListener('animationend', function () {
+        if (n === storyIndex) showStep(n + 1);
+      });
+    });
+
+    document.querySelectorAll('[data-story]').forEach(function (story) {
+      story.addEventListener('click', function () {
+        openStory(story);
+      });
+    });
+    storyView.querySelector('[data-story-prev]').addEventListener('click', function () {
+      showStep(storyIndex - 1);
+    });
+    storyView.querySelector('[data-story-next]').addEventListener('click', function () {
+      showStep(storyIndex + 1);
+    });
+    storyView.querySelectorAll('[data-story-close]').forEach(function (btn) {
+      btn.addEventListener('click', closeStory);
+    });
+    document.addEventListener('keydown', function (event) {
+      if (storyView.hidden) return;
+      if (event.key === 'Escape') closeStory();
+      else if (event.key === 'ArrowLeft') showStep(storyIndex - 1);
+      else if (event.key === 'ArrowRight') showStep(storyIndex + 1);
+    });
+  }
+
   // Log in / Sign up pop-up. Prototype: a click / tap on a field fills it with
   // the demo value from data-value. "Log In" enables once email and password
   // are filled; "Registration" also needs the date of birth and the 18+ box.
@@ -224,7 +335,10 @@
 
       card.addEventListener('submit', function (event) {
         event.preventDefault();
-        if (!submit.disabled) closeModal();
+        if (submit.disabled) return;
+        closeModal();
+        setAuth(true);
+        window.scrollTo(0, 0);
       });
 
       card.resetCard = function () {
