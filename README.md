@@ -37,6 +37,11 @@ broken stroke, so it is cropped from a 4× PNG render of the bottom tab bar
 4× render of the desktop menu (node `1418:88150`): Figma exports it as 20
 masked layers.
 
+Team crests in the Sport cards (`team-manchester-united.svg`,
+`team-newcastle-united.svg`) are not from Figma (the design has an empty
+placeholder there): they are the club logos from Wikipedia, shown in
+grayscale; they are trademarks of the clubs and only stand in for real data.
+
 Known differences from Figma:
 
 - the VIP banner image uses a WebGPU lens-distortion shader in Figma; here it

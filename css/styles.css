@@ -90,7 +90,6 @@ a {
 .header__nav,
 .banner-d-carousel,
 .filter-btn__label,
-.promo-tag--desktop-only,
 .polybet.polybet--desktop-only,
 .pill-btn.payments__see-all,
 .payments__cards {
@@ -1068,6 +1067,15 @@ a {
   background-image: linear-gradient(to bottom, var(--c-bg-7) 30%, var(--c-accent));
 }
 
+.team-logo img {
+  position: absolute;
+  inset: 18%;
+  width: 64%;
+  height: 64%;
+  object-fit: contain;
+  filter: grayscale(1) brightness(1.15);
+}
+
 .team-logo--away {
   background-image: linear-gradient(to bottom, var(--c-accent) 30%, var(--c-bg-7));
 }
@@ -2005,10 +2013,6 @@ a {
     left: 0;
     right: 0;
     bottom: 0;
-  }
-
-  .promo-tag--desktop-only {
-    display: block;
   }
 
   .polybet.polybet--desktop-only {
