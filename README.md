@@ -8,8 +8,9 @@ The page is fluid:
 - **1024px+** – desktop layout, frames "1280" / "1920" (`1398:34085`,
   `1411:67717`) with the side menu collapsed (72px), and "1280 opened" /
   "1920 opened" (`1418:88148`, `1418:90887`) with it opened (210px).
-  The ⋮ button in the menu (or the search field) opens it, the logo collapses
-  it back; the state is kept in `localStorage`. Between the frames rows of
+  The menu is opened by default on screens wider than 1280px and collapsed
+  up to 1280px. The ⋮ button (or the search field) opens it, the logo
+  collapses it; once toggled, the choice is kept in `localStorage`. Between the frames rows of
   fixed-size tiles scroll horizontally and cards/banners stretch.
 
 - `index.html` – markup

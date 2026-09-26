@@ -38,19 +38,39 @@
     });
   });
 
-  // Desktop menu: collapsed (72px) / opened (210px), remembered between visits.
+  // Desktop menu: collapsed (72px) / opened (210px). Opened by default on
+  // screens wider than 1280px (the initial state is set in <head>); once the
+  // user toggles it, their choice is remembered between visits.
   var root = document.documentElement;
   var toggles = document.querySelectorAll('[data-sidebar-toggle]');
+  var DEFAULT_OPEN = window.matchMedia('(min-width: 1281px)');
 
-  function setSidebar(open) {
+  function applySidebar(open) {
     root.classList.toggle('sidebar-open', open);
     Array.prototype.forEach.call(toggles, function (btn) {
       btn.setAttribute('aria-expanded', String(open));
     });
+  }
+
+  function setSidebar(open) {
+    applySidebar(open);
     try {
-      localStorage.setItem('sidebar', open ? 'open' : 'collapsed');
+      localStorage.setItem('sidebar-state', open ? 'open' : 'collapsed');
     } catch (e) {}
   }
+
+  function storedSidebar() {
+    try {
+      return localStorage.getItem('sidebar-state');
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // Without a saved choice the menu follows the breakpoint on resize.
+  DEFAULT_OPEN.addEventListener('change', function (event) {
+    if (!storedSidebar()) applySidebar(event.matches);
+  });
 
   Array.prototype.forEach.call(toggles, function (btn) {
     btn.setAttribute('aria-expanded', String(root.classList.contains('sidebar-open')));
