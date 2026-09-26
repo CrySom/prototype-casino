@@ -1977,6 +1977,389 @@ a {
 .tab-bar__icon-menu i:nth-child(3) { top: 66.67%; }
 
 /* ==========================================================================
+   Registration pop-up (Figma "registration-card", Entrance – Sign Up – Log In)
+   Empty 87:45267 · with promo code 76:80830 · filled 86:44644
+   ========================================================================== */
+.modal-open {
+  overflow: hidden;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.modal[hidden] {
+  display: none;
+}
+
+.modal__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 15, 15, 0.8);
+}
+
+.reg-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 370px;
+  margin: auto;
+  padding: 16px;
+  border: 1px solid var(--c-bg-3);
+  border-radius: var(--radius-2);
+  background: var(--c-bg-2);
+}
+
+.reg-card__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 26px;
+}
+
+.reg-card__title {
+  flex: 1 0 0;
+  min-width: 1px;
+  margin: 0;
+  padding-right: 8px;
+  font-family: var(--f-manrope);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: normal;
+  color: var(--c-white);
+}
+
+.reg-card__close {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin: -3px;
+  border: 1px solid var(--c-bg-5);
+  border-radius: var(--radius-4);
+  background: var(--c-bg-5);
+}
+
+.reg-card__close img {
+  width: 12px;
+  height: 12px;
+}
+
+.reg-tabs .page-tab {
+  font-size: 12px;
+}
+
+/* Inputs: tap/click fills the field with demo data */
+.reg-card__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.reg-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--c-bg-6);
+  border-radius: var(--radius-4);
+  background: var(--c-bg-1);
+  cursor: text;
+  outline: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.reg-field[hidden] {
+  display: none;
+}
+
+.reg-field.is-focused {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.reg-field__icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.reg-field__icon img {
+  position: absolute;
+}
+
+.reg-field__icon--email img { inset: -0.83% -14.96% -10.83%; }
+.reg-field__icon--password img { inset: -5.83% 0 -11.67%; }
+.reg-field__icon--birth img { inset: -7.55% -4.63% -13.39%; }
+
+.reg-field__content {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 1px;
+  height: 40px;
+}
+
+.reg-field__label,
+.reg-field__value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.reg-field__label {
+  font-family: var(--f-geist);
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.25px;
+  color: var(--c-accent);
+}
+
+.reg-field__value {
+  display: none;
+  font-family: var(--f-geist);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--c-txt-75);
+}
+
+.reg-field.is-filled .reg-field__label {
+  height: 16px;
+  font-size: 10px;
+  line-height: 14px;
+  letter-spacing: 0;
+  display: flex;
+  align-items: center;
+}
+
+.reg-field--promo.is-filled .reg-field__label {
+  color: var(--c-txt-50);
+}
+
+.reg-field.is-filled .reg-field__value {
+  display: block;
+}
+
+/* Text caret in the focused field, as in the filled frame */
+.reg-field.is-focused .reg-field__value::after {
+  content: '|';
+  margin-left: 3px;
+  animation: reg-caret 1s steps(1) infinite;
+}
+
+@keyframes reg-caret {
+  50% { opacity: 0; }
+}
+
+.reg-field__eye {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.reg-field__eye img {
+  width: 100%;
+  height: 100%;
+}
+
+.reg-field__eye.is-on {
+  opacity: 0.5;
+}
+
+.reg-card__promo-link {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  height: 32px;
+  font-family: var(--f-geist);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  white-space: nowrap;
+  color: var(--c-white);
+}
+
+.reg-card__promo-link[hidden] {
+  display: none;
+}
+
+.reg-card__promo-link img {
+  width: 100%;
+  height: 1px;
+}
+
+/* Checkboxes */
+.reg-card__checks {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 8px;
+}
+
+.reg-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.reg-check--top {
+  align-items: flex-start;
+}
+
+.reg-check__input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.reg-check__box {
+  position: relative;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.reg-check__box img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.reg-check__on,
+.reg-check__input:checked + .reg-check__box .reg-check__off {
+  display: none;
+}
+
+.reg-check__input:checked + .reg-check__box .reg-check__on {
+  display: block;
+}
+
+.reg-check__input:focus-visible + .reg-check__box {
+  outline: 1px solid rgba(255, 255, 255, 0.4);
+  outline-offset: 2px;
+}
+
+.reg-check__text {
+  flex: 1 0 0;
+  min-width: 1px;
+  font-family: var(--f-geist);
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.25px;
+  color: var(--c-txt-40);
+}
+
+.reg-check__text a {
+  color: var(--c-white);
+  text-decoration: underline;
+}
+
+.reg-card__submit {
+  width: 100%;
+  height: 40px;
+  padding: 0 24px;
+  background: var(--c-brand);
+  font-size: 14px;
+  line-height: 14px;
+  color: var(--c-bg-1);
+  transition: opacity 0.15s ease;
+}
+
+.reg-card__submit:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.reg-card__divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.reg-card__divider span {
+  flex: 1 0 0;
+  min-width: 1px;
+  height: 1px;
+}
+
+.reg-card__divider img {
+  width: 100%;
+  height: 1px;
+}
+
+.reg-card__divider p {
+  flex-shrink: 0;
+  font-family: var(--f-geist);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  white-space: nowrap;
+  color: var(--c-txt-50);
+}
+
+.reg-social {
+  display: flex;
+  gap: 4px;
+}
+
+.reg-social__btn {
+  display: flex;
+  flex: 1 0 0;
+  align-items: center;
+  justify-content: center;
+  min-width: 1px;
+  height: 36px;
+  border-radius: 12px;
+}
+
+.reg-social__btn:hover {
+  background: var(--c-bg-5);
+}
+
+.reg-social__icon {
+  width: 20px;
+  height: 20px;
+}
+
+.reg-social__icon img {
+  width: 100%;
+  height: 100%;
+}
+
+.reg-social__icon--16 {
+  width: 16px;
+  height: 16px;
+}
+
+.reg-social__icon--metamask {
+  width: 17px;
+  height: 16px;
+  mix-blend-mode: luminosity;
+}
+
+/* ==========================================================================
    Desktop 1024px+ (Figma "1280" / "1920", collapsed and opened menu)
    Content is fluid between the frames: rows of fixed-size tiles scroll
    horizontally, cards and banners stretch with the viewport.

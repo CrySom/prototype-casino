@@ -38,6 +38,14 @@ broken stroke, so it is cropped from a 4× PNG render of the bottom tab bar
 4× render of the desktop menu (node `1418:88150`): Figma exports it as 20
 masked layers.
 
+Registration pop-up (Figma file "Entrance - Sign Up - Log In", frames
+`87:45267`, `76:80830`, `86:44644`) opens from the Sign up / Sign in buttons.
+It is a prototype: a click or tap on a field fills it with demo data,
+"I have a promocode" reveals the promo field, the eye shows the password, and
+"Registration" is enabled once email, password, date of birth and the 18+
+checkbox are done. The input icons come from the empty frame, because Figma
+exports the filled frame with the wrong (instance-swapped) icons.
+
 Team crests in the Sport cards (`team-manchester-united.svg`,
 `team-newcastle-united.svg`) are not from Figma (the design has an empty
 placeholder there): they are the club logos from Wikipedia, shown in

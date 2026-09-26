@@ -136,3 +136,20 @@ pay-google-p.svg            https://www.figma.com/api/mcp/asset/120e2cfb-04f8-4c
 pay-google-a.svg            https://www.figma.com/api/mcp/asset/120e2cfb-04f8-4c24-9011-feecaa2c00df/6956b.svg
 pay-google-y.svg            https://www.figma.com/api/mcp/asset/120e2cfb-04f8-4c24-9011-feecaa2c00df/2359e.svg
 sb-chevron.svg              https://www.figma.com/api/mcp/asset/010351dc-7fb9-43a8-a731-4ee95de05aed/e4224.svg
+# registration pop-up (file jAqjGyzDwS5zsKQxwGZMTE, frames 87:45267, 76:80830, 86:44644)
+reg-close.svg               https://www.figma.com/api/mcp/asset/5c307674-e929-40fd-b226-da365cf60958/ab3c6.svg
+reg-email.svg               https://www.figma.com/api/mcp/asset/5c307674-e929-40fd-b226-da365cf60958/53a00.svg
+reg-lock.svg                https://www.figma.com/api/mcp/asset/5c307674-e929-40fd-b226-da365cf60958/be1e5.svg
+reg-eye.svg                 https://www.figma.com/api/mcp/asset/5c307674-e929-40fd-b226-da365cf60958/28feb.svg
+reg-calendar.svg            https://www.figma.com/api/mcp/asset/5c307674-e929-40fd-b226-da365cf60958/ae1e0.svg
+reg-link-underline.svg      https://www.figma.com/api/mcp/asset/5c307674-e929-40fd-b226-da365cf60958/7fe50.svg
+reg-checkbox-off.svg        https://www.figma.com/api/mcp/asset/5c307674-e929-40fd-b226-da365cf60958/8354b.svg
+reg-checkbox-on.svg         https://www.figma.com/api/mcp/asset/5c307674-e929-40fd-b226-da365cf60958/698e0.svg
+reg-divider.svg             https://www.figma.com/api/mcp/asset/5c307674-e929-40fd-b226-da365cf60958/20144.svg
+reg-google.svg              https://www.figma.com/api/mcp/asset/5c307674-e929-40fd-b226-da365cf60958/fad0c.svg
+reg-wallet.svg              https://www.figma.com/api/mcp/asset/5c307674-e929-40fd-b226-da365cf60958/8fa6d.svg
+reg-metamask.svg            https://www.figma.com/api/mcp/asset/5c307674-e929-40fd-b226-da365cf60958/8595a.svg
+reg-telegram.svg            https://www.figma.com/api/mcp/asset/5c307674-e929-40fd-b226-da365cf60958/77c9b.svg
+reg-apple.svg               https://www.figma.com/api/mcp/asset/5c307674-e929-40fd-b226-da365cf60958/2ee56.svg
+reg-instagram.svg           https://www.figma.com/api/mcp/asset/5c307674-e929-40fd-b226-da365cf60958/5a7b5.svg
+reg-facebook.svg            https://www.figma.com/api/mcp/asset/5c307674-e929-40fd-b226-da365cf60958/81112.svg

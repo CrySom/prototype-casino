@@ -138,6 +138,131 @@
     });
   }
 
+  // Registration pop-up. Prototype: a click / tap on a field fills it with the
+  // demo value from data-value; the button enables once email, password,
+  // date of birth and the 18+ checkbox are done.
+  var modal = document.getElementById('signup');
+  if (modal) {
+    var form = modal.querySelector('form');
+    var fields = modal.querySelectorAll('[data-reg-field]');
+    var submit = modal.querySelector('.reg-card__submit');
+    var terms = modal.querySelector('#reg-terms');
+    var promoLink = modal.querySelector('[data-reg-promo]');
+    var eye = modal.querySelector('[data-reg-eye]');
+    var lastFocus = null;
+
+    function fieldText(field) {
+      var value = field.getAttribute('data-value');
+      if (field.getAttribute('data-reg-field') === 'password' && !(eye && eye.classList.contains('is-on'))) {
+        return value.replace(/./g, '*');
+      }
+      return value;
+    }
+
+    function focusField(field) {
+      Array.prototype.forEach.call(fields, function (f) {
+        f.classList.toggle('is-focused', f === field);
+      });
+    }
+
+    function fill(field) {
+      field.classList.add('is-filled');
+      field.querySelector('.reg-field__value').textContent = fieldText(field);
+      focusField(field);
+      updateSubmit();
+    }
+
+    function updateSubmit() {
+      var required = ['email', 'password', 'birth'].every(function (name) {
+        return modal.querySelector('[data-reg-field="' + name + '"]').classList.contains('is-filled');
+      });
+      submit.disabled = !(required && terms.checked);
+    }
+
+    function reset() {
+      Array.prototype.forEach.call(fields, function (f) {
+        f.classList.remove('is-filled', 'is-focused');
+        f.querySelector('.reg-field__value').textContent = '';
+      });
+      modal.querySelector('[data-reg-field="promo"]').hidden = true;
+      promoLink.hidden = false;
+      if (eye) eye.classList.remove('is-on');
+      form.reset();
+      updateSubmit();
+    }
+
+    function openModal() {
+      lastFocus = document.activeElement;
+      modal.hidden = false;
+      root.classList.add('modal-open');
+      modal.querySelector('.reg-card__close').focus();
+    }
+
+    function closeModal() {
+      modal.hidden = true;
+      root.classList.remove('modal-open');
+      reset();
+      if (lastFocus) lastFocus.focus();
+    }
+
+    document.querySelectorAll('[data-modal-open="signup"]').forEach(function (btn) {
+      btn.addEventListener('click', function (event) {
+        event.preventDefault();
+        openModal();
+      });
+    });
+
+    modal.querySelectorAll('[data-modal-close]').forEach(function (btn) {
+      btn.addEventListener('click', closeModal);
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && !modal.hidden) closeModal();
+    });
+
+    Array.prototype.forEach.call(fields, function (field) {
+      field.addEventListener('click', function (event) {
+        if (event.target.closest('[data-reg-eye]')) return;
+        fill(field);
+      });
+      field.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          fill(field);
+        }
+      });
+    });
+
+    // Clicking outside the fields drops the focus ring.
+    form.addEventListener('click', function (event) {
+      if (!event.target.closest('[data-reg-field]')) focusField(null);
+    });
+
+    if (eye) {
+      eye.addEventListener('click', function () {
+        eye.classList.toggle('is-on');
+        var field = eye.closest('[data-reg-field]');
+        if (field.classList.contains('is-filled')) {
+          field.querySelector('.reg-field__value').textContent = fieldText(field);
+        }
+      });
+    }
+
+    promoLink.addEventListener('click', function () {
+      promoLink.hidden = true;
+      var promo = modal.querySelector('[data-reg-field="promo"]');
+      promo.hidden = false;
+      promo.focus();
+    });
+
+    terms.addEventListener('change', updateSubmit);
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      if (!submit.disabled) closeModal();
+    });
+  }
+
   // Coefficients: toggle selection.
   document.querySelectorAll('.coef').forEach(function (coef) {
     coef.addEventListener('click', function () {
