@@ -100,6 +100,24 @@
     });
   });
 
+  // Game tiles on touch screens: the first tap shows the hover state
+  // (play button, favourite), a tap on the active tile opens the game.
+  if (window.matchMedia('(hover: none)').matches) {
+    var activeTile = null;
+    document.addEventListener('click', function (event) {
+      var tile = event.target.closest('.game-tile');
+      if (tile && tile !== activeTile) {
+        event.preventDefault();
+        if (activeTile) activeTile.classList.remove('is-active');
+        tile.classList.add('is-active');
+        activeTile = tile;
+      } else if (!tile && activeTile) {
+        activeTile.classList.remove('is-active');
+        activeTile = null;
+      }
+    });
+  }
+
   // Coefficients: toggle selection.
   document.querySelectorAll('.coef').forEach(function (coef) {
     coef.addEventListener('click', function () {

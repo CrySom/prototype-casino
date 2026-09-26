@@ -776,12 +776,14 @@ a {
 }
 
 .game-tile:hover .game-tile__hover,
-.game-tile:focus-visible .game-tile__hover {
+.game-tile:focus-visible .game-tile__hover,
+.game-tile.is-active .game-tile__hover {
   opacity: 1;
 }
 
 .game-tile--hover-title:hover .game-tile__label--idle,
-.game-tile--hover-title:focus-visible .game-tile__label--idle {
+.game-tile--hover-title:focus-visible .game-tile__label--idle,
+.game-tile--hover-title.is-active .game-tile__label--idle {
   opacity: 0;
 }
 
