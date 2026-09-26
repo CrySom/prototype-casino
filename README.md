@@ -147,3 +147,21 @@ Play flow (Figma "Entrance - Sign Up - Log In", Game Page `389:253407`):
 Differences from Figma: texts are in English, the game currency list uses
 English names and currency symbols; the game card on desktop and the game page
 from 768px have no Figma layout and follow the mobile one.
+
+Profile (`profile.html`, built from the provided mockup with the Style Guide
+Molecules "Profile components"): reached from the avatar menu in the header;
+the Menu tab of the bottom bar is active on it.
+
+- **Personal data** – player card with the level avatar, VIP progress and
+  stats; balance card (total in the display fiat, eye to hide amounts, currency
+  chip opening the fiat list, real balance / bonuses / free bet with info
+  tooltips, Withdraw, Deposit, View wallet); My activity, Security and
+  Safety & Privacy cells; Log out.
+- **Gaming profile** – level + progress block ("Level + progress in profile"),
+  favourite games, recent bets.
+- Guests see a prompt to log in. Two columns from 1280px (cards on the left,
+  sticky), player and balance side by side from 768px.
+
+Differences from the mockup: the level avatar from the style guide replaces the
+empty circle; outline icons for the cells are drawn for the prototype
+(`pf-*.svg`); the Gaming profile content is not in the mockup.

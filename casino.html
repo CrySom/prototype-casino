@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="css/halls.css">
 <link rel="stylesheet" href="css/wallet.css">
 <link rel="stylesheet" href="css/play.css">
+<link rel="stylesheet" href="css/profile.css">
 <script>(function(){var s=null;try{s=localStorage.getItem('sidebar-state')}catch(e){}if(s?s==='open':window.innerWidth>1280)document.documentElement.classList.add('sidebar-open');try{if(localStorage.getItem('auth')==='1')document.documentElement.classList.add('is-auth');if((JSON.parse(localStorage.getItem('wallet-state')||'{}')).hidden)document.documentElement.classList.add('is-balance-hidden')}catch(e){}})()</script>
 </head>
 <body>
@@ -72,6 +73,7 @@
         <button class="header__icon-btn" type="button" aria-label="Profile" aria-expanded="false" data-profile-toggle><img src="assets/img/hdr-avatar.svg" alt=""></button>
         <div class="profile-menu" hidden data-profile-menu>
           <p class="profile-menu__name">Player #25432543</p>
+          <a class="profile-menu__item" href="profile.html">Profile</a>
           <button class="profile-menu__item" type="button" data-logout>Log out</button>
         </div>
       </div>

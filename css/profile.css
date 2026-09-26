@@ -1,0 +1,709 @@
+/* Profile page: player card, balance, activity / security / privacy cells
+   (Style Guide Molecules "Profile components"). */
+
+a.profile-menu__item {
+  display: flex;
+  align-items: center;
+}
+
+.pf {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 16px 32px;
+}
+
+.pf-tabs .page-tab {
+  font-weight: 600;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+}
+
+.pf-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pf-layout[hidden] {
+  display: none;
+}
+
+.pf-side,
+.pf-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.pf-card {
+  padding: 16px;
+  border: 1px solid var(--c-bg-6);
+  border-radius: var(--radius-4);
+  background: var(--c-bg-2);
+}
+
+/* Player card */
+.pf-user {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pf-user__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pf-user__avatar {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.pf-user__name {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.pf-user__name h1 {
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--f-manrope);
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 22px;
+  text-transform: uppercase;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pf-user__name p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--c-accent);
+}
+
+.pf-user__settings {
+  display: flex;
+  align-self: flex-start;
+  width: 20px;
+  height: 20px;
+}
+
+.pf-user__settings img {
+  width: 20px;
+  height: 20px;
+}
+
+.pf-vip {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pf-vip__title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 4px;
+  font-family: var(--f-manrope);
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.pf-vip__title img {
+  width: 14px;
+  height: 14px;
+}
+
+.pf-vip__value {
+  margin: 0;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.pf-bar {
+  height: 4px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--c-bg-5);
+}
+
+.pf-bar i {
+  display: block;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--c-brand);
+}
+
+.pf-vip__labels {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  font-size: 10px;
+  line-height: 12px;
+  color: var(--c-accent);
+}
+
+.pf-stats {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pf-stats li {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+  padding: 0 4px;
+}
+
+.pf-stats li + li {
+  border-left: 1px solid var(--c-bg-6);
+}
+
+.pf-stats__value {
+  font-family: var(--f-manrope);
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.pf-stats__label {
+  overflow: hidden;
+  max-width: 100%;
+  font-size: 11px;
+  line-height: 14px;
+  color: var(--c-accent);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Balance card */
+.pf-balance {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pf-balance__label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--c-secondary);
+}
+
+.pf-balance__eye img {
+  width: 16px;
+  height: 16px;
+}
+
+.pf-balance__total {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.pf-balance__sum {
+  font-family: var(--f-manrope);
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 32px;
+  font-variant-numeric: tabular-nums;
+}
+
+.pf-chip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: var(--radius-4);
+  background: var(--c-bg-5);
+  font-weight: 600;
+  font-size: 12px;
+  transition: background-color 0.15s ease;
+}
+
+.pf-chip:hover {
+  background: var(--c-bg-7);
+}
+
+.pf-chip img {
+  width: 16px;
+  height: 16px;
+}
+
+.pf-balance__cols {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px 0 0;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--c-secondary);
+}
+
+.pf-blist {
+  margin: 0;
+  padding: 0 12px;
+  border-radius: var(--radius-4);
+  background: var(--c-bg-1);
+  list-style: none;
+}
+
+.pf-brow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 8px 0;
+}
+
+.pf-brow + .pf-brow {
+  border-top: 1px solid var(--c-bg-5);
+}
+
+.pf-brow__icon,
+.pf-brow__icon img {
+  display: block;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.pf-brow__title {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: var(--f-manrope);
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.pf-money {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.pf-money__main {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.pf-money__sub {
+  font-size: 10px;
+  line-height: 14px;
+  color: var(--c-accent);
+}
+
+/* Info tooltip (balance switcher "with info tooltip") */
+.pf-tip {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+}
+
+.pf-tip__btn,
+.pf-tip__btn img {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.pf-tip__text {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: -8px;
+  z-index: 5;
+  width: 240px;
+  padding: 8px 12px;
+  border-radius: var(--radius-2);
+  background: var(--c-bg-5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--c-txt-75);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.15s ease, visibility 0.15s;
+}
+
+.pf-tip.is-open .pf-tip__text {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  .pf-tip:hover .pf-tip__text {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.pf-balance__btns {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.pf-btn {
+  flex: 1 1 0;
+  gap: 8px;
+  min-width: 0;
+  height: 44px;
+  padding: 0 12px;
+  font-size: 14px;
+}
+
+.pf-btn img {
+  width: 18px;
+  height: 18px;
+}
+
+.pf-btn--outline {
+  border: 1px solid var(--c-bg-7);
+  color: var(--c-white);
+  transition: background-color 0.15s ease;
+}
+
+.pf-btn--outline:hover {
+  background: var(--c-bg-5);
+}
+
+.pf-btn--primary {
+  background: var(--c-brand);
+  color: var(--c-bg-1);
+}
+
+.pf-btn--primary img {
+  filter: brightness(0);
+}
+
+.pf-btn--wide {
+  flex: 0 0 auto;
+  width: 100%;
+}
+
+/* Sections with cells (Internal section profile) */
+.pf-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pf-section__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-family: var(--f-manrope);
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.pf-section__title img {
+  width: 20px;
+  height: 20px;
+}
+
+.pf-cells {
+  display: grid;
+  gap: 8px;
+}
+
+.pf-cells--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.pf-cells--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.pf-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--c-bg-6);
+  border-radius: var(--radius-2);
+  background: var(--c-bg-2);
+  transition: background-color 0.15s ease;
+}
+
+.pf-cell:hover {
+  background: var(--c-bg-4);
+}
+
+.pf-cell--row {
+  flex-direction: row;
+  align-items: center;
+}
+
+.pf-cell__icon,
+.pf-cell__icon img {
+  display: block;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.pf-cell__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.pf-cell__title {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.pf-cell__desc {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--c-accent);
+}
+
+.pf-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 52px;
+  border: 1px solid var(--c-bg-6);
+  border-radius: var(--radius-4);
+  background: var(--c-bg-2);
+  font-family: var(--f-manrope);
+  font-weight: 800;
+  font-size: 16px;
+  transition: background-color 0.15s ease;
+}
+
+.pf-logout:hover {
+  background: var(--c-bg-4);
+}
+
+.pf-logout img {
+  width: 22px;
+  height: 22px;
+}
+
+/* Gaming profile */
+.pf-level {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pf-level__avatar {
+  align-self: center;
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+}
+
+.pf-level__user {
+  margin: 0 0 8px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 26px;
+  text-align: center;
+}
+
+.pf-level__row {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.pf-level__row span + span {
+  font-size: 12px;
+  color: var(--c-secondary);
+}
+
+.pf-level__link {
+  align-self: flex-end;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.pf-games {
+  margin: 0 -16px;
+}
+
+.pf-bets {
+  margin: 0;
+  padding: 4px 16px;
+  list-style: none;
+}
+
+.pf-bets li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 72px 72px;
+  align-items: center;
+  gap: 8px;
+  min-height: 52px;
+  font-size: 13px;
+}
+
+.pf-bets li + li {
+  border-top: 1px solid var(--c-bg-5);
+}
+
+.pf-bets .pf-bets__head {
+  min-height: 36px;
+  font-size: 11px;
+  color: var(--c-accent);
+}
+
+.pf-bets li > span:not(:first-child) {
+  text-align: right;
+}
+
+.pf-bet__name b,
+.pf-bet__name small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pf-bet__name b {
+  font-weight: 600;
+}
+
+.pf-bet__name small {
+  font-size: 11px;
+  color: var(--c-accent);
+}
+
+.pf-bet__win {
+  font-weight: 600;
+}
+
+/* Guest */
+.pf-guest {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  max-width: 360px;
+  margin: 0 auto;
+  padding: 64px 16px;
+  text-align: center;
+}
+
+.pf-guest img {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+}
+
+.pf-guest h1 {
+  margin: 8px 0 0;
+  font-family: var(--f-manrope);
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.pf-guest p {
+  margin: 0 0 16px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--c-secondary);
+}
+
+.pf-guest__btns {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+/* Tablet: player and balance side by side */
+@media (min-width: 768px) {
+  .pf {
+    padding: 24px 24px 40px;
+  }
+
+  .pf-tabs {
+    max-width: 480px;
+  }
+
+  .pf-side {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .pf-layout--gaming .pf-side {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pf-cell {
+    padding: 16px;
+  }
+
+  .pf-cell__title,
+  .pf-cell__desc {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .pf-games {
+    margin: 0 -24px;
+  }
+}
+
+/* Desktop: cards on the left, sections on the right */
+@media (min-width: 1280px) {
+  .pf-layout {
+    display: grid;
+    grid-template-columns: 400px minmax(0, 1fr);
+    align-items: start;
+    gap: 24px;
+  }
+
+  .pf-side {
+    display: flex;
+    align-items: stretch;
+    position: sticky;
+    top: 16px;
+  }
+
+  .pf-main {
+    gap: 24px;
+  }
+
+  .pf-games {
+    margin: 0;
+  }
+}

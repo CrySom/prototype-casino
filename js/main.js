@@ -905,6 +905,16 @@
       });
       document.querySelectorAll('[data-balance-code]').forEach(function (el) { el.textContent = cur.code; });
 
+      // Profile: amounts follow the display fiat and the hidden balance
+      var pf = fiat || FIATS[0];
+      document.querySelectorAll('[data-pf-usd]').forEach(function (el) {
+        el.textContent = wstate.hidden ? HIDDEN : fiatText({ amount: +el.getAttribute('data-pf-usd'), usd: 1 }, pf, true);
+      });
+      document.querySelectorAll('[data-pf-crypto]').forEach(function (el) {
+        el.textContent = wstate.hidden ? HIDDEN : (+el.getAttribute('data-pf-crypto')).toFixed(6);
+      });
+      document.querySelectorAll('[data-pf-fiat]').forEach(function (el) { el.textContent = pf.code; });
+
       // Dropdown
       var q = dropSearch.value.trim().toLowerCase();
       var list = visibleCurrencies(q);
@@ -1149,6 +1159,46 @@
       }
     });
   }
+
+  // Profile: tabs, info tooltips, log out.
+  var pfTabs = document.querySelectorAll('[data-pf-tab]');
+  pfTabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var name = tab.getAttribute('data-pf-tab');
+      pfTabs.forEach(function (t) {
+        t.classList.toggle('is-active', t === tab);
+        t.setAttribute('aria-selected', String(t === tab));
+      });
+      document.querySelectorAll('[data-pf-pane]').forEach(function (p) { p.hidden = p.getAttribute('data-pf-pane') !== name; });
+    });
+  });
+  var pfTips = document.querySelectorAll('[data-pf-tip]');
+  var closeTips = function (except) {
+    pfTips.forEach(function (b) {
+      if (b === except) return;
+      b.parentNode.classList.remove('is-open');
+      b.setAttribute('aria-expanded', 'false');
+    });
+  };
+  pfTips.forEach(function (b) {
+    b.addEventListener('click', function (event) {
+      event.stopPropagation();
+      var open = !b.parentNode.classList.contains('is-open');
+      closeTips(b);
+      b.parentNode.classList.toggle('is-open', open);
+      b.setAttribute('aria-expanded', String(open));
+    });
+  });
+  if (pfTips.length) {
+    document.addEventListener('click', function () { closeTips(); });
+    document.addEventListener('keydown', function (event) { if (event.key === 'Escape') closeTips(); });
+  }
+  document.querySelectorAll('.pf [data-logout]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      setAuth(false);
+      window.scrollTo(0, 0);
+    });
+  });
 
   // Coefficients: toggle selection.
   document.querySelectorAll('.coef').forEach(function (coef) {
