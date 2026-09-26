@@ -9,7 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Jost:wght@700&amp;family=Manrope:wght@700;800&amp;family=Roboto+Flex:opsz,wdth,wght,GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC@8..144,25..151,100..1000,-200..150,27..175,323..603,25..135,649..854,-305..-98,560..788,416..570,528..760&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/halls.css">
-<script>(function(){var s=null;try{s=localStorage.getItem('sidebar-state')}catch(e){}if(s?s==='open':window.innerWidth>1280)document.documentElement.classList.add('sidebar-open');try{if(localStorage.getItem('auth')==='1')document.documentElement.classList.add('is-auth')}catch(e){}})()</script>
+<link rel="stylesheet" href="css/wallet.css">
+<script>(function(){var s=null;try{s=localStorage.getItem('sidebar-state')}catch(e){}if(s?s==='open':window.innerWidth>1280)document.documentElement.classList.add('sidebar-open');try{if(localStorage.getItem('auth')==='1')document.documentElement.classList.add('is-auth');if((JSON.parse(localStorage.getItem('wallet-state')||'{}')).hidden)document.documentElement.classList.add('is-balance-hidden')}catch(e){}})()</script>
 </head>
 <body>
 <div class="layout">
@@ -59,8 +60,11 @@
     </div>
     <div class="header__user auth-only">
       <div class="balance">
-        <button class="balance__amount" type="button" aria-label="Balance"><span class="balance__icon"><img src="assets/img/hdr-eye.svg" alt=""></span><span class="balance__sum">1200.000000</span><span class="balance__currency"><img src="assets/img/hdr-usdt.svg" alt="USDT"></span><span class="balance__icon"><img src="assets/img/hdr-chevron.svg" alt=""></span></button>
-        <button class="balance__wallet" type="button" aria-label="Wallet"><img src="assets/img/hdr-wallet.svg" alt=""></button>
+        <div class="balance__amount" data-balance>
+          <button class="balance__icon balance__eye" type="button" aria-label="Hide balance" aria-pressed="false" data-balance-eye><img class="balance__eye-off" src="assets/img/wl-eye-off.svg" alt=""><img class="balance__eye-on" src="assets/img/hdr-eye.svg" alt=""></button>
+          <button class="balance__toggle" type="button" aria-label="Currencies" aria-expanded="false" data-balance-toggle><span class="balance__sum" data-balance-sum>1200.000000</span><span class="balance__currency"><img src="assets/img/currency-t.png" alt="USDT"></span><span class="balance__icon balance__chevron"><img src="assets/img/hdr-chevron.svg" alt=""></span></button>
+        </div>
+        <button class="balance__wallet" type="button" aria-label="Wallet" data-wallet-open><img src="assets/img/hdr-wallet.svg" alt=""></button>
       </div>
       <button class="header__icon-btn" type="button" aria-label="Notifications"><img src="assets/img/hdr-bell.svg" alt=""></button>
       <div class="header__profile">
@@ -481,6 +485,64 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Balance dropdown (Figma "Wallet" 334:418761: Balance Dropdown 334:419346) -->
+  <div class="wdrop" id="wallet-drop" hidden data-wdrop>
+    <div class="wsearch"><label class="wsearch__field"><img src="assets/img/wl-search.svg" alt=""><input type="search" placeholder="Search currencies" autocomplete="off" data-wdrop-search></label><span class="wsearch__tools"><button type="button" aria-label="Sort"><img src="assets/img/wl-list.svg" alt=""></button><button type="button" aria-label="Favorites"><img src="assets/img/wl-star.svg" alt=""></button></span></div>
+    <div class="wlist" data-wdrop-list></div>
+    <div class="wempty" hidden data-w-empty><img src="assets/img/currency-usd.png" alt=""><p class="wempty__title">No currencies found</p><p class="wempty__text">Try searching by a different currency name or code.</p></div>
+    <div class="wdrop__btns">
+      <button class="btn btn--secondary wbtn" type="button" data-wallet-open>Wallet</button>
+      <button class="btn btn--secondary wbtn" type="button" data-wsettings-open>Balance Settings</button>
+    </div>
+    <a class="btn wbtn wbtn--primary" href="#"><img src="assets/img/wl-deposit.svg" alt=""><span>Deposit</span></a>
+  </div>
+
+  <!-- Wallet (334:419971) -->
+  <div class="wmodal" id="wallet" hidden data-wmodal="wallet">
+    <div class="wmodal__backdrop" data-wmodal-close></div>
+    <section class="wmodal__card wmodal__card--wallet" role="dialog" aria-modal="true" aria-label="Wallet">
+      <div class="wmodal__head"><h2 class="wmodal__title">Wallet</h2><button class="wmodal__close" type="button" aria-label="Close" data-wmodal-close><img src="assets/img/wl-close.svg" alt=""></button></div>
+      <div class="wtabs" data-tabs><button class="wtab is-active" type="button" data-wtab="wallet">Wallet</button><button class="wtab" type="button" data-wtab="buy">Buy Crypto</button><button class="wtab" type="button" data-wtab="swap">Swap</button></div>
+      <div class="wpane" data-wpane="wallet">
+        <div class="wtotal">
+          <p class="wtotal__label">Total Real Balance<button class="wtotal__eye" type="button" aria-label="Hide balance" data-balance-eye><img class="balance__eye-off" src="assets/img/wl-eye-off.svg" alt=""><img class="balance__eye-on" src="assets/img/hdr-eye.svg" alt=""></button></p>
+          <div class="wtotal__row"><p class="wtotal__sum" data-wallet-total>$1,250.00</p><button class="wtotal__fiat" type="button" data-wfiat-open><span data-wallet-fiat>USD</span><img src="assets/img/wl-chevron.svg" alt=""></button></div>
+        </div>
+        <div class="wactions"><a class="btn btn--secondary wbtn" href="#"><img src="assets/img/wl-withdraw.svg" alt=""><span>Withdraw</span></a><a class="btn wbtn wbtn--primary" href="#"><img src="assets/img/wl-deposit.svg" alt=""><span>Deposit</span></a></div>
+        <div class="wtable"><div class="wtable__head"><span>Currencies</span><span>Balance</span></div><div class="wlist" data-wallet-list></div></div>
+      </div>
+      <div class="wpane wpane--soon" data-wpane="buy" hidden><p>Buy crypto with a bank card or other payment methods.</p><p>This screen is not part of the prototype yet.</p></div>
+      <div class="wpane wpane--soon" data-wpane="swap" hidden><p>Swap one currency for another at the current rate.</p><p>This screen is not part of the prototype yet.</p></div>
+    </section>
+  </div>
+
+  <!-- Balance Settings (334:420233) -->
+  <div class="wmodal wmodal--sheet" id="balance-settings" hidden data-wmodal="settings">
+    <div class="wmodal__backdrop" data-wmodal-close></div>
+    <section class="wmodal__card" role="dialog" aria-modal="true" aria-label="Balance Settings">
+      <div class="wmodal__head"><h2 class="wmodal__title">Balance Settings</h2><button class="wmodal__close" type="button" aria-label="Close" data-wmodal-close><img src="assets/img/wl-close.svg" alt=""></button></div>
+      <div class="wcells">
+        <label class="wcell"><span class="wcell__icon"><img src="assets/img/wl-eye-off-24.svg" alt=""></span><span class="wcell__text"><span>Hide Zero Balances</span><small>Currencies with zero balances will be hidden from the list.</small></span>
+          <input class="wcell__check" type="checkbox" data-whide-zero><span class="wcell__box"><img class="reg-check__off" src="assets/img/reg-checkbox-off.svg" alt=""><img class="reg-check__on" src="assets/img/reg-checkbox-on.svg" alt=""></span></label>
+        <button class="wcell" type="button" data-wfiat-open><span class="wcell__icon"><img src="assets/img/wl-settings.svg" alt=""></span><span class="wcell__text"><span>Display Crypto in Fiat</span><small data-wfiat-hint>All bets &amp; transactions will be settled in the crypto equivalent</small></span>
+          <span class="wcell__nav"><img src="assets/img/wl-nav.svg" alt=""></span></button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Display Crypto in Fiat (334:420346) -->
+  <div class="wmodal wmodal--sheet" id="display-fiat" hidden data-wmodal="fiat">
+    <div class="wmodal__backdrop" data-wmodal-close></div>
+    <section class="wmodal__card" role="dialog" aria-modal="true" aria-label="Display Crypto in Fiat">
+      <div class="wmodal__head"><h2 class="wmodal__title">Display Crypto in Fiat</h2><button class="wmodal__close" type="button" aria-label="Close" data-wmodal-close><img src="assets/img/wl-close.svg" alt=""></button></div>
+      <div class="wsearch"><label class="wsearch__field"><img src="assets/img/wl-search.svg" alt=""><input type="search" placeholder="Search currencies" autocomplete="off" data-wfiat-search></label><span class="wsearch__tools"><button type="button" aria-label="Sort"><img src="assets/img/wl-list.svg" alt=""></button><button type="button" aria-label="Favorites"><img src="assets/img/wl-star.svg" alt=""></button></span></div>
+      <div class="wrecent" data-wrecent-block><p class="wsub">Recently used currencies</p><div class="wrecent__chips" data-wrecent></div></div>
+      <p class="wsub">Fiat currency</p>
+      <div class="wlist wlist--fiat" data-wfiat-list></div>
+      <div class="wempty" hidden data-w-empty><img src="assets/img/currency-usd.png" alt=""><p class="wempty__title">No currencies found</p><p class="wempty__text">Try searching by a different currency name or code.</p></div>
+    </section>
   </div>
 
 <script src="js/main.js"></script>

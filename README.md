@@ -112,3 +112,21 @@ category chips of Casino use the mobile tile layout (the desktop Figma tiles
 are 40px high and clip their content); the bonus counters keep the 20% opacity
 of Figma and light up on hover; team crests in the sport cards are the two club
 logos used on the home page.
+
+Wallet (Figma file "Wallet", `334:418761`), available on every page when
+logged in:
+
+- **Balance dropdown** – the arrow next to the header balance opens a list of
+  currencies with search ("No currencies found" state); picking a currency
+  shows it in the header. Buttons: Wallet, Balance Settings, Deposit.
+- **Hidden balance** – the eye in the header replaces all amounts (header,
+  dropdown, Wallet) with `******`.
+- **Wallet** – total real balance in the chosen fiat, list of currencies.
+- **Balance Settings** – "Hide Zero Balances" and "Display Crypto in Fiat"
+  (fiat list with search and recently used currencies). With a fiat selected
+  the header and the dropdown show the amounts in that fiat.
+- State (currency, hidden balance, settings) is kept in `localStorage`.
+
+Differences from Figma: the demo currencies differ (Figma repeats USDC), the
+fiat descriptions are English; Buy Crypto / Swap tabs, Deposit and Withdraw are
+placeholders; on mobile Balance Settings and the fiat list are bottom sheets.

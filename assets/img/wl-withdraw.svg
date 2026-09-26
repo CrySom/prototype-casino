@@ -1,0 +1,17 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="24.984" height="26.492" viewBox="0 0 24.984 26.492" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Withdaw" filter="url(#filter0_d_0_334)">
+<path id="Vector" d="M12.492 4V14.6667M8.04757 8.44444L12.492 4L16.9365 8.44444M20.492 14.6667V18.2222C20.492 18.6937 20.3047 19.1459 19.9713 19.4793C19.6379 19.8127 19.1857 20 18.7142 20H6.2698C5.7983 20 5.34611 19.8127 5.01272 19.4793C4.67932 19.1459 4.49202 18.6937 4.49202 18.2222V14.6667" stroke="#F7F8FA" stroke-width="0.984035" stroke-linecap="round"/>
+</g>
+<defs>
+<filter id="filter0_d_0_334" x="-3.50798" y="-2" width="32" height="32" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="2"/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_334"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_334" result="shape"/>
+</filter>
+</defs>
+</svg>

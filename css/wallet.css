@@ -1,0 +1,671 @@
+/* ==========================================================================
+   Wallet (Figma file "Wallet", 334:418761): balance dropdown with
+   currencies, Wallet, Balance Settings, Display Crypto in Fiat, hidden
+   balance. Mobile: dropdown under the header, settings as bottom sheets.
+   ========================================================================== */
+
+/* Header balance: eye (hide / show) + dropdown trigger ---------------------- */
+.balance__amount {
+  border: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+
+.balance.is-open .balance__amount {
+  border-color: var(--c-secondary);
+}
+
+.balance__eye,
+.balance__toggle {
+  display: flex;
+  align-items: center;
+}
+
+.balance__toggle {
+  gap: 4px;
+  height: 100%;
+}
+
+.balance__toggle .balance__currency {
+  margin-left: 0;
+}
+
+.balance__eye img,
+.wtotal__eye img {
+  width: 16px;
+  height: 16px;
+}
+
+.balance__eye-on,
+.is-balance-hidden .balance__eye-off {
+  display: none;
+}
+
+.is-balance-hidden .balance__eye-on {
+  display: block;
+}
+
+.balance__chevron img {
+  transition: transform 0.2s ease;
+}
+
+.balance.is-open .balance__chevron img {
+  transform: rotate(180deg);
+}
+
+.balance__sum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Dropdown ------------------------------------------------------------------- */
+.wdrop {
+  position: absolute;
+  top: 56px;
+  left: 0;
+  right: 0;
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  background: var(--c-bg-2);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+}
+
+.wdrop[hidden],
+.wmodal[hidden],
+.wempty[hidden],
+.wpane[hidden] {
+  display: none;
+}
+
+.wsearch {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.wsearch__field {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--c-bg-6);
+  border-radius: var(--radius-4);
+  background: var(--c-bg-1);
+  cursor: text;
+}
+
+.wsearch__field:focus-within {
+  border-color: var(--c-accent);
+}
+
+.wsearch__field img {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.wsearch__field input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: 400 12px/16px var(--f-geist);
+  color: var(--c-white);
+}
+
+.wsearch__field input::placeholder {
+  color: var(--c-accent);
+}
+
+.wsearch__field input:focus {
+  outline: none;
+}
+
+.wsearch__field input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.wsearch__tools {
+  display: none;
+  gap: 4px;
+}
+
+.wsearch.is-typing .wsearch__tools {
+  display: flex;
+}
+
+.wsearch__tools button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.wsearch__tools img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Currency rows (dropdown, wallet, fiat list) */
+.wlist {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--radius-2);
+}
+
+.wrow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  padding-right: 8px;
+  border-radius: var(--radius-2);
+  text-align: left;
+  transition: background-color 0.15s ease;
+}
+
+button.wrow:hover {
+  background: var(--c-bg-4);
+}
+
+.wrow.is-active {
+  background: var(--c-bg-4);
+}
+
+.wrow__icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.wrow__icon img {
+  width: 24px;
+  height: 24px;
+  mix-blend-mode: luminosity;
+}
+
+.wrow__name {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  height: 40px;
+}
+
+.wrow__code {
+  overflow: hidden;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--c-txt-75);
+}
+
+.wrow__full {
+  overflow: hidden;
+  font-size: 10px;
+  line-height: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--c-accent);
+}
+
+.wrow__value {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.wrow__main {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.wrow__sub {
+  font-size: 10px;
+  line-height: 14px;
+  color: var(--c-accent);
+}
+
+.wrow__check {
+  width: 16px;
+  height: 16px;
+}
+
+.wempty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 40px 16px;
+  text-align: center;
+}
+
+.wempty img {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 8px;
+}
+
+.wempty__title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.wempty__text {
+  max-width: 220px;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--c-txt-50);
+}
+
+.wdrop__btns {
+  display: flex;
+  gap: 10px;
+  padding-top: 6px;
+}
+
+.wbtn {
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: var(--radius-4);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 14px;
+  white-space: nowrap;
+}
+
+.wbtn img {
+  width: 24px;
+  height: 24px;
+}
+
+.wbtn--primary {
+  flex: 0 0 auto;
+  width: 100%;
+  background: var(--c-brand);
+  color: var(--c-bg-1);
+}
+
+.wactions .wbtn--primary {
+  flex: 1 1 0;
+  width: auto;
+}
+
+/* Modals --------------------------------------------------------------------- */
+.wmodal {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.wmodal__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(18, 18, 18, 0.85);
+}
+
+.wmodal__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 520px;
+  padding: 16px;
+  border: 1px solid var(--c-bg-3);
+  border-radius: var(--radius-2);
+  background: var(--c-bg-2);
+}
+
+.wmodal__card--wallet {
+  gap: 16px;
+}
+
+/* Mobile: settings and fiat come up from the bottom */
+@media (max-width: 1023px) {
+  .wmodal--sheet {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .wmodal--sheet .wmodal__card {
+    max-width: none;
+    max-height: 85vh;
+    overflow-y: auto;
+    border-radius: 8px 8px 0 0;
+    animation: wsheet-in 0.25s ease;
+  }
+}
+
+@keyframes wsheet-in {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+.wmodal__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wmodal__title {
+  flex: 1 1 auto;
+  margin: 0;
+  font-family: var(--f-manrope);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: normal;
+}
+
+.wmodal__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-4);
+  background: var(--c-bg-5);
+}
+
+.wmodal__close img {
+  width: 12px;
+  height: 12px;
+}
+
+.wtabs {
+  display: flex;
+  padding: 8px;
+  border-radius: var(--radius-4);
+  background: var(--c-bg-3);
+}
+
+.wtab {
+  flex: 1 1 0;
+  height: 32px;
+  background: var(--c-bg-5);
+  font-size: 12px;
+  line-height: 10px;
+  color: var(--c-secondary);
+}
+
+.wtab:first-child {
+  border-radius: var(--radius-4) 0 0 var(--radius-4);
+}
+
+.wtab:last-child {
+  border-radius: 0 var(--radius-4) var(--radius-4) 0;
+}
+
+.wtab.is-active {
+  background: rgba(255, 255, 255, 0.2);
+  font-weight: 700;
+  color: var(--c-brand);
+}
+
+.wpane {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.wpane--soon {
+  padding: 32px 16px;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  color: var(--c-txt-50);
+}
+
+.wpane--soon p:first-child {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--c-white);
+}
+
+.wtotal {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wtotal__label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  color: var(--c-txt-50);
+}
+
+.wtotal__eye {
+  display: flex;
+}
+
+.wtotal__row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.wtotal__sum {
+  padding-right: 8px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  font-variant-numeric: tabular-nums;
+}
+
+.wtotal__fiat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 26px;
+  padding: 4px 6px;
+  border-radius: var(--radius-4);
+  background: var(--c-bg-5);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.wtotal__fiat img {
+  width: 12px;
+  height: 12px;
+}
+
+.wactions {
+  display: flex;
+  gap: 6px;
+}
+
+.wtable {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wtable__head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.25px;
+  color: var(--c-txt-50);
+}
+
+/* Balance settings cells */
+.wcells {
+  display: flex;
+  flex-direction: column;
+}
+
+.wcell {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  height: 60px;
+  padding: 0 8px;
+  border-radius: var(--radius-2);
+  text-align: left;
+  cursor: pointer;
+}
+
+.wcell:hover {
+  background: var(--c-bg-3);
+}
+
+.wcell__icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.wcell__icon img {
+  width: 24px;
+  height: 24px;
+}
+
+.wcell__text {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--c-txt-75);
+}
+
+.wcell__text small {
+  overflow: hidden;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--c-accent);
+}
+
+.wcell__check {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.wcell__box,
+.wcell__nav {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.wcell__box img,
+.wcell__nav img {
+  width: 100%;
+  height: 100%;
+}
+
+.wcell__box .reg-check__on,
+.wcell__check:checked + .wcell__box .reg-check__off {
+  display: none;
+}
+
+.wcell__check:checked + .wcell__box .reg-check__on {
+  display: block;
+}
+
+.wcell__check:focus-visible + .wcell__box {
+  outline: 1px solid var(--c-brand);
+  outline-offset: 2px;
+}
+
+/* Display crypto in fiat */
+.wsub {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  color: var(--c-txt-50);
+}
+
+.wrecent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.wrecent[hidden] {
+  display: none;
+}
+
+.wrecent__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.wchip {
+  height: 32px;
+  padding: 4px 24px;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-4);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  color: var(--c-secondary);
+}
+
+.wchip:hover {
+  border-color: var(--c-accent);
+  color: var(--c-white);
+}
+
+.wlist--fiat .wrow {
+  padding: 0 8px;
+}
+
+.wlist--fiat .wrow__icon img {
+  width: 24px;
+  height: 24px;
+}
+
+@media (min-width: 1024px) {
+  .wdrop {
+    top: 72px;
+    left: auto;
+    width: 320px;
+    padding: 16px;
+  }
+}

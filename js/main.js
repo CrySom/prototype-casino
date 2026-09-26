@@ -833,6 +833,221 @@
     });
   });
 
+  // Wallet: currency dropdown under the balance, Wallet, Balance Settings and
+  // Display Crypto in Fiat (demo data). The eye hides every amount; the
+  // choices are kept in localStorage.
+  var wdrop = document.querySelector('[data-wdrop]');
+  if (wdrop) {
+    var IMGP = 'assets/img/';
+    var CURRENCIES = [
+      { code: 'USDT', name: 'Tether', amount: 1200, usd: 1, icon: 'currency-t.png' },
+      { code: 'USDC', name: 'USD Coin', amount: 50, usd: 1, icon: 'currency-usd.png' },
+      { code: 'ETH', name: 'Ethereum', amount: 0, usd: 3200, icon: 'currency-eth.svg' },
+      { code: 'BTC', name: 'Bitcoin', amount: 0, usd: 65000, icon: 'currency-e.png' },
+      { code: 'LTC', name: 'Litecoin', amount: 0, usd: 80, icon: 'currency-usd.png' }
+    ];
+    var FIATS = [
+      { code: 'USD', name: 'US Dollar', sym: '$', rate: 1 },
+      { code: 'AED', name: 'UAE Dirham', sym: 'AED ', rate: 3.67 },
+      { code: 'CNY', name: 'Chinese Yuan', sym: '¥', rate: 7.1 },
+      { code: 'TRY', name: 'Turkish Lira', sym: '₺', rate: 32.5 }
+    ];
+    var HIDDEN = '******';
+    var wstate = { hidden: false, hideZero: false, fiat: null, recent: ['AED', 'CNY'], current: 'USDT' };
+    try { Object.assign(wstate, JSON.parse(localStorage.getItem('wallet-state') || '{}')); } catch (e) {}
+    var saveW = function () {
+      try { localStorage.setItem('wallet-state', JSON.stringify(wstate)); } catch (e) {}
+    };
+    var fiatOf = function (code) { return FIATS.filter(function (f) { return f.code === code; })[0]; };
+    var fiatText = function (c, fiat, sep) {
+      var v = c.amount * c.usd * fiat.rate;
+      var t = v.toFixed(2);
+      if (sep) t = t.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      return fiat.sym + t;
+    };
+    var cryptoText = function (c) { return c.amount.toFixed(6); };
+    var wEsc = function (t) { return String(t).replace(/[&<>"]/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]; }); };
+    var matches = function (item, q) {
+      return !q || item.code.toLowerCase().indexOf(q) >= 0 || item.name.toLowerCase().indexOf(q) >= 0;
+    };
+    var visibleCurrencies = function (q) {
+      return CURRENCIES.filter(function (c) {
+        return (!wstate.hideZero || c.amount > 0 || c.code === wstate.current) && matches(c, q);
+      });
+    };
+    var row = function (c, main, sub, tag, active) {
+      var t = tag || 'div';
+      return '<' + t + ' class="wrow' + (active ? ' is-active' : '') + '"' + (t === 'button' ? ' type="button" data-wcur="' + c.code + '"' : '') + '>' +
+        '<span class="wrow__icon"><img src="' + IMGP + c.icon + '" alt=""></span>' +
+        '<span class="wrow__name"><span class="wrow__code">' + c.code + '</span><span class="wrow__full">' + wEsc(c.name) + '</span></span>' +
+        '<span class="wrow__value"><span class="wrow__main">' + main + '</span>' + (sub ? '<span class="wrow__sub">' + sub + '</span>' : '') + '</span></' + t + '>';
+    };
+
+    var dropSearch = wdrop.querySelector('[data-wdrop-search]');
+    var fiatSearch = document.querySelector('[data-wfiat-search]');
+
+    var renderWallet = function () {
+      root.classList.toggle('is-balance-hidden', wstate.hidden);
+      document.querySelectorAll('[data-balance-eye]').forEach(function (b) {
+        b.setAttribute('aria-label', wstate.hidden ? 'Show balance' : 'Hide balance');
+        b.setAttribute('aria-pressed', String(wstate.hidden));
+      });
+      var fiat = fiatOf(wstate.fiat);
+      var cur = CURRENCIES.filter(function (c) { return c.code === wstate.current; })[0] || CURRENCIES[0];
+
+      // Header
+      document.querySelectorAll('[data-balance-sum]').forEach(function (el) {
+        el.textContent = wstate.hidden ? HIDDEN : fiat ? fiatText(cur, fiat) : cryptoText(cur);
+      });
+      document.querySelectorAll('.balance__currency img').forEach(function (im) {
+        im.src = IMGP + cur.icon;
+        im.alt = cur.code;
+      });
+
+      // Dropdown
+      var q = dropSearch.value.trim().toLowerCase();
+      var list = visibleCurrencies(q);
+      wdrop.querySelector('[data-wdrop-list]').innerHTML = list.map(function (c) {
+        var main = wstate.hidden ? HIDDEN : fiat ? fiatText(c, fiat) : cryptoText(c);
+        var sub = fiat && !wstate.hidden ? cryptoText(c) : '';
+        return row(c, main, sub, 'button', c.code === cur.code);
+      }).join('');
+      wdrop.querySelector('[data-w-empty]').hidden = list.length > 0;
+      dropSearch.closest('.wsearch').classList.toggle('is-typing', !!q);
+
+      // Wallet modal: values in the chosen fiat (USD when "None")
+      var wf = fiat || FIATS[0];
+      var total = CURRENCIES.reduce(function (t, c) { return t + c.amount * c.usd; }, 0);
+      document.querySelector('[data-wallet-total]').textContent = wstate.hidden ? wf.sym.trim() + HIDDEN :
+        fiatText({ amount: total, usd: 1 }, wf, true);
+      document.querySelector('[data-wallet-fiat]').textContent = wf.code;
+      document.querySelector('[data-wallet-list]').innerHTML = visibleCurrencies('').map(function (c) {
+        return row(c, wstate.hidden ? HIDDEN : fiatText(c, wf), wstate.hidden ? HIDDEN : cryptoText(c));
+      }).join('');
+
+      // Settings
+      document.querySelector('[data-whide-zero]').checked = wstate.hideZero;
+
+      // Fiat list
+      var fq = fiatSearch.value.trim().toLowerCase();
+      var fiats = [{ code: 'None', name: 'Show balances in crypto', none: true }].concat(FIATS).filter(function (f) { return matches(f, fq); });
+      document.querySelector('[data-wfiat-list]').innerHTML = fiats.map(function (f) {
+        var selected = f.none ? !wstate.fiat : wstate.fiat === f.code;
+        return '<button class="wrow' + (selected ? ' is-active' : '') + '" type="button" data-wfiat="' + (f.none ? '' : f.code) + '">' +
+          '<span class="wrow__icon"><img src="' + IMGP + 'currency-usd.png" alt=""></span>' +
+          '<span class="wrow__name"><span class="wrow__code">' + f.code + '</span>' + (f.none ? '' : '<span class="wrow__full">' + f.name + '</span>') + '</span>' +
+          (selected ? '<img class="wrow__check" src="' + IMGP + 'wl-check.svg" alt="Selected">' : '') + '</button>';
+      }).join('');
+      var fiatModal = document.querySelector('[data-wmodal="fiat"]');
+      fiatModal.querySelector('[data-w-empty]').hidden = fiats.length > 0;
+      fiatSearch.closest('.wsearch').classList.toggle('is-typing', !!fq);
+      var recent = document.querySelector('[data-wrecent]');
+      recent.innerHTML = wstate.recent.map(function (c) { return '<button class="wchip" type="button" data-wfiat="' + c + '">' + c + '</button>'; }).join('');
+      document.querySelector('[data-wrecent-block]').hidden = !wstate.recent.length || !!fq;
+    };
+
+    var balanceBox = document.querySelector('.header .balance');
+    var dropToggle = document.querySelector('[data-balance-toggle]');
+    var setDrop = function (open) {
+      wdrop.hidden = !open;
+      balanceBox.classList.toggle('is-open', open);
+      dropToggle.setAttribute('aria-expanded', String(open));
+      if (!open) {
+        dropSearch.value = '';
+        renderWallet();
+      }
+    };
+    var wmodal = function (name) { return document.querySelector('[data-wmodal="' + name + '"]'); };
+    var anyModalOpen = function () {
+      return Array.prototype.some.call(document.querySelectorAll('[data-wmodal]'), function (m) { return !m.hidden; });
+    };
+    var openW = function (name) {
+      setDrop(false);
+      wmodal(name).hidden = false;
+      root.classList.add('modal-open');
+      var close = wmodal(name).querySelector('.wmodal__close');
+      if (close) close.focus();
+    };
+    var closeW = function (name) {
+      wmodal(name).hidden = true;
+      if (name === 'fiat') {
+        fiatSearch.value = '';
+        renderWallet();
+      }
+      if (!anyModalOpen()) root.classList.remove('modal-open');
+    };
+
+    dropToggle.addEventListener('click', function () { setDrop(wdrop.hidden); });
+    document.addEventListener('click', function (event) {
+      if (!wdrop.hidden && !wdrop.contains(event.target) && !balanceBox.contains(event.target)) setDrop(false);
+    });
+    document.querySelectorAll('[data-balance-eye]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        wstate.hidden = !wstate.hidden;
+        saveW();
+        renderWallet();
+      });
+    });
+    wdrop.addEventListener('click', function (event) {
+      var r = event.target.closest('[data-wcur]');
+      if (!r) return;
+      wstate.current = r.getAttribute('data-wcur');
+      saveW();
+      setDrop(false);
+    });
+    dropSearch.addEventListener('input', renderWallet);
+    fiatSearch.addEventListener('input', renderWallet);
+
+    document.querySelectorAll('[data-wallet-open]').forEach(function (b) {
+      b.addEventListener('click', function () { openW('wallet'); });
+    });
+    document.querySelectorAll('[data-wsettings-open]').forEach(function (b) {
+      b.addEventListener('click', function () { openW('settings'); });
+    });
+    document.querySelectorAll('[data-wfiat-open]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (!wmodal('settings').hidden) closeW('settings');
+        openW('fiat');
+      });
+    });
+    document.querySelectorAll('[data-wmodal]').forEach(function (m) {
+      m.querySelectorAll('[data-wmodal-close]').forEach(function (b) {
+        b.addEventListener('click', function () { closeW(m.getAttribute('data-wmodal')); });
+      });
+    });
+    document.querySelector('[data-whide-zero]').addEventListener('change', function (event) {
+      wstate.hideZero = event.target.checked;
+      saveW();
+      renderWallet();
+    });
+    wmodal('fiat').addEventListener('click', function (event) {
+      var f = event.target.closest('[data-wfiat]');
+      if (!f) return;
+      var code = f.getAttribute('data-wfiat') || null;
+      wstate.fiat = code;
+      if (code) {
+        wstate.recent = [code].concat(wstate.recent.filter(function (c) { return c !== code; })).slice(0, 5);
+      }
+      saveW();
+      closeW('fiat');
+    });
+    document.querySelectorAll('[data-wtab]').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var name = tab.getAttribute('data-wtab');
+        document.querySelectorAll('[data-wpane]').forEach(function (p) { p.hidden = p.getAttribute('data-wpane') !== name; });
+      });
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key !== 'Escape') return;
+      if (!wdrop.hidden) setDrop(false);
+      ['fiat', 'settings', 'wallet'].some(function (n) {
+        if (!wmodal(n).hidden) { closeW(n); return true; }
+        return false;
+      });
+    });
+    renderWallet();
+  }
+
   // Coefficients: toggle selection.
   document.querySelectorAll('.coef').forEach(function (coef) {
     coef.addEventListener('click', function () {
