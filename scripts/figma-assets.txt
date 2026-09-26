@@ -30,7 +30,6 @@ event-promo-bg.svg          https://www.figma.com/api/mcp/asset/cef081ac-1a74-47
 icon-discount.svg           https://www.figma.com/api/mcp/asset/cef081ac-1a74-47b9-afea-681db81d64cc/3d474.svg
 icon-play.svg               https://www.figma.com/api/mcp/asset/bbc23bd5-3aa2-4f64-bd88-dfe5a1ac3fe6/4de4f.svg
 icon-favorite-game.svg      https://www.figma.com/api/mcp/asset/bbc23bd5-3aa2-4f64-bd88-dfe5a1ac3fe6/13c41.svg
-live-casino-1.png           https://www.figma.com/api/mcp/asset/48e5a081-1e42-4586-b065-0181b16c01c1/d1e7a.png
 live-casino-2.png           https://www.figma.com/api/mcp/asset/48e5a081-1e42-4586-b065-0181b16c01c1/a3661.png
 provider-logo.svg           https://www.figma.com/api/mcp/asset/eabd2e13-90fc-4037-a2e4-0f51cc64969d/99625.svg
 icon-playing.svg            https://www.figma.com/api/mcp/asset/eabd2e13-90fc-4037-a2e4-0f51cc64969d/6491b.svg
