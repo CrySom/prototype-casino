@@ -21,6 +21,16 @@ The page is fluid:
 - `js/main.js` – carousel pagination, tabs, coefficient selection
 - `assets/img/` – images and icons exported from Figma
 
+## Performance (iPhone)
+
+- Raster images are WebP, sized to about 2× of their largest size on screen
+  (the Figma exports were up to 1555–1908 px for 40–270 px slots), 9.4 MB → 2.9 MB.
+- Prototype pictures are stored already in greyscale, so the black-and-white
+  filter is applied only to SVG icons; the UI Design Concepts keep their colours.
+- Pictures load lazily (`loading="lazy"`, `decoding="async"`).
+- No `backdrop-filter` blur inside the game tiles and tile labels (it made
+  scrolling slow on iOS with 100+ tiles per page).
+
 ## Assets
 
 Images are downloaded from the Figma MCP asset server:

@@ -61,8 +61,12 @@ p {
 img {
   display: block;
   max-width: none;
-  /* The whole prototype is black and white, including images from Figma
-     (league flags, store badges, promo icons) and demo pictures. */
+}
+
+/* The whole prototype is black and white. Raster images (WebP) are stored
+   already in greyscale; only the SVG icons from Figma (flags, logos) get the
+   filter, so iOS Safari does not repaint hundreds of filtered images on scroll. */
+img[src$=".svg"] {
   filter: grayscale(1);
 }
 
@@ -797,8 +801,6 @@ a {
 .game-tile__slot {
   position: absolute;
   inset: 0;
-  -webkit-backdrop-filter: blur(2px);
-  backdrop-filter: blur(2px);
   background: rgba(0, 0, 0, 0.01);
 }
 

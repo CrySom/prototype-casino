@@ -410,58 +410,58 @@
     // [image, category, markets, title, question, yes %, yes coef, no coef, volume, bets]
     var MARKETS = {
       Top: [
-        ['prediction-event.png', 'Politics', 15, 'Donald Trump offers', 'Donald Trump’s Offer for Greenland<br>(Trillions of Dollars)', 52, '1,92', '1,68', '2.1M $', '78 901'],
-        ['thematic-sport.png', 'Sport', 24, 'Champions League', 'Will Real Madrid win the<br>Champions League 2026?', 38, '2,63', '1,45', '5.4M $', '120 344'],
-        ['thematic-casino.png', 'Crypto', 9, 'Bitcoin price', 'Will Bitcoin close above<br>$150,000 this year?', 61, '1,64', '2,56', '8.9M $', '210 087'],
-        ['thematic-prediction.png', 'Tech', 7, 'AI race', 'Will a new AI model top<br>the leaderboard in June?', 70, '1,43', '3,33', '1.2M $', '45 620']
+        ['prediction-event.webp', 'Politics', 15, 'Donald Trump offers', 'Donald Trump’s Offer for Greenland<br>(Trillions of Dollars)', 52, '1,92', '1,68', '2.1M $', '78 901'],
+        ['thematic-sport.webp', 'Sport', 24, 'Champions League', 'Will Real Madrid win the<br>Champions League 2026?', 38, '2,63', '1,45', '5.4M $', '120 344'],
+        ['thematic-casino.webp', 'Crypto', 9, 'Bitcoin price', 'Will Bitcoin close above<br>$150,000 this year?', 61, '1,64', '2,56', '8.9M $', '210 087'],
+        ['thematic-prediction.webp', 'Tech', 7, 'AI race', 'Will a new AI model top<br>the leaderboard in June?', 70, '1,43', '3,33', '1.2M $', '45 620']
       ],
       Politics: [
-        ['prediction-event.png', 'Politics', 15, 'Donald Trump offers', 'Donald Trump’s Offer for Greenland<br>(Trillions of Dollars)', 52, '1,92', '1,68', '2.1M $', '78 901'],
-        ['prediction-event.png', 'Politics', 11, 'US Midterms', 'Will Republicans keep<br>the House in 2026?', 57, '1,75', '2,33', '12.4M $', '301 552'],
-        ['banner-player.png', 'Politics', 6, 'UK elections', 'Snap general election<br>before 2027?', 18, '5,55', '1,22', '740K $', '19 210'],
-        ['vip-image.png', 'Politics', 8, 'EU summit', 'Will the EU agree a new<br>budget deal this quarter?', 44, '2,27', '1,79', '980K $', '27 403']
+        ['prediction-event.webp', 'Politics', 15, 'Donald Trump offers', 'Donald Trump’s Offer for Greenland<br>(Trillions of Dollars)', 52, '1,92', '1,68', '2.1M $', '78 901'],
+        ['prediction-event.webp', 'Politics', 11, 'US Midterms', 'Will Republicans keep<br>the House in 2026?', 57, '1,75', '2,33', '12.4M $', '301 552'],
+        ['banner-player.webp', 'Politics', 6, 'UK elections', 'Snap general election<br>before 2027?', 18, '5,55', '1,22', '740K $', '19 210'],
+        ['vip-image.webp', 'Politics', 8, 'EU summit', 'Will the EU agree a new<br>budget deal this quarter?', 44, '2,27', '1,79', '980K $', '27 403']
       ],
       Sport: [
-        ['thematic-sport.png', 'Sport', 15, 'F1 Drivers’ Champion', 'George Russell to win the<br>2026 championship?', 52, '1,92', '1,68', '3.3M $', '96 015'],
-        ['thematic-sport.png', 'Sport', 24, 'Champions League', 'Will Real Madrid win the<br>Champions League 2026?', 38, '2,63', '1,45', '5.4M $', '120 344'],
-        ['banner-player.png', 'Sport', 12, 'NBA Finals', 'Will the Celtics reach<br>the NBA Finals?', 46, '2,17', '1,85', '4.1M $', '88 730'],
-        ['thematic-sport.png', 'Sport', 5, 'Wimbledon', 'Will Carlos Alcaraz win<br>Wimbledon 2026?', 41, '2,43', '1,69', '1.7M $', '40 118']
+        ['thematic-sport.webp', 'Sport', 15, 'F1 Drivers’ Champion', 'George Russell to win the<br>2026 championship?', 52, '1,92', '1,68', '3.3M $', '96 015'],
+        ['thematic-sport.webp', 'Sport', 24, 'Champions League', 'Will Real Madrid win the<br>Champions League 2026?', 38, '2,63', '1,45', '5.4M $', '120 344'],
+        ['banner-player.webp', 'Sport', 12, 'NBA Finals', 'Will the Celtics reach<br>the NBA Finals?', 46, '2,17', '1,85', '4.1M $', '88 730'],
+        ['thematic-sport.webp', 'Sport', 5, 'Wimbledon', 'Will Carlos Alcaraz win<br>Wimbledon 2026?', 41, '2,43', '1,69', '1.7M $', '40 118']
       ],
       Culture: [
-        ['vip-image.png', 'Culture', 10, 'Oscars 2027', 'Will a sci-fi film win<br>Best Picture?', 23, '4,34', '1,30', '620K $', '14 902'],
-        ['banner-player.png', 'Culture', 4, 'Eurovision', 'Will Sweden win<br>Eurovision 2027?', 19, '5,26', '1,23', '410K $', '11 037'],
-        ['thematic-casino.png', 'Culture', 7, 'Box office', 'Will a film pass $2B<br>at the box office this year?', 34, '2,94', '1,51', '890K $', '21 764'],
-        ['thematic-prediction.png', 'Culture', 3, 'Music awards', 'Album of the Year goes<br>to a debut artist?', 27, '3,70', '1,37', '350K $', '9 480']
+        ['vip-image.webp', 'Culture', 10, 'Oscars 2027', 'Will a sci-fi film win<br>Best Picture?', 23, '4,34', '1,30', '620K $', '14 902'],
+        ['banner-player.webp', 'Culture', 4, 'Eurovision', 'Will Sweden win<br>Eurovision 2027?', 19, '5,26', '1,23', '410K $', '11 037'],
+        ['thematic-casino.webp', 'Culture', 7, 'Box office', 'Will a film pass $2B<br>at the box office this year?', 34, '2,94', '1,51', '890K $', '21 764'],
+        ['thematic-prediction.webp', 'Culture', 3, 'Music awards', 'Album of the Year goes<br>to a debut artist?', 27, '3,70', '1,37', '350K $', '9 480']
       ],
       Tech: [
-        ['thematic-prediction.png', 'Tech', 7, 'AI race', 'Will a new AI model top<br>the leaderboard in June?', 70, '1,43', '3,33', '1.2M $', '45 620'],
-        ['thematic-casino.png', 'Tech', 5, 'Smartphones', 'Foldable iPhone announced<br>this year?', 33, '3,03', '1,49', '1.9M $', '52 311'],
-        ['vip-image.png', 'Tech', 9, 'Big Tech', 'Will a company pass<br>a $6T market cap?', 48, '2,08', '1,92', '2.6M $', '63 804'],
-        ['banner-player.png', 'Tech', 4, 'Gaming', 'GTA VI released<br>on schedule?', 64, '1,56', '2,78', '3.1M $', '104 925']
+        ['thematic-prediction.webp', 'Tech', 7, 'AI race', 'Will a new AI model top<br>the leaderboard in June?', 70, '1,43', '3,33', '1.2M $', '45 620'],
+        ['thematic-casino.webp', 'Tech', 5, 'Smartphones', 'Foldable iPhone announced<br>this year?', 33, '3,03', '1,49', '1.9M $', '52 311'],
+        ['vip-image.webp', 'Tech', 9, 'Big Tech', 'Will a company pass<br>a $6T market cap?', 48, '2,08', '1,92', '2.6M $', '63 804'],
+        ['banner-player.webp', 'Tech', 4, 'Gaming', 'GTA VI released<br>on schedule?', 64, '1,56', '2,78', '3.1M $', '104 925']
       ],
       Space: [
-        ['thematic-prediction.png', 'Space', 6, 'Starship', 'Starship reaches orbit<br>and lands this year?', 58, '1,72', '2,38', '1.4M $', '37 290'],
-        ['vip-image.png', 'Space', 3, 'Moon landing', 'Crewed Moon landing<br>before 2028?', 29, '3,45', '1,41', '960K $', '22 518'],
-        ['thematic-casino.png', 'Space', 4, 'Mars', 'Uncrewed Mars mission<br>launched in 2026?', 36, '2,78', '1,56', '510K $', '13 604'],
-        ['banner-player.png', 'Space', 2, 'Space tourism', 'More than 50 tourists<br>in space this year?', 42, '2,38', '1,72', '280K $', '7 915']
+        ['thematic-prediction.webp', 'Space', 6, 'Starship', 'Starship reaches orbit<br>and lands this year?', 58, '1,72', '2,38', '1.4M $', '37 290'],
+        ['vip-image.webp', 'Space', 3, 'Moon landing', 'Crewed Moon landing<br>before 2028?', 29, '3,45', '1,41', '960K $', '22 518'],
+        ['thematic-casino.webp', 'Space', 4, 'Mars', 'Uncrewed Mars mission<br>launched in 2026?', 36, '2,78', '1,56', '510K $', '13 604'],
+        ['banner-player.webp', 'Space', 2, 'Space tourism', 'More than 50 tourists<br>in space this year?', 42, '2,38', '1,72', '280K $', '7 915']
       ],
       Celebrities: [
-        ['banner-player.png', 'Celebrities', 8, 'Royal news', 'Royal wedding announced<br>this year?', 21, '4,76', '1,27', '430K $', '12 660'],
-        ['vip-image.png', 'Celebrities', 5, 'Tour record', 'Highest-grossing tour<br>record broken in 2026?', 55, '1,82', '2,22', '770K $', '19 043'],
-        ['thematic-casino.png', 'Celebrities', 6, 'Social media', 'First account to reach<br>1B followers?', 31, '3,23', '1,45', '390K $', '10 377'],
-        ['thematic-prediction.png', 'Celebrities', 3, 'Red carpet', 'Met Gala theme revealed<br>before March?', 67, '1,49', '3,03', '150K $', '4 802']
+        ['banner-player.webp', 'Celebrities', 8, 'Royal news', 'Royal wedding announced<br>this year?', 21, '4,76', '1,27', '430K $', '12 660'],
+        ['vip-image.webp', 'Celebrities', 5, 'Tour record', 'Highest-grossing tour<br>record broken in 2026?', 55, '1,82', '2,22', '770K $', '19 043'],
+        ['thematic-casino.webp', 'Celebrities', 6, 'Social media', 'First account to reach<br>1B followers?', 31, '3,23', '1,45', '390K $', '10 377'],
+        ['thematic-prediction.webp', 'Celebrities', 3, 'Red carpet', 'Met Gala theme revealed<br>before March?', 67, '1,49', '3,03', '150K $', '4 802']
       ],
       Crypto: [
-        ['thematic-casino.png', 'Crypto', 9, 'Bitcoin price', 'Will Bitcoin close above<br>$150,000 this year?', 61, '1,64', '2,56', '8.9M $', '210 087'],
-        ['thematic-prediction.png', 'Crypto', 7, 'Ethereum', 'ETH above $8,000<br>by December?', 35, '2,86', '1,54', '4.6M $', '118 402'],
-        ['vip-image.png', 'Crypto', 5, 'ETF', 'Solana ETF approved<br>this quarter?', 49, '2,04', '1,96', '2.2M $', '59 731'],
-        ['banner-player.png', 'Crypto', 4, 'Stablecoins', 'USDT market cap<br>above $200B?', 72, '1,39', '3,57', '1.5M $', '33 216']
+        ['thematic-casino.webp', 'Crypto', 9, 'Bitcoin price', 'Will Bitcoin close above<br>$150,000 this year?', 61, '1,64', '2,56', '8.9M $', '210 087'],
+        ['thematic-prediction.webp', 'Crypto', 7, 'Ethereum', 'ETH above $8,000<br>by December?', 35, '2,86', '1,54', '4.6M $', '118 402'],
+        ['vip-image.webp', 'Crypto', 5, 'ETF', 'Solana ETF approved<br>this quarter?', 49, '2,04', '1,96', '2.2M $', '59 731'],
+        ['banner-player.webp', 'Crypto', 4, 'Stablecoins', 'USDT market cap<br>above $200B?', 72, '1,39', '3,57', '1.5M $', '33 216']
       ],
       Other: [
-        ['vip-image.png', 'Other', 4, 'Weather', 'Hottest year on record<br>in 2026?', 63, '1,59', '2,70', '640K $', '17 588'],
-        ['thematic-prediction.png', 'Other', 3, 'Economy', 'Fed cuts rates<br>at the next meeting?', 54, '1,85', '2,17', '6.3M $', '140 976'],
-        ['thematic-casino.png', 'Other', 2, 'Travel', 'Record number of flights<br>in a single day?', 47, '2,13', '1,89', '220K $', '6 104'],
-        ['banner-player.png', 'Other', 5, 'Science', 'Room-temperature<br>superconductor confirmed?', 8, '12,5', '1,09', '1.1M $', '28 447']
+        ['vip-image.webp', 'Other', 4, 'Weather', 'Hottest year on record<br>in 2026?', 63, '1,59', '2,70', '640K $', '17 588'],
+        ['thematic-prediction.webp', 'Other', 3, 'Economy', 'Fed cuts rates<br>at the next meeting?', 54, '1,85', '2,17', '6.3M $', '140 976'],
+        ['thematic-casino.webp', 'Other', 2, 'Travel', 'Record number of flights<br>in a single day?', 47, '2,13', '1,89', '220K $', '6 104'],
+        ['banner-player.webp', 'Other', 5, 'Science', 'Room-temperature<br>superconductor confirmed?', 8, '12,5', '1,09', '1.1M $', '28 447']
       ]
     };
     var order = Object.keys(MARKETS);
@@ -841,11 +841,11 @@
   if (wdrop) {
     var IMGP = 'assets/img/';
     var CURRENCIES = [
-      { code: 'USDT', name: 'Tether', amount: 1200, usd: 1, icon: 'currency-t.png' },
-      { code: 'USDC', name: 'USD Coin', amount: 50, usd: 1, icon: 'currency-usd.png' },
+      { code: 'USDT', name: 'Tether', amount: 1200, usd: 1, icon: 'currency-t.webp' },
+      { code: 'USDC', name: 'USD Coin', amount: 50, usd: 1, icon: 'currency-usd.webp' },
       { code: 'ETH', name: 'Ethereum', amount: 0, usd: 3200, icon: 'currency-eth.svg' },
-      { code: 'BTC', name: 'Bitcoin', amount: 0, usd: 65000, icon: 'currency-e.png' },
-      { code: 'LTC', name: 'Litecoin', amount: 0, usd: 80, icon: 'currency-usd.png' }
+      { code: 'BTC', name: 'Bitcoin', amount: 0, usd: 65000, icon: 'currency-e.webp' },
+      { code: 'LTC', name: 'Litecoin', amount: 0, usd: 80, icon: 'currency-usd.webp' }
     ];
     var FIATS = [
       { code: 'USD', name: 'US Dollar', sym: '$', rate: 1 },
@@ -946,7 +946,7 @@
       document.querySelector('[data-wfiat-list]').innerHTML = fiats.map(function (f) {
         var selected = f.none ? !wstate.fiat : wstate.fiat === f.code;
         return '<button class="wrow' + (selected ? ' is-active' : '') + '" type="button" data-wfiat="' + (f.none ? '' : f.code) + '">' +
-          '<span class="wrow__icon"><img src="' + IMGP + 'currency-usd.png" alt=""></span>' +
+          '<span class="wrow__icon"><img src="' + IMGP + 'currency-usd.webp" alt=""></span>' +
           '<span class="wrow__name"><span class="wrow__code">' + f.code + '</span>' + (f.none ? '' : '<span class="wrow__full">' + f.name + '</span>') + '</span>' +
           (selected ? '<img class="wrow__check" src="' + IMGP + 'wl-check.svg" alt="Selected">' : '') + '</button>';
       }).join('');
