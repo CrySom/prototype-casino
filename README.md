@@ -176,3 +176,14 @@ as a screen between the header and the tab bar (tap Menu again or Esc to close).
 
 Differences from Figma: the items of the collapsed "Live Casino Games" group
 are made up; menu items lead to the matching hall page.
+
+Desktop menu behaviour (Style Guide Molecules "Desktop menu" `1138:146031`):
+a "<<" / ">>" handle on the edge of the menu (on hover) collapses and expands
+it; in the collapsed menu "⋮" opens the list of sections (Casino / Sport /
+Prediction), an item shows its name on hover, counters become badges on the
+icons and the Casino Games list stays visible; the EN button opens the language
+list in two columns (also in the mobile menu, the choice is remembered).
+
+Differences from Figma: languages are marked with a code instead of a flag and
+the list has no repeats; the right drawer of the file has no content yet and is
+not used.

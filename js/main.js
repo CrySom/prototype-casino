@@ -49,6 +49,7 @@
     root.classList.toggle('sidebar-open', open);
     Array.prototype.forEach.call(toggles, function (btn) {
       btn.setAttribute('aria-expanded', String(open));
+      if (btn.classList.contains('sb-handle')) btn.setAttribute('aria-label', open ? 'Collapse menu' : 'Expand menu');
     });
   }
 
@@ -104,7 +105,7 @@
     var head = group.firstElementChild;
     head.setAttribute('aria-expanded', String(group.classList.contains('is-open')));
     head.addEventListener('click', function () {
-      if (!root.classList.contains('sidebar-open')) {
+      if (group.closest('.sidebar') && !root.classList.contains('sidebar-open')) {
         setSidebar(true);
         return;
       }
@@ -1215,6 +1216,127 @@
       if (search) search.placeholder = name === 'prediction' ? 'Search predictions' : 'Search games, providers, categories';
     });
   });
+
+  // Desktop menu pop-ups: sections list (collapsed "⋮"), item names on hover
+  // in the collapsed menu, language list (EN button, also in the mobile menu).
+  var sidebarEl = document.querySelector('.sidebar');
+  var pops = {};
+  document.querySelectorAll('[data-sb-pop]').forEach(function (p) { pops[p.getAttribute('data-sb-pop')] = p; });
+  var popOwner = {};
+  var closePop = function (name) {
+    var p = pops[name];
+    if (!p || p.hidden) return;
+    p.hidden = true;
+    if (popOwner[name]) popOwner[name].setAttribute('aria-expanded', 'false');
+    popOwner[name] = null;
+  };
+  var place = function (p, x, y, fromBottom) {
+    p.style.left = Math.max(8, Math.min(x, window.innerWidth - p.offsetWidth - 8)) + 'px';
+    if (fromBottom) {
+      p.style.top = 'auto';
+      p.style.bottom = Math.max(8, window.innerHeight - y) + 'px';
+    } else {
+      p.style.bottom = 'auto';
+      p.style.top = Math.max(8, Math.min(y, window.innerHeight - p.offsetHeight - 8)) + 'px';
+    }
+  };
+  var openPop = function (name, owner, pos) {
+    var p = pops[name];
+    ['sections', 'lang'].forEach(function (n) { if (n !== name) closePop(n); });
+    p.hidden = false;
+    popOwner[name] = owner;
+    owner.setAttribute('aria-expanded', 'true');
+    pos(p);
+    var first = p.querySelector('.is-active') || p.querySelector('button');
+    if (first) first.focus({ preventScroll: true });
+  };
+  var collapsed = function () { return DESKTOP.matches && !root.classList.contains('sidebar-open'); };
+
+  if (pops.sections && sidebarEl) {
+    var secBtn = sidebarEl.querySelector('[data-sb-sections]');
+    secBtn.addEventListener('click', function (event) {
+      event.stopPropagation();
+      if (!pops.sections.hidden) { closePop('sections'); return; }
+      openPop('sections', secBtn, function (p) {
+        var r = secBtn.getBoundingClientRect();
+        place(p, sidebarEl.getBoundingClientRect().right, r.top);
+      });
+    });
+    pops.sections.addEventListener('click', function (event) {
+      var item = event.target.closest('[data-sb-section]');
+      if (!item) return;
+      var tab = sidebarEl.querySelector('[data-menu-tab="' + item.getAttribute('data-sb-section') + '"]');
+      if (tab) tab.click();
+      closePop('sections');
+      secBtn.focus();
+    });
+  }
+
+  if (pops.tip && sidebarEl) {
+    var tipText = pops.tip.querySelector('[data-sb-tip-text]');
+    var tipIcon = pops.tip.querySelector('[data-sb-tip-icon]');
+    sidebarEl.addEventListener('mouseover', function (event) {
+      var cell = event.target.closest('.sidebar__menu .sb-cell');
+      if (!collapsed() || !cell || !cell.title || cell.hasAttribute('data-sb-sections')) { pops.tip.hidden = true; return; }
+      var r = cell.getBoundingClientRect();
+      tipText.textContent = cell.title;
+      var icon = cell.querySelector('.sb-cell__icon img');
+      tipIcon.innerHTML = icon ? '<img src="' + icon.getAttribute('src') + '" alt="">' : '';
+      pops.tip.hidden = false;
+      pops.tip.style.left = r.left + 'px';
+      pops.tip.style.top = r.top + 'px';
+      pops.tip.style.bottom = 'auto';
+    });
+    sidebarEl.addEventListener('mouseleave', function () { pops.tip.hidden = true; });
+    sidebarEl.querySelector('.sidebar__menu').addEventListener('scroll', function () { pops.tip.hidden = true; });
+  }
+
+  if (pops.lang) {
+    var setLang = function (code) {
+      document.querySelectorAll('[data-lang-code]').forEach(function (el) { el.textContent = code; });
+      pops.lang.querySelectorAll('[data-lang]').forEach(function (b) {
+        var on = b.getAttribute('data-lang') === code;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-checked', String(on));
+      });
+    };
+    document.querySelectorAll('[data-lang-open]').forEach(function (btn) {
+      btn.addEventListener('click', function (event) {
+        event.stopPropagation();
+        if (!pops.lang.hidden && popOwner.lang === btn) { closePop('lang'); return; }
+        openPop('lang', btn, function (p) {
+          var r = btn.getBoundingClientRect();
+          if (btn.closest('.sidebar') && collapsed()) place(p, sidebarEl.getBoundingClientRect().right + 4, r.bottom, true);
+          else place(p, r.left, r.top - 8, true);
+        });
+      });
+    });
+    pops.lang.addEventListener('click', function (event) {
+      var item = event.target.closest('[data-lang]');
+      if (!item) return;
+      var code = item.getAttribute('data-lang');
+      setLang(code);
+      try { localStorage.setItem('lang', code); } catch (e) {}
+      var owner = popOwner.lang;
+      closePop('lang');
+      if (owner) owner.focus();
+    });
+    try { if (localStorage.getItem('lang')) setLang(localStorage.getItem('lang')); } catch (e) {}
+  }
+
+  document.addEventListener('click', function (event) {
+    ['sections', 'lang'].forEach(function (n) {
+      if (pops[n] && !pops[n].contains(event.target)) closePop(n);
+    });
+  });
+  document.addEventListener('keydown', function (event) {
+    if (event.key !== 'Escape') return;
+    ['sections', 'lang'].forEach(function (n) {
+      var owner = popOwner[n];
+      if (pops[n] && !pops[n].hidden) { closePop(n); if (owner) owner.focus(); }
+    });
+  });
+  window.addEventListener('resize', function () { closePop('sections'); closePop('lang'); });
 
   var mmenu = document.querySelector('[data-mmenu]');
   var mmenuToggle = document.querySelector('[data-mmenu-toggle]');

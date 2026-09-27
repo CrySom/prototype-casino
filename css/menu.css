@@ -406,3 +406,201 @@
     display: none;
   }
 }
+
+/* Desktop menu behaviour (Style Guide Molecules "Desktop menu" 1138:146031) --- */
+.sb-pop[hidden] {
+  display: none;
+}
+
+.sb-pop {
+  position: fixed;
+  z-index: 140;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  border-radius: var(--radius-2);
+  background: var(--c-bg-2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+}
+
+.sb-pop__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 12px;
+  font-family: var(--f-geist);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: left;
+  white-space: nowrap;
+  color: var(--c-txt-75);
+}
+
+.sb-pop__item:hover,
+.sb-pop__item:focus-visible,
+.sb-pop__item.is-active {
+  background: var(--c-bg-5);
+  color: var(--c-white);
+}
+
+.sb-pop__icon {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.sb-pop__icon img {
+  width: 24px;
+  height: 24px;
+}
+
+.sb-pop--sections {
+  min-width: 160px;
+  padding: 0;
+}
+
+.sb-pop--sections .sb-pop__icon img {
+  filter: brightness(0) invert(0.7);
+}
+
+/* Name of an item of the collapsed menu, shown over it on hover */
+.sb-pop--tip {
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  min-width: 208px;
+  height: 40px;
+  padding: 0 12px 0 8px;
+  background: var(--c-bg-5);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  color: var(--c-white);
+  pointer-events: none;
+}
+
+.sb-pop--tip .sb-pop__icon {
+  width: 40px;
+  height: 40px;
+}
+
+/* Language list: two columns */
+.sb-lang {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 320px;
+  padding: 0;
+}
+
+.sb-lang[hidden] {
+  display: none;
+}
+
+.sb-lang__code {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 16px;
+  border-radius: var(--radius-2);
+  background: var(--c-bg-7);
+  font-weight: 600;
+  font-size: 9px;
+  line-height: 10px;
+  color: var(--c-white);
+}
+
+.sb-lang__item.is-active .sb-lang__code {
+  background: var(--c-brand);
+  color: var(--c-bg-1);
+}
+
+@media (min-width: 1024px) {
+  /* Collapse / expand handle on the edge of the menu, shown on hover */
+  .sb-handle {
+    position: absolute;
+    top: 50%;
+    left: calc(100% - 8px);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 40px;
+    border: 1px solid var(--c-bg-7);
+    border-left: 0;
+    border-radius: 0 var(--radius-4) var(--radius-4) 0;
+    background: var(--c-bg-3);
+    opacity: 0;
+    transform: translateY(-50%);
+    transition: opacity 0.15s ease, background-color 0.15s ease;
+  }
+
+  .sidebar:hover .sb-handle,
+  .sb-handle:focus-visible {
+    opacity: 1;
+  }
+
+  .sb-handle:hover {
+    background: var(--c-bg-5);
+  }
+
+  .sb-handle img {
+    width: 16px;
+    height: 16px;
+    transform: rotate(180deg);
+    transition: transform 0.2s ease;
+  }
+
+  .sidebar-open .sb-handle img {
+    transform: none;
+  }
+
+  /* Collapsed menu: counters as badges on the icons, Casino Games stay listed */
+  .sb-cell {
+    position: relative;
+  }
+
+  html:not(.sidebar-open) .sb-cell__right:has(.sb-badge) {
+    position: absolute;
+    top: 3px;
+    left: calc(50% + 4px);
+    display: block;
+    width: auto;
+    height: auto;
+  }
+
+  html:not(.sidebar-open) .sb-badge {
+    min-width: 14px;
+    height: 14px;
+    padding: 0 3px;
+    border-radius: 7px;
+    background: var(--c-brand);
+    font-size: 8px;
+    line-height: 14px;
+    color: var(--c-bg-1);
+  }
+
+  html:not(.sidebar-open) .sb-app--nested .sb-group.is-open > .sb-group__items {
+    display: flex;
+    flex-direction: column;
+  }
+
+  html:not(.sidebar-open) .sidebar .sb-cell--sub,
+  html:not(.sidebar-open) .sidebar .sb-app--nested .sb-cell--sub {
+    padding-left: 8px;
+  }
+
+  .sb-app--toggle .sb-cell[aria-expanded="true"] {
+    background: var(--c-bg-5);
+  }
+}
