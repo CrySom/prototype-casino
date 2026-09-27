@@ -131,22 +131,22 @@ Differences from Figma: the demo currencies differ (Figma repeats USDC), the
 fiat descriptions are English; Buy Crypto / Swap tabs, Deposit and Withdraw are
 placeholders; on mobile Balance Settings and the fiat list are bottom sheets.
 
-Play flow (Figma "Entrance - Sign Up - Log In", Game Page `389:253407`):
+Game page (`game.html`, file "crypto-casino", Real and demo mode `3369:293780`):
+a tap on any game tile opens it. Guests play in demo mode, logged-in players in
+money mode.
 
-- **Game card** – a tap on any game tile opens the card: game tile, name and
-  provider, Demo / Play buttons, favourite star and the "Game currency" field
-  with its list (the choice is kept in `localStorage`). On mobile the card drops
-  down under the header, on desktop it is a centred pop-up. For guests Play opens
-  Log in.
-- **Game page** (`game.html`) – the slot header: for guests the logo and
-  Sign in / Sign up; when logged in close, the current crypto currency (opens
-  the balance dropdown), Wallet and a favourite star. `?demo=1` adds a "Demo"
-  label. The game is a screenshot shown in full width on mobile and fitted to
-  the screen from 768px.
+- **Header** – current crypto currency (opens the balance dropdown), Wallet,
+  favourite star and close (back to the previous page); guests see Sign in /
+  Sign up instead.
+- **Demo mode** – "You are playing in demo mode now" and "Play real mode" under
+  the game (for guests it opens Log in). `?demo=1` opens a demo for a logged-in
+  player too.
+- **Money mode** – the bottom tab bar under the game (Menu opens the menu).
+- The game is a screenshot: full width on mobile, fitted to the screen from
+  768px.
 
-Differences from Figma: texts are in English, the game currency list uses
-English names and currency symbols; the game card on desktop and the game page
-from 768px have no Figma layout and follow the mobile one.
+Differences from Figma: the texts inside the game screenshot are part of the
+game image and stay as they are; there is no desktop layout in the file.
 
 Profile (`profile.html`, built from the provided mockup with the Style Guide
 Molecules "Profile components"): the avatar in the header opens it;
