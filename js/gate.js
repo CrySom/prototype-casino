@@ -24,7 +24,6 @@
     gate.setAttribute('novalidate', '');
     gate.innerHTML =
       '<div class="gate__card">' +
-      '<img class="gate__logo" src="assets/img/logo.svg" alt="IQ">' +
       '<h1 class="gate__title">Crypto Casino</h1>' +
       '<p class="gate__text">Enter the password to open the prototype.</p>' +
       '<label class="gate__field"><span class="gate__label">Password</span>' +
