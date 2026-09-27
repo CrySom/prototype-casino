@@ -3,7 +3,7 @@
    only its hash; after a correct entry the browser remembers it. */
 (function () {
   var KEY = 'proto-access';
-  var HASH = '58a56109';
+  var HASH = '5bdd055d';
   var hash = function (s) {
     var x = 0x811c9dc5;
     s = 'iq-proto:' + s;
@@ -28,7 +28,7 @@
       '<h1 class="gate__title">Crypto Casino</h1>' +
       '<p class="gate__text">Enter the password to open the prototype.</p>' +
       '<label class="gate__field"><span class="gate__label">Password</span>' +
-      '<input class="gate__input" type="password" name="password" autocomplete="current-password" autofocus required></label>' +
+      '<input class="gate__input" type="password" name="password" inputmode="numeric" autocomplete="current-password" autofocus required></label>' +
       '<p class="gate__error" role="alert" hidden>Wrong password. Try again.</p>' +
       '<button class="gate__btn" type="submit">Enter</button>' +
       '</div>';
