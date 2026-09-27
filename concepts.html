@@ -12,17 +12,28 @@
 <link rel="stylesheet" href="css/start.css">
 </head>
 <body class="start-body">
-<main class="start start--concepts">
+<main class="start start--concepts cc">
   <a class="start__back" href="index.html"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Back</span></a>
   <header class="start__head">
     <img class="start__logo" src="assets/img/logo.svg" alt="IQ">
     <h1 class="start__title">UI Design Concepts</h1>
-    <p class="start__text">The concepts are not published yet. They will appear on this page.</p>
+    <p class="start__text">Home page concepts for mobile. Tap a preview to open the page.</p>
   </header>
-  <div class="start-empty">
-    <span class="start-empty__badge">Coming soon</span>
-    <a class="btn start-empty__btn" href="home.html">Open the prototype</a>
-  </div>
+  <nav class="cc-grid" aria-label="Concepts">
+      <a class="cc-card" href="concept-1.html">
+        <span class="cc-card__shot"><img src="assets/img/cc-1-preview.jpg" alt="" loading="lazy"></span>
+        <span class="cc-card__meta"><span class="cc-card__num">Concept 01</span><span class="cc-card__name"><i style="background:#3d7bff"></i>Deep Contrast — Blue</span></span>
+      </a><a class="cc-card" href="concept-2.html">
+        <span class="cc-card__shot"><img src="assets/img/cc-2-preview.jpg" alt="" loading="lazy"></span>
+        <span class="cc-card__meta"><span class="cc-card__num">Concept 02</span><span class="cc-card__name"><i style="background:#8b5cf6"></i>Deep Contrast — Violet</span></span>
+      </a><a class="cc-card" href="concept-3.html">
+        <span class="cc-card__shot"><img src="assets/img/cc-3-preview.jpg" alt="" loading="lazy"></span>
+        <span class="cc-card__meta"><span class="cc-card__num">Concept 03</span><span class="cc-card__name"><i style="background:#38bdf8"></i>Deep Contrast — Cyan</span></span>
+      </a><a class="cc-card" href="concept-4.html">
+        <span class="cc-card__shot"><img src="assets/img/cc-4-preview.jpg" alt="" loading="lazy"></span>
+        <span class="cc-card__meta"><span class="cc-card__num">Concept 04</span><span class="cc-card__name"><i style="background:#1f7a4d"></i>Deep Contrast — Green</span></span>
+      </a><div class="cc-card cc-card--soon" aria-label="Concept 05, coming soon"><span class="cc-card__shot"><span class="cc-card__soon">Coming soon</span></span><span class="cc-card__meta"><span class="cc-card__num">Concept 05</span><span class="cc-card__name">In progress</span></span></div>
+  </nav>
 </main>
 </body>
 </html>
