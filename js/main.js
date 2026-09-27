@@ -1196,7 +1196,7 @@
   document.querySelectorAll('.pf [data-logout]').forEach(function (b) {
     b.addEventListener('click', function () {
       setAuth(false);
-      window.scrollTo(0, 0);
+      window.location.href = 'index.html';
     });
   });
 

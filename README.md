@@ -156,7 +156,7 @@ the Menu tab of the bottom bar is active on it.
   stats; balance card (total in the display fiat, eye to hide amounts, currency
   chip opening the fiat list, real balance / bonuses / free bet with info
   tooltips, Withdraw, Deposit, View wallet); My activity, Security and
-  Safety & Privacy cells; Log out.
+  Safety & Privacy cells; Log out (goes to the home page as a guest).
 - **Gaming profile** – level + progress block ("Level + progress in profile"),
   favourite games, recent bets.
 - Guests see a prompt to log in. Two columns from 1280px (cards on the left,
