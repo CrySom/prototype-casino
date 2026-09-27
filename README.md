@@ -132,8 +132,9 @@ fiat descriptions are English; Buy Crypto / Swap tabs, Deposit and Withdraw are
 placeholders; on mobile Balance Settings and the fiat list are bottom sheets.
 
 Game page (`game.html`, file "crypto-casino", Real and demo mode `3369:293780`):
-a tap on any game tile opens it. Guests play in demo mode, logged-in players in
-money mode.
+a tap on any game tile first opens the game card (Game Page `389:253407`: tile,
+name, Demo / Play, "Game currency" with its list); Demo opens the game in demo
+mode, Play in money mode (guests are asked to log in).
 
 - **Header** – current crypto currency (opens the balance dropdown), Wallet,
   favourite star and close (back to the previous page); guests see Sign in /
