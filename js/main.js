@@ -1200,6 +1200,58 @@
     });
   });
 
+  // Menu: the Casino / Sport / Prediction tabs switch the menu (sidebar and
+  // mobile screen); on mobile the Menu tab opens the menu as a screen.
+  document.querySelectorAll('[data-menu-tab]').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var box = tab.closest('.sidebar__menu, .mmenu__scroll');
+      var name = tab.getAttribute('data-menu-tab');
+      box.querySelectorAll('[data-menu-tab]').forEach(function (t) {
+        t.classList.toggle('is-active', t === tab);
+        t.setAttribute('aria-selected', String(t === tab));
+      });
+      box.querySelectorAll('[data-menu-pane]').forEach(function (p) { p.hidden = p.getAttribute('data-menu-pane') !== name; });
+      var search = box.querySelector('[data-menu-search]');
+      if (search) search.placeholder = name === 'prediction' ? 'Search predictions' : 'Search games, providers, categories';
+    });
+  });
+
+  var mmenu = document.querySelector('[data-mmenu]');
+  var mmenuToggle = document.querySelector('[data-mmenu-toggle]');
+  if (mmenu && mmenuToggle) {
+    var tabBarActive = null;
+    var menuScroll = 0;
+    var setMenu = function (open) {
+      if (open === !mmenu.hidden) return;
+      var tabs = document.querySelectorAll('.tab-bar__tab');
+      if (open) {
+        menuScroll = window.scrollY;
+        window.scrollTo(0, 0);
+        var hdr = document.querySelector('.header');
+        mmenu.style.top = (hdr ? hdr.getBoundingClientRect().bottom : 0) + 'px';
+        tabBarActive = document.querySelector('.tab-bar__tab.is-active');
+        tabs.forEach(function (t) { t.classList.toggle('is-active', t === mmenuToggle); });
+      } else {
+        tabs.forEach(function (t) { t.classList.toggle('is-active', t === tabBarActive); });
+      }
+      mmenu.hidden = !open;
+      root.classList.toggle('mmenu-open', open);
+      mmenuToggle.setAttribute('aria-expanded', String(open));
+      if (!open) window.scrollTo(0, menuScroll);
+    };
+    mmenuToggle.addEventListener('click', function (event) {
+      event.preventDefault();
+      setMenu(mmenu.hidden);
+    });
+    document.querySelectorAll('.tab-bar__tab:not([data-mmenu-toggle])').forEach(function (t) {
+      t.addEventListener('click', function () { if (!mmenu.hidden) setMenu(false); });
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && !mmenu.hidden) setMenu(false);
+    });
+    DESKTOP.addEventListener('change', function (e) { if (e.matches) setMenu(false); });
+  }
+
   // Coefficients: toggle selection.
   document.querySelectorAll('.coef').forEach(function (coef) {
     coef.addEventListener('click', function () {

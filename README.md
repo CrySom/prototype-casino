@@ -165,3 +165,14 @@ the Menu tab of the bottom bar is active on it.
 Differences from the mockup: the level avatar from the style guide replaces the
 empty circle; outline icons for the cells are drawn for the prototype
 (`pf-*.svg`); the Gaming profile content is not in the mockup.
+
+Menu (Style Guide Molecules "Menu" `38158:16243`): the menu has a version per
+section – Casino (saved games, Casino Games, Live Casino Games), Sport (sports
+and leagues) and Prediction (prediction categories) – plus the common
+promotions / chat blocks. Each page opens its own section (home and profile:
+Casino); the Casino / Sport / Prediction tabs switch the menu in place. On
+desktop it is the sidebar; below 1024px the Menu tab of the bottom bar opens it
+as a screen between the header and the tab bar (tap Menu again or Esc to close).
+
+Differences from Figma: the items of the collapsed "Live Casino Games" group
+are made up; menu items lead to the matching hall page.

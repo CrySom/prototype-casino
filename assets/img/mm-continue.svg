@@ -1,0 +1,8 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Broadcast">
+<g id="icon">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M20 5H4C3.44772 5 3 5.44772 3 6V18C3 18.5523 3.44772 19 4 19H20C20.5523 19 21 18.5523 21 18V6C21 5.44772 20.5523 5 20 5ZM4 4C2.89543 4 2 4.89543 2 6V18C2 19.1046 2.89543 20 4 20H20C21.1046 20 22 19.1046 22 18V6C22 4.89543 21.1046 4 20 4H4Z" fill="#656565"/>
+<path d="M10 14.2951L10.025 9.70495C10.025 9.16844 10.5006 8.84057 10.9011 9.07902L14.6809 11.4039C15.1064 11.6721 15.1064 12.3875 14.6809 12.6557L10.8761 14.921C10.4756 15.1594 10 14.8316 10 14.2951Z" fill="#656565"/>
+</g>
+</g>
+</svg>
