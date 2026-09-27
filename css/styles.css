@@ -359,7 +359,6 @@ a {
   left: calc(50% + 42.56px);
   width: 285.13px;
   transform: translateX(-50%);
-  filter: blur(5.2px);
 }
 
 .banner--1 .l-vector3 {
@@ -403,7 +402,6 @@ a {
   left: 52px;
   right: -14px;
   aspect-ratio: 1498 / 1050;
-  filter: blur(5.2px);
 }
 
 .banner--2 .l-vector4 {

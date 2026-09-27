@@ -27,11 +27,6 @@
   gap: 10px;
 }
 
-/* The hall banner photo is sharp in Figma (the home banner is blurred) */
-.hall-banner .l-photo {
-  filter: none;
-}
-
 .hall-stories {
   display: none;
 }
