@@ -21,6 +21,14 @@ The page is fluid:
 - `js/main.js` – carousel pagination, tabs, coefficient selection
 - `assets/img/` – images and icons exported from Figma
 
+## Password screen
+
+Every page first shows a password screen (`js/gate.js`, `css/gate.css`); after
+the right password the browser remembers it (`localStorage` key
+`proto-access`, remove it to see the screen again). Only a hash of the password
+is in the code. This is a front-end gate for casual visitors, not real
+protection – for that use Vercel Password Protection or a server-side check.
+
 ## Performance (iPhone)
 
 - Raster images are WebP, sized to about 2× of their largest size on screen
