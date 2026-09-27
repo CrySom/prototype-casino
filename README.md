@@ -13,7 +13,9 @@ The page is fluid:
   collapses it; once toggled, the choice is kept in `localStorage`. Between the frames rows of
   fixed-size tiles scroll horizontally and cards/banners stretch.
 
-- `index.html` – home page; `casino.html`, `sport.html`, `prediction.html` – game halls
+- `index.html` – start screen: Prototype and UI Design Concepts
+- `home.html` – prototype home page; `casino.html`, `sport.html`, `prediction.html` – game halls
+- `concepts.html` – UI Design Concepts (placeholder, the concepts are not added yet)
 - `css/halls.css` – styles of the game halls
 - `css/styles.css` – styles (design tokens as CSS variables on `:root`)
 - `js/main.js` – carousel pagination, tabs, coefficient selection
@@ -85,7 +87,7 @@ Known differences from Figma:
   with two masked copies, the thin triangle lines are exported with a uniform
   38px blur and are therefore almost invisible.
 
-Open `index.html` in a browser (mobile viewport, 320–480 px).
+Open `index.html` (start screen) or `home.html` in a browser (mobile viewport, 320–480 px).
 
 Game halls (Figma file "Entrance - Sign Up - Log In": Casino `823:268537`,
 Sport `823:268844`, Prediction `823:269180`). The thematic cards of the home

@@ -1204,7 +1204,7 @@
   document.querySelectorAll('.pf [data-logout]').forEach(function (b) {
     b.addEventListener('click', function () {
       setAuth(false);
-      window.location.href = 'index.html';
+      window.location.href = 'home.html';
     });
   });
 
