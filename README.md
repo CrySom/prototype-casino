@@ -15,7 +15,7 @@ The page is fluid:
 
 - `index.html` – start screen: Prototype and UI Design Concepts
 - `home.html` – prototype home page; `casino.html`, `sport.html`, `prediction.html` – game halls
-- `concepts.html` – UI Design Concepts: previews of the home page concepts (file "crypto-casino", NEW `2950:223386`; mobile only), a fifth slot is reserved; `concept-1…4.html` – one concept in full length with previous / next. The concepts are shown as exported renders and keep their colours (the black-and-white filter of the prototype is off there).
+- `concepts.html` – UI Design Concepts: previews of the home page concepts (file "crypto-casino", NEW `2950:223386`; mobile only); `concept-1…5.html` – one concept in full length with previous / next. The concepts are shown as exported renders and keep their colours (the black-and-white filter of the prototype is off there).
 - `css/halls.css` – styles of the game halls
 - `css/styles.css` – styles (design tokens as CSS variables on `:root`)
 - `js/main.js` – carousel pagination, tabs, coefficient selection
