@@ -192,8 +192,9 @@ section – Casino (saved games, Casino Games, Live Casino Games), Sport (sports
 and leagues) and Prediction (prediction categories) – plus the common
 promotions / chat blocks. Each page opens its own section (home and profile:
 Casino); the Casino / Sport / Prediction tabs switch the menu in place. On
-desktop it is the sidebar; below 1024px the Menu tab of the bottom bar opens it
-as a screen between the header and the tab bar (tap Menu again or Esc to close).
+desktop it is the sidebar; below 1024px the Menu tab of the bottom bar opens the
+menu page `menu.html?s=<section>` with the section of the current page (Menu
+again or Back returns; on desktop the page leads to the section itself).
 
 Differences from Figma: the items of the collapsed "Live Casino Games" group
 are made up; menu items lead to the matching hall page.
