@@ -1345,40 +1345,30 @@
   });
   window.addEventListener('resize', function () { closePop('sections'); closePop('lang'); });
 
-  var mmenu = document.querySelector('[data-mmenu]');
-  var mmenuToggle = document.querySelector('[data-mmenu-toggle]');
-  if (mmenu && mmenuToggle) {
-    var tabBarActive = null;
-    var menuScroll = 0;
-    var setMenu = function (open) {
-      if (open === !mmenu.hidden) return;
-      var tabs = document.querySelectorAll('.tab-bar__tab');
-      if (open) {
-        menuScroll = window.scrollY;
-        window.scrollTo(0, 0);
-        var hdr = document.querySelector('.header, .slot-header');
-        mmenu.style.top = (hdr ? hdr.getBoundingClientRect().bottom : 0) + 'px';
-        tabBarActive = document.querySelector('.tab-bar__tab.is-active');
-        tabs.forEach(function (t) { t.classList.toggle('is-active', t === mmenuToggle); });
-      } else {
-        tabs.forEach(function (t) { t.classList.toggle('is-active', t === tabBarActive); });
-      }
-      mmenu.hidden = !open;
-      root.classList.toggle('mmenu-open', open);
-      mmenuToggle.setAttribute('aria-expanded', String(open));
-      if (!open) window.scrollTo(0, menuScroll);
-    };
-    mmenuToggle.addEventListener('click', function (event) {
-      event.preventDefault();
-      setMenu(mmenu.hidden);
+  // Mobile menu page (menu.html?s=casino|sport|prediction): shows the menu of
+  // the section it was opened from; Menu again goes back; on desktop the
+  // sidebar is the menu, so the page leads to the section itself.
+  var menuPage = document.querySelector('[data-menu-page]');
+  if (menuPage) {
+    var sm = /[?&]s=(casino|sport|prediction)\b/.exec(location.search);
+    var section = sm ? sm[1] : 'casino';
+    if (DESKTOP.matches) {
+      location.replace(section + '.html');
+    } else {
+      var secTab = menuPage.querySelector('[data-menu-tab="' + section + '"]');
+      if (secTab && !secTab.classList.contains('is-active')) secTab.click();
+    }
+    document.querySelectorAll('[data-menu-link]').forEach(function (a) {
+      a.addEventListener('click', function (event) {
+        var sameSite = false;
+        try { sameSite = !!document.referrer && new URL(document.referrer).origin === location.origin; } catch (e) {}
+        if (sameSite && history.length > 1) {
+          event.preventDefault();
+          history.back();
+        }
+      });
     });
-    document.querySelectorAll('.tab-bar__tab:not([data-mmenu-toggle])').forEach(function (t) {
-      t.addEventListener('click', function () { if (!mmenu.hidden) setMenu(false); });
-    });
-    document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape' && !mmenu.hidden) setMenu(false);
-    });
-    DESKTOP.addEventListener('change', function (e) { if (e.matches) setMenu(false); });
+    DESKTOP.addEventListener('change', function (e) { if (e.matches) location.replace(section + '.html'); });
   }
 
   // Coefficients: toggle selection.
