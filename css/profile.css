@@ -707,3 +707,10 @@ a.profile-menu__item {
     margin: 0;
   }
 }
+
+/* The total balance hides / shows the amounts, like the eye */
+button.pf-balance__sum {
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+}

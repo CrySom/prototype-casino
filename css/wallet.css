@@ -669,3 +669,9 @@ button.wrow:hover {
     padding: 16px;
   }
 }
+
+/* Header wallet / deposit button: shown, but not available yet (no approval) */
+.is-inert {
+  pointer-events: none;
+  cursor: default;
+}
