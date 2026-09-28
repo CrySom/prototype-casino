@@ -588,8 +588,3 @@
     background: var(--c-bg-5);
   }
 }
-
-/* "Start screen": the way out of the prototype, last item of the menu */
-.sb-app--exit .sb-cell {
-  color: var(--c-white);
-}

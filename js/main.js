@@ -81,15 +81,7 @@
     });
   });
 
-  // Logo in the opened menu collapses it back; search in the collapsed one opens it.
-  var logo = document.querySelector('.sidebar__logo-link');
-  if (logo) {
-    logo.addEventListener('click', function (event) {
-      if (!root.classList.contains('sidebar-open')) return;
-      event.preventDefault();
-      setSidebar(false);
-    });
-  }
+  // The logo leads to the start screen; search in the collapsed menu opens it.
 
   var sbSearch = document.querySelector('.sb-search');
   if (sbSearch) {

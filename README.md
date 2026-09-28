@@ -195,8 +195,9 @@ Casino); the Casino / Sport / Prediction tabs switch the menu in place. On
 desktop it is the sidebar; below 1024px the Menu tab of the bottom bar opens the
 menu page `menu.html?s=<section>` with the section of the current page (Menu
 again or Back returns; on desktop the page leads to the section itself).
-The last item of every menu, "Start screen", leads out of the prototype to
-`index.html` (Prototype / UI Design Concepts).
+The IQ logo (header, sidebar, game page) leads out of the prototype to the start
+screen `index.html` (Prototype / UI Design Concepts); the prototype home is
+`home.html` (Prototype card, breadcrumbs).
 
 Differences from Figma: the items of the collapsed "Live Casino Games" group
 are made up; menu items lead to the matching hall page.
