@@ -74,7 +74,6 @@
 .wdrop[hidden],
 .wmodal[hidden],
 .wmodal__close[hidden],
-.wpick[hidden],
 .wnote[hidden],
 .wwager[hidden],
 .winput[hidden],
@@ -707,8 +706,7 @@ button.wrow:hover {
   border-radius: var(--radius-4);
 }
 
-button.wrow--field:hover,
-.wrow--field.is-open {
+button.wrow--field:hover {
   background: var(--c-bg-3);
 }
 
@@ -719,10 +717,6 @@ button.wrow--field:hover,
   transition: transform 0.2s ease;
 }
 
-.wrow--field.is-open .wrow__arrow {
-  transform: rotate(180deg);
-}
-
 .wrow--method {
   border-radius: 0;
 }
@@ -731,14 +725,18 @@ button.wrow--field:hover,
   mix-blend-mode: normal;
 }
 
-/* Currency list under a cell or an input */
-.wpick {
-  max-height: 200px;
+/* Select coin window (bottom sheet on mobile, like Display Crypto in Fiat) */
+.wsearch--sm {
+  padding: 4px 0;
+}
+
+.wsearch--sm .wsearch__field {
+  height: 32px;
+}
+
+.wlist--coin {
+  max-height: 50vh;
   overflow-y: auto;
-  padding: 4px;
-  border: 1px solid var(--c-bg-6);
-  border-radius: var(--radius-4);
-  background: var(--c-bg-1);
 }
 
 /* Amount input */
@@ -821,10 +819,6 @@ button.winput__max:hover {
   width: 20px;
   height: 20px;
   transition: transform 0.2s ease;
-}
-
-.winput__cur.is-open .winput__chev {
-  transform: rotate(180deg);
 }
 
 /* Divider with the swap button */

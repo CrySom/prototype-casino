@@ -149,7 +149,11 @@ logged in:
   fiat price (both editable, currency lists), "below the minimum purchase
   limit of $7.00" note; Buy opens the Swapped.com provider step (You spend /
   You receive, presets 100…1K, Pay with Card), then Completed.
-- **Swap** – From / To currencies (lists, ⇅ flips them), amounts in both
+- **Select coin** (`505:277877` / `505:278072` / `505:277941`) – the From / To
+  cells and the Buy Crypto currencies open a separate window over the Wallet
+  (bottom sheet up to 1023px, centred modal on desktop): search, recently used
+  currencies, list with balances; closing it returns to the Wallet.
+- **Swap** – From / To currencies (⇅ flips them), amounts in both
   fields, MAX, exchange rate with refresh; Swap Now opens Confirm Swap
   (fee $0.25 in the From currency, total, rate, provider Swaps.xyz), then
   Swap Completed with a Tx hash (tap copies it). Swap Now is off when there is
@@ -162,7 +166,9 @@ logged in:
 - State (currency, hidden balance, settings) is kept in `localStorage`.
 
 Differences from Figma: the demo currencies differ (Figma repeats USDC), the
-fiat descriptions are English; amounts and the exchange rate come from the demo
+fiat descriptions are English; the Select coin search placeholder and list title
+are "Search currencies" / "Currencies" (Figma: "Search games, providers, categories" /
+"Fiat currency"); amounts and the exchange rate come from the demo
 prices (Figma: fixed sample numbers, e.g. 1 USDT ≈ 0.006119 ETH); the provider
 presets are 100 / 200 / 300 / 500 / 1K (Figma repeats 200); Buy Crypto's
 Completed shows the amounts that were bought (Figma swaps the two values);

@@ -255,12 +255,10 @@
           <div class="wblock">
             <p class="wlabel">How much crypto do you want to top-up?</p>
             <label class="winput"><input type="text" inputmode="decimal" placeholder="0.000000" autocomplete="off" aria-label="Crypto amount" data-buy-crypto><button class="winput__cur" type="button" data-wpick="buy-crypto"><img src="assets/img/currency-t.webp" alt="" decoding="async" data-buy-crypto-icon><span data-buy-crypto-code>USDT</span><img class="winput__chev" src="assets/img/ws-chevron.svg" alt="" decoding="async"></button></label>
-            <div class="wlist wpick" hidden data-wpick-list="buy-crypto"></div>
           </div>
           <div class="wblock">
             <p class="wlabel">You will pay (approx.)</p>
             <label class="winput"><input type="text" inputmode="decimal" placeholder="0.000000" autocomplete="off" aria-label="Fiat amount" data-buy-fiat><button class="winput__cur" type="button" data-wpick="buy-fiat"><img src="assets/img/currency-usd.webp" alt="" decoding="async"><span data-buy-fiat-code>USD</span><img class="winput__chev" src="assets/img/ws-chevron.svg" alt="" decoding="async"></button></label>
-            <div class="wlist wpick" hidden data-wpick-list="buy-fiat"></div>
           </div>
         </div>
         <div class="wnote" hidden data-buy-min><img src="assets/img/ws-warning.svg" alt="" decoding="async"><p>Sorry, this is below the minimum purchase limit of <span data-buy-min-text>$7.00</span>.</p></div>
@@ -308,7 +306,6 @@
           <div class="wblock">
             <p class="wlabel">From</p>
             <button class="wrow wrow--field" type="button" data-wpick="swap-from"></button>
-            <div class="wlist wpick" hidden data-wpick-list="swap-from"></div>
             <label class="winput" data-swap-from-field><input type="text" inputmode="decimal" placeholder="0.000000" autocomplete="off" aria-label="Amount to swap" data-swap-from><button class="winput__max" type="button" data-swap-max>MAX</button></label>
             <div class="wwager" hidden data-swap-wager>
               <p class="wwager__head"><span>Wagering requirement</span><span data-wager-pct>80%</span></p>
@@ -322,7 +319,6 @@
           <div class="wblock">
             <p class="wlabel">To</p>
             <button class="wrow wrow--field" type="button" data-wpick="swap-to"></button>
-            <div class="wlist wpick" hidden data-wpick-list="swap-to"></div>
             <label class="winput"><input type="text" inputmode="decimal" placeholder="0.000000" autocomplete="off" aria-label="Amount to receive" data-swap-to><span class="winput__max">MAX</span></label>
           </div>
           <div class="wrate"><p><span>Exchange rate</span><span data-swap-rate>1 USDT ≈ 0.000313 ETH</span></p><button type="button" aria-label="Refresh the rate" data-swap-refresh><img src="assets/img/ws-refresh.svg" alt="" decoding="async"></button></div>
@@ -349,6 +345,19 @@
           <div class="wactions"><button class="btn btn--secondary wbtn" type="button" data-wstep="wallet">Back to Wallet</button><button class="btn wbtn wbtn--primary is-inert" type="button" aria-disabled="true" tabindex="-1">View Transaction</button></div>
         </div>
       </div>
+    </section>
+  </div>
+
+  <!-- Select coin (Wallet 505:277877 / 505:278072 / 505:277941): list of currencies for Swap and Buy Crypto -->
+  <div class="wmodal wmodal--sheet" id="select-coin" hidden data-wmodal="coin">
+    <div class="wmodal__backdrop" data-wmodal-close></div>
+    <section class="wmodal__card wmodal__card--coin" role="dialog" aria-modal="true" aria-label="Select currency">
+      <div class="wmodal__head"><h2 class="wmodal__title" data-coin-title>Swap</h2><button class="wmodal__close" type="button" aria-label="Close" data-wmodal-close><img src="assets/img/wl-close.svg" alt="" decoding="async"></button></div>
+      <div class="wsearch wsearch--sm"><label class="wsearch__field"><img src="assets/img/wl-search.svg" alt="" decoding="async"><input type="search" placeholder="Search currencies" autocomplete="off" data-coin-search></label></div>
+      <div class="wrecent" data-coin-recent-block><p class="wsub">Recently used currencies</p><div class="wrecent__chips" data-coin-recent></div></div>
+      <p class="wlabel" data-coin-sub>Currencies</p>
+      <div class="wlist wlist--coin" data-coin-list></div>
+      <div class="wempty" hidden data-coin-empty><img src="assets/img/currency-usd.webp" alt="" loading="lazy" decoding="async"><p class="wempty__title">No currencies found</p><p class="wempty__text">Try searching by a different currency name or code.</p></div>
     </section>
   </div>
 
