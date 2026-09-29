@@ -327,6 +327,7 @@
 
       <!-- Buy Crypto: provider (387:608768) -->
       <div class="wpane wpane--form" data-wpane="buy-provider" hidden>
+        <button class="wprov" type="button" aria-label="Change the provider" data-prov-open><img class="wprov__logo" src="assets/img/pv-swapped.webp" alt="" decoding="async" data-prov-logo><span class="wprov__name" data-prov-name>Swapped.com</span><img class="wprov__chev" src="assets/img/ws-chevron-right.svg" alt="" decoding="async"></button>
         <div class="wform">
           <div class="wblock">
             <p class="wlabel">You spend</p>
@@ -418,6 +419,15 @@
       <p class="wlabel" data-coin-sub>Currencies</p>
       <div class="wlist wlist--coin" data-coin-list></div>
       <div class="wempty" hidden data-coin-empty><img src="assets/img/currency-usd.webp" alt="" loading="lazy" decoding="async"><p class="wempty__title">No currencies found</p><p class="wempty__text">Try searching by a different currency name or code.</p></div>
+    </section>
+  </div>
+
+  <!-- Provider (Wallet 505:288830): providers for Buy Crypto -->
+  <div class="wmodal wmodal--sheet" id="select-provider" hidden data-wmodal="provider">
+    <div class="wmodal__backdrop" data-wmodal-close></div>
+    <section class="wmodal__card wmodal__card--coin" role="dialog" aria-modal="true" aria-label="Provider">
+      <div class="wmodal__head"><h2 class="wmodal__title">Provider</h2><button class="wmodal__close" type="button" aria-label="Close" data-wmodal-close><img src="assets/img/wl-close.svg" alt="" decoding="async"></button></div>
+      <div class="wlist wlist--coin" data-prov-list></div>
     </section>
   </div>
 

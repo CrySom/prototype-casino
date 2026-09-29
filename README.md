@@ -147,8 +147,13 @@ logged in:
   the header and the dropdown show the amounts in that fiat.
 - **Buy Crypto** (Screens `201:246320`) – crypto amount and the approximate
   fiat price (both editable, currency lists), "below the minimum purchase
-  limit of $7.00" note; Buy opens the Swapped.com provider step (You spend /
-  You receive, presets 100…1K, Pay with Card), then Completed.
+  limit of $7.00" note; Buy opens the provider step (`171:327715`: provider
+  row, You spend / You receive, presets 100…1K, Pay with Card), then Completed.
+  The provider row opens the Provider list (`505:288830`, bottom sheet on
+  mobile): Paybis, Banxa, Swapped.com, Binance Connect, Ramp Network with the
+  amount each gives (demo fees 0–1.5%); the purchase credits that amount.
+  Provider logos (`pv-*`) are the providers' own site icons (Binance: Simple
+  Icons), in greyscale — Figma shows the QIWI logo as a placeholder.
 - **Select coin** (`505:277877` / `505:278072` / `505:277941`) – the From / To
   cells and the Buy Crypto currencies open a separate window over the Wallet
   (bottom sheet up to 1023px, centred modal on desktop): search, recently used

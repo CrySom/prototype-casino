@@ -182,3 +182,7 @@ ws-copy.svg                 https://www.figma.com/api/mcp/asset/890258ed-e4b1-45
 ws-chevron.svg              https://www.figma.com/api/mcp/asset/8db8f3a8-a34a-4b3f-8c11-f0d9cda6cb40/89c3f.svg
 ws-repeat.svg               https://www.figma.com/api/mcp/asset/8db8f3a8-a34a-4b3f-8c11-f0d9cda6cb40/3fa5f.svg
 ws-settings.svg             https://www.figma.com/api/mcp/asset/3721376d-a6e8-4ed0-b8ff-bc4410946a47/f7262.svg
+# Provider logos are not from Figma (it has a QIWI placeholder): pv-paybis.webp (cdn.paybis.com favicon 192),
+# pv-banxa.webp (banxa.com favicon 192), pv-swapped.webp (swapped.com apple-touch icon), pv-ramp.webp
+# (ramp.network webclip), pv-binance.svg (simple-icons "binance"); rasters resized to 48 px and greyscaled.
+ws-chevron-right.svg        https://www.figma.com/api/mcp/asset/9d4ee4c4-b7aa-452b-a729-3f8f7f4b3c35/d06a8.svg

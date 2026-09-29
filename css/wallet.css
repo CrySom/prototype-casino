@@ -1173,3 +1173,50 @@ button.wsplit__btn:hover {
   min-width: 0;
   padding: 4px;
 }
+
+/* Buy Crypto provider row (171:327715): opens the Provider list */
+.wprov {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 32px;
+  text-align: left;
+}
+
+.wprov__logo {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-4);
+}
+
+.wprov__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--c-txt-50);
+}
+
+.wprov__chev {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.wprov:hover .wprov__name {
+  color: var(--c-white);
+}
+
+.wprov__name {
+  color: var(--c-txt-75);
+}
+
+.wrow__icon--logo img {
+  border-radius: var(--radius-4);
+}

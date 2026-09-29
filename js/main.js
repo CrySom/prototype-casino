@@ -978,7 +978,7 @@
         fiatSearch.value = '';
         renderWallet();
       }
-      if (name === 'coin') wmodal('wallet').hidden = false;
+      if (name === 'coin' || name === 'provider') wmodal('wallet').hidden = false;
       if (!anyModalOpen()) root.classList.remove('modal-open');
     };
 
@@ -1046,8 +1046,8 @@
     var STEPS = {
       wallet: { tab: 'wallet', title: 'Wallet' },
       buy: { tab: 'buy', title: 'Buy Crypto' },
-      'buy-provider': { tab: 'buy', title: 'Swapped.com', gear: true },
-      'buy-done': { tab: 'buy', title: 'Swapped.com', gear: true },
+      'buy-provider': { tab: 'buy', title: 'Buy Crypto' },
+      'buy-done': { tab: 'buy', title: 'Buy Crypto' },
       swap: { tab: 'swap', title: 'Swap' },
       'swap-confirm': { tab: 'swap', title: 'Confirm Swap' },
       'swap-done': { tab: 'swap', title: 'Completed!' }
@@ -1156,6 +1156,41 @@
       closeW('coin');
     });
 
+    // Provider (Buy Crypto): the row above the amounts opens the list of
+    // providers with the amount each one gives (demo fees).
+    var PROVIDERS = [
+      { name: 'Paybis', fee: 0.012, logo: 'pv-paybis.webp' },
+      { name: 'Banxa', fee: 0.015, logo: 'pv-banxa.webp' },
+      { name: 'Swapped.com', fee: 0, logo: 'pv-swapped.webp' },
+      { name: 'Binance Connect', fee: 0.008, logo: 'pv-binance.svg' },
+      { name: 'Ramp Network', fee: 0.01, logo: 'pv-ramp.webp' }
+    ];
+    var provModal = wmodal('provider');
+    var provOf = function (name) { return PROVIDERS.filter(function (pr) { return pr.name === name; })[0]; };
+    var renderProviders = function () {
+      var code = buy.crypto;
+      provModal.querySelector('[data-prov-list]').innerHTML = PROVIDERS.map(function (pr) {
+        var get = buy.amount * (1 - pr.fee);
+        return '<button class="wrow' + (pr.name === buy.provider ? ' is-active' : '') + '" type="button" data-prov-item="' + pr.name + '">' +
+          '<span class="wrow__icon wrow__icon--logo"><img src="' + IMGP + pr.logo + '" alt=""></span>' +
+          '<span class="wrow__name"><span class="wrow__code">' + pr.name + '</span><span class="wrow__full">' +
+          get.toFixed(6) + ' ' + code + (pr.fee ? ' (-' + (buy.amount * pr.fee).toFixed(3) + ')' : '') + '</span></span></button>';
+      }).join('');
+    };
+    q('[data-prov-open]').addEventListener('click', function () {
+      renderProviders();
+      wcard.hidden = true;
+      openW('provider');
+    });
+    provModal.addEventListener('click', function (event) {
+      var item = event.target.closest('[data-prov-item]');
+      if (!item) return;
+      buy.provider = item.getAttribute('data-prov-item');
+      q('[data-prov-name]').textContent = buy.provider;
+      q('[data-prov-logo]').src = IMGP + provOf(buy.provider).logo;
+      closeW('provider');
+    });
+
     // Swap
     var swap = { from: 'USDT', to: 'ETH', amount: 16, hash: '' };
     var swapFrom = q('[data-swap-from]');
@@ -1243,7 +1278,7 @@
     });
 
     // Buy Crypto
-    var buy = { crypto: 'USDT', fiat: 'USD', amount: 0 };
+    var buy = { crypto: 'USDT', fiat: 'USD', amount: 0, provider: 'Swapped.com' };
     var buyCrypto = q('[data-buy-crypto]');
     var buyFiat = q('[data-buy-fiat]');
     var provCrypto = q('[data-prov-crypto]');
@@ -1291,8 +1326,9 @@
     q('[data-prov-submit]').addEventListener('click', function () {
       var c = byCode(buy.crypto), f = fiatOf(buy.fiat);
       q('[data-buy-done-spend]').textContent = (buy.amount * buyPrice()).toFixed(2) + ' ' + f.code;
-      q('[data-buy-done-get]').textContent = buy.amount.toFixed(6) + ' ' + c.code;
-      credit(c, buy.amount);
+      var get = buy.amount * (1 - provOf(buy.provider).fee);
+      q('[data-buy-done-get]').textContent = get.toFixed(6) + ' ' + c.code;
+      credit(c, get);
       renderWallet();
       setWStep('buy-done');
     });
@@ -1324,7 +1360,7 @@
     document.addEventListener('keydown', function (event) {
       if (event.key !== 'Escape') return;
       if (!wdrop.hidden) setDrop(false);
-      ['coin', 'fiat', 'settings', 'wallet'].some(function (n) {
+      ['coin', 'provider', 'fiat', 'settings', 'wallet'].some(function (n) {
         if (!wmodal(n).hidden) { closeW(n); return true; }
         return false;
       });
