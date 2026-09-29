@@ -134,28 +134,6 @@
   display: none;
 }
 
-.wsearch__tools {
-  display: none;
-  gap: 4px;
-}
-
-.wsearch.is-typing .wsearch__tools {
-  display: flex;
-}
-
-.wsearch__tools button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-}
-
-.wsearch__tools img {
-  width: 20px;
-  height: 20px;
-}
-
 /* Currency rows (dropdown, wallet, fiat list) */
 .wlist {
   display: flex;
