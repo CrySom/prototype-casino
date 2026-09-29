@@ -1003,7 +1003,10 @@
     fiatSearch.addEventListener('input', renderWallet);
 
     document.querySelectorAll('[data-wallet-open]').forEach(function (b) {
-      b.addEventListener('click', function () { openW('wallet'); });
+      b.addEventListener('click', function () {
+        setWStep('wallet');
+        openW('wallet');
+      });
     });
     document.querySelectorAll('[data-wsettings-open]').forEach(function (b) {
       b.addEventListener('click', function () { openW('settings'); });
@@ -1035,11 +1038,270 @@
       saveW();
       closeW('fiat');
     });
-    document.querySelectorAll('[data-wtab]').forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        var name = tab.getAttribute('data-wtab');
-        document.querySelectorAll('[data-wpane]').forEach(function (p) { p.hidden = p.getAttribute('data-wpane') !== name; });
+    // Wallet modal steps: Wallet, Buy Crypto (form, Swapped.com provider,
+    // completed) and Swap (form, confirmation, completed). A tab opens the
+    // first step of its flow; balances change for the current visit only.
+    var wcard = wmodal('wallet');
+    var STEPS = {
+      wallet: { tab: 'wallet', title: 'Wallet' },
+      buy: { tab: 'buy', title: 'Buy Crypto' },
+      'buy-provider': { tab: 'buy', title: 'Swapped.com', gear: true },
+      'buy-done': { tab: 'buy', title: 'Swapped.com', gear: true },
+      swap: { tab: 'swap', title: 'Swap' },
+      'swap-confirm': { tab: 'swap', title: 'Confirm Swap' },
+      'swap-done': { tab: 'swap', title: 'Completed!' }
+    };
+    var BUY_MIN_USD = 7;
+    var SWAP_FEE_USD = 0.25;
+    // Deposits that still have to be wagered (demo: part of the USDC balance)
+    var WAGER = { USDC: { total: 50, left: 10 } };
+    var byCode = function (code) { return CURRENCIES.filter(function (c) { return c.code === code; })[0]; };
+    var num = function (v) {
+      var n = parseFloat(String(v).replace(',', '.'));
+      return isFinite(n) && n > 0 ? n : 0;
+    };
+    var fix = function (n, d) { return n ? n.toFixed(d) : ''; };
+    var usdText = function (v) { return '$' + v.toFixed(2); };
+    var rateText = function (from, to) {
+      var r = from.usd / to.usd;
+      return '1 ' + from.code + ' ≈ ' + (r >= 1 ? r.toFixed(2) : r.toFixed(6)) + ' ' + to.code;
+    };
+    var fieldRow = function (c, arrow) {
+      var main = wstate.hidden ? HIDDEN : usdText(c.amount * c.usd);
+      var sub = wstate.hidden ? HIDDEN : cryptoText(c);
+      return row(c, main, sub).replace(/^<div class="wrow">|<\/div>$/g, '') +
+        (arrow ? '<img class="wrow__arrow" src="' + IMGP + 'ws-arrow.svg" alt="">' : '');
+    };
+    var q = function (sel) { return wcard.querySelector(sel); };
+    var credit = function (c, amount) {
+      c.amount += amount;
+      var w = WAGER[c.code] || (WAGER[c.code] = { total: 0, left: 0 });
+      w.total += amount;
+      w.left += amount;
+    };
+
+    // Currency lists under the From / To cells and the Buy Crypto inputs
+    var closePicks = function (except) {
+      wcard.querySelectorAll('[data-wpick-list]').forEach(function (l) {
+        if (l.getAttribute('data-wpick-list') === except) return;
+        l.hidden = true;
+        var t = q('[data-wpick="' + l.getAttribute('data-wpick-list') + '"]');
+        if (t) t.classList.remove('is-open');
       });
+    };
+    var pickItems = function (name) {
+      if (name === 'buy-fiat') {
+        return FIATS.map(function (f) {
+          return '<button class="wrow' + (f.code === buy.fiat ? ' is-active' : '') + '" type="button" data-wpick-item="' + f.code + '">' +
+            '<span class="wrow__icon"><img src="' + IMGP + 'currency-usd.webp" alt=""></span>' +
+            '<span class="wrow__name"><span class="wrow__code">' + f.code + '</span><span class="wrow__full">' + f.name + '</span></span></button>';
+        }).join('');
+      }
+      var current = name === 'swap-from' ? swap.from : name === 'swap-to' ? swap.to : buy.crypto;
+      var other = name === 'swap-from' ? swap.to : name === 'swap-to' ? swap.from : null;
+      return CURRENCIES.filter(function (c) { return c.code !== other; }).map(function (c) {
+        var main = wstate.hidden ? HIDDEN : usdText(c.amount * c.usd);
+        return row(c, main, wstate.hidden ? HIDDEN : cryptoText(c), 'button', c.code === current)
+          .replace('data-wcur=', 'data-wpick-item=');
+      }).join('');
+    };
+    wcard.querySelectorAll('[data-wpick]').forEach(function (t) {
+      t.addEventListener('click', function (event) {
+        event.preventDefault();
+        var name = t.getAttribute('data-wpick');
+        var list = q('[data-wpick-list="' + name + '"]');
+        var open = list.hidden;
+        closePicks(name);
+        if (open) list.innerHTML = pickItems(name);
+        list.hidden = !open;
+        t.classList.toggle('is-open', open);
+      });
+    });
+    wcard.querySelectorAll('[data-wpick-list]').forEach(function (list) {
+      list.addEventListener('click', function (event) {
+        var item = event.target.closest('[data-wpick-item]');
+        if (!item) return;
+        var code = item.getAttribute('data-wpick-item');
+        var name = list.getAttribute('data-wpick-list');
+        if (name === 'swap-from') swap.from = code;
+        else if (name === 'swap-to') swap.to = code;
+        else if (name === 'buy-crypto') buy.crypto = code;
+        else buy.fiat = code;
+        closePicks();
+        if (name.indexOf('swap') === 0) { syncSwap('from'); renderSwap(); }
+        else { syncBuy('crypto'); renderBuy(); }
+      });
+    });
+
+    // Swap
+    var swap = { from: 'USDT', to: 'ETH', amount: 16, hash: '' };
+    var swapFrom = q('[data-swap-from]');
+    var swapTo = q('[data-swap-to]');
+    var swapFee = function (from) { return SWAP_FEE_USD / from.usd; };
+    var syncSwap = function (side) {
+      var from = byCode(swap.from), to = byCode(swap.to);
+      if (side === 'to') swap.amount = num(swapTo.value) * to.usd / from.usd;
+      else if (side === 'from') swap.amount = num(swapFrom.value);
+      if (side !== 'from') swapFrom.value = fix(swap.amount, 6);
+      if (side !== 'to') swapTo.value = fix(swap.amount * from.usd / to.usd, 6);
+    };
+    var renderSwap = function () {
+      var from = byCode(swap.from), to = byCode(swap.to);
+      q('[data-wpick="swap-from"]').innerHTML = fieldRow(from, true);
+      q('[data-wpick="swap-to"]').innerHTML = fieldRow(to, true);
+      q('[data-swap-rate]').textContent = rateText(from, to);
+      var w = WAGER[from.code];
+      var wagering = !!(w && w.left > 0);
+      q('[data-swap-from-field]').hidden = wagering;
+      q('[data-swap-wager]').hidden = !wagering;
+      if (wagering) {
+        var pct = Math.round((1 - w.left / w.total) * 100);
+        q('[data-wager-pct]').textContent = pct + '%';
+        q('[data-wager-bar]').style.width = pct + '%';
+        q('[data-wager-left]').textContent = w.left.toFixed(2) + ' ' + from.code;
+      }
+      var total = swap.amount + swapFee(from);
+      q('[data-swap-submit]').disabled = wagering || !swap.amount || total > from.amount + 1e-9;
+    };
+    swapFrom.addEventListener('input', function () { syncSwap('from'); renderSwap(); });
+    swapTo.addEventListener('input', function () { syncSwap('to'); renderSwap(); });
+    q('[data-swap-max]').addEventListener('click', function (event) {
+      event.preventDefault();
+      var from = byCode(swap.from);
+      swap.amount = Math.max(0, from.amount - swapFee(from));
+      syncSwap();
+      renderSwap();
+    });
+    q('[data-swap-flip]').addEventListener('click', function () {
+      var t = swap.from;
+      swap.from = swap.to;
+      swap.to = t;
+      closePicks();
+      syncSwap('from');
+      renderSwap();
+    });
+    q('[data-swap-refresh]').addEventListener('click', function (event) {
+      var b = event.currentTarget;
+      b.classList.remove('is-spinning');
+      void b.offsetWidth;
+      b.classList.add('is-spinning');
+    });
+    q('[data-swap-submit]').addEventListener('click', function () {
+      var from = byCode(swap.from), to = byCode(swap.to);
+      var fee = swapFee(from);
+      var get = swap.amount * from.usd / to.usd;
+      q('[data-confirm-from]').innerHTML = fieldRow({ code: from.code, name: from.name, icon: from.icon, amount: swap.amount, usd: from.usd });
+      q('[data-confirm-to]').innerHTML = fieldRow({ code: to.code, name: to.name, icon: to.icon, amount: get, usd: to.usd });
+      q('[data-confirm-fee]').textContent = fee.toFixed(6) + ' ' + from.code;
+      q('[data-confirm-total]').textContent = (swap.amount + fee).toFixed(6) + ' ' + from.code;
+      q('[data-confirm-rate]').textContent = rateText(from, to);
+      setWStep('swap-confirm');
+    });
+    q('[data-swap-confirm]').addEventListener('click', function () {
+      var from = byCode(swap.from), to = byCode(swap.to);
+      var total = swap.amount + swapFee(from);
+      from.amount = Math.max(0, from.amount - total);
+      credit(to, swap.amount * from.usd / to.usd);
+      var hex = '';
+      for (var i = 0; i < 64; i++) hex += '0123456789abcdef'[Math.floor(Math.random() * 16)];
+      swap.hash = '0x' + hex;
+      q('[data-swap-done-sum]').textContent = total.toFixed(6) + ' ' + from.code;
+      q('[data-swap-hash-text]').textContent = swap.hash.slice(0, 4) + '...' + swap.hash.slice(-4);
+      renderWallet();
+      setWStep('swap-done');
+    });
+    q('[data-swap-hash]').addEventListener('click', function (event) {
+      var b = event.currentTarget;
+      var done = function () {
+        b.querySelector('span').textContent = 'Copied';
+        setTimeout(function () { b.querySelector('span').textContent = swap.hash.slice(0, 4) + '...' + swap.hash.slice(-4); }, 1200);
+      };
+      if (navigator.clipboard) navigator.clipboard.writeText(swap.hash).then(done, done);
+      else done();
+    });
+
+    // Buy Crypto
+    var buy = { crypto: 'USDT', fiat: 'USD', amount: 0 };
+    var buyCrypto = q('[data-buy-crypto]');
+    var buyFiat = q('[data-buy-fiat]');
+    var provCrypto = q('[data-prov-crypto]');
+    var provFiat = q('[data-prov-fiat]');
+    var buyPrice = function () { return byCode(buy.crypto).usd * fiatOf(buy.fiat).rate; };
+    var syncBuy = function (side, src) {
+      var price = buyPrice();
+      if (side === 'fiat') buy.amount = num(src ? src.value : buyFiat.value) / price;
+      else if (side === 'crypto') buy.amount = num(src ? src.value : buyCrypto.value);
+      [[buyCrypto, 'crypto'], [provCrypto, 'crypto'], [buyFiat, 'fiat'], [provFiat, 'fiat']].forEach(function (f) {
+        if (f[0] === src) return;
+        f[0].value = f[1] === 'crypto' ? fix(buy.amount, 6) : fix(buy.amount * price, 2);
+      });
+    };
+    var buyTooLow = function () {
+      var usd = buy.amount * byCode(buy.crypto).usd;
+      return usd > 0 && usd < BUY_MIN_USD;
+    };
+    var renderBuy = function () {
+      var c = byCode(buy.crypto), f = fiatOf(buy.fiat);
+      wcard.querySelectorAll('[data-buy-crypto-code]').forEach(function (el) { el.textContent = c.code; });
+      wcard.querySelectorAll('[data-buy-crypto-icon]').forEach(function (el) { el.src = IMGP + c.icon; });
+      wcard.querySelectorAll('[data-buy-fiat-code]').forEach(function (el) { el.textContent = f.code; });
+      q('[data-buy-min-text]').textContent = f.sym + (BUY_MIN_USD * f.rate).toFixed(2);
+      q('[data-buy-min]').hidden = !buyTooLow();
+      q('[data-prov-submit]').disabled = !buy.amount || buyTooLow();
+    };
+    [[buyCrypto, 'crypto'], [buyFiat, 'fiat'], [provCrypto, 'crypto'], [provFiat, 'fiat']].forEach(function (f) {
+      f[0].addEventListener('input', function () { syncBuy(f[1], f[0]); renderBuy(); });
+    });
+    q('[data-prov-chips]').addEventListener('click', function (event) {
+      var chip = event.target.closest('[data-prov-chip]');
+      if (!chip) return;
+      buy.amount = +chip.getAttribute('data-prov-chip');
+      syncBuy();
+      renderBuy();
+    });
+    q('[data-buy-submit]').addEventListener('click', function () {
+      if (!buy.amount || buyTooLow()) {
+        buyCrypto.focus();
+        return;
+      }
+      setWStep('buy-provider');
+    });
+    q('[data-prov-submit]').addEventListener('click', function () {
+      var c = byCode(buy.crypto), f = fiatOf(buy.fiat);
+      q('[data-buy-done-spend]').textContent = (buy.amount * buyPrice()).toFixed(2) + ' ' + f.code;
+      q('[data-buy-done-get]').textContent = buy.amount.toFixed(6) + ' ' + c.code;
+      credit(c, buy.amount);
+      renderWallet();
+      setWStep('buy-done');
+    });
+
+    var setWStep = function (step) {
+      var st = STEPS[step];
+      closePicks();
+      wcard.querySelectorAll('[data-wpane]').forEach(function (p) { p.hidden = p.getAttribute('data-wpane') !== step; });
+      wcard.querySelectorAll('[data-wtab]').forEach(function (t) { t.classList.toggle('is-active', t.getAttribute('data-wtab') === st.tab); });
+      q('[data-wallet-title]').textContent = st.title;
+      q('[data-wallet-gear]').hidden = !st.gear;
+      q('[data-wallet-close]').hidden = !!st.gear;
+      if (step === 'swap') {
+        if (swap.from === swap.to || !byCode(swap.from)) swap.from = wstate.current;
+        if (swap.from === swap.to) swap.to = CURRENCIES.filter(function (c) { return c.code !== swap.from; })[0].code;
+        syncSwap();
+        renderSwap();
+      }
+      if (step === 'buy' || step === 'buy-provider') {
+        syncBuy();
+        renderBuy();
+      }
+    };
+    wcard.querySelectorAll('[data-wtab]').forEach(function (tab) {
+      tab.addEventListener('click', function () { setWStep(tab.getAttribute('data-wtab')); });
+    });
+    wcard.querySelectorAll('[data-wstep]').forEach(function (b) {
+      b.addEventListener('click', function () { setWStep(b.getAttribute('data-wstep')); });
+    });
+    wcard.addEventListener('click', function (event) {
+      if (!event.target.closest('[data-wpick], [data-wpick-list]')) closePicks();
     });
     document.addEventListener('keydown', function (event) {
       if (event.key !== 'Escape') return;

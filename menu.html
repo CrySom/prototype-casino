@@ -185,8 +185,8 @@
   <div class="wmodal" id="wallet" hidden data-wmodal="wallet">
     <div class="wmodal__backdrop" data-wmodal-close></div>
     <section class="wmodal__card wmodal__card--wallet" role="dialog" aria-modal="true" aria-label="Wallet">
-      <div class="wmodal__head"><h2 class="wmodal__title">Wallet</h2><button class="wmodal__close" type="button" aria-label="Close" data-wmodal-close><img src="assets/img/wl-close.svg" alt="" decoding="async"></button></div>
-      <div class="wtabs" data-tabs><button class="wtab is-active" type="button" data-wtab="wallet">Wallet</button><button class="wtab" type="button" data-wtab="buy">Buy Crypto</button><button class="wtab" type="button" data-wtab="swap">Swap</button></div>
+      <div class="wmodal__head"><h2 class="wmodal__title" data-wallet-title>Wallet</h2><button class="wmodal__close is-inert" type="button" aria-label="Provider settings (not available yet)" aria-disabled="true" tabindex="-1" hidden data-wallet-gear><img src="assets/img/ws-settings.svg" alt="" decoding="async"></button><button class="wmodal__close" type="button" aria-label="Close" data-wmodal-close data-wallet-close><img src="assets/img/wl-close.svg" alt="" decoding="async"></button></div>
+      <div class="wtabs"><button class="wtab is-active" type="button" data-wtab="wallet">Wallet</button><button class="wtab" type="button" data-wtab="buy">Buy Crypto</button><button class="wtab" type="button" data-wtab="swap">Swap</button></div>
       <div class="wpane" data-wpane="wallet">
         <div class="wtotal">
           <p class="wtotal__label">Total Real Balance<button class="wtotal__eye" type="button" aria-label="Hide balance" data-balance-eye><img class="balance__eye-off" src="assets/img/wl-eye-off.svg" alt="" decoding="async"><img class="balance__eye-on" src="assets/img/hdr-eye.svg" alt="" decoding="async"></button></p>
@@ -195,8 +195,106 @@
         <div class="wactions"><a class="btn btn--secondary wbtn" href="#"><img src="assets/img/wl-withdraw.svg" alt="" decoding="async"><span>Withdraw</span></a><a class="btn wbtn wbtn--primary" href="#"><img src="assets/img/wl-deposit.svg" alt="" decoding="async"><span>Deposit</span></a></div>
         <div class="wtable"><div class="wtable__head"><span>Currencies</span><span>Balance</span></div><div class="wlist" data-wallet-list></div></div>
       </div>
-      <div class="wpane wpane--soon" data-wpane="buy" hidden><p>Buy crypto with a bank card or other payment methods.</p><p>This screen is not part of the prototype yet.</p></div>
-      <div class="wpane wpane--soon" data-wpane="swap" hidden><p>Swap one currency for another at the current rate.</p><p>This screen is not part of the prototype yet.</p></div>
+      <!-- Buy Crypto (Wallet 201:246320, phone 387:607607 / 387:608027 / 387:608463) -->
+      <div class="wpane wpane--form" data-wpane="buy" hidden>
+        <div class="wform">
+          <div class="wblock">
+            <p class="wlabel">How much crypto do you want to top-up?</p>
+            <label class="winput"><input type="text" inputmode="decimal" placeholder="0.000000" autocomplete="off" aria-label="Crypto amount" data-buy-crypto><button class="winput__cur" type="button" data-wpick="buy-crypto"><img src="assets/img/currency-t.webp" alt="" decoding="async" data-buy-crypto-icon><span data-buy-crypto-code>USDT</span><img class="winput__chev" src="assets/img/ws-chevron.svg" alt="" decoding="async"></button></label>
+            <div class="wlist wpick" hidden data-wpick-list="buy-crypto"></div>
+          </div>
+          <div class="wblock">
+            <p class="wlabel">You will pay (approx.)</p>
+            <label class="winput"><input type="text" inputmode="decimal" placeholder="0.000000" autocomplete="off" aria-label="Fiat amount" data-buy-fiat><button class="winput__cur" type="button" data-wpick="buy-fiat"><img src="assets/img/currency-usd.webp" alt="" decoding="async"><span data-buy-fiat-code>USD</span><img class="winput__chev" src="assets/img/ws-chevron.svg" alt="" decoding="async"></button></label>
+            <div class="wlist wpick" hidden data-wpick-list="buy-fiat"></div>
+          </div>
+        </div>
+        <div class="wnote" hidden data-buy-min><img src="assets/img/ws-warning.svg" alt="" decoding="async"><p>Sorry, this is below the minimum purchase limit of <span data-buy-min-text>$7.00</span>.</p></div>
+        <button class="btn wbtn wbtn--primary" type="button" data-buy-submit><img src="assets/img/ws-repeat.svg" alt="" decoding="async"><span>Buy</span></button>
+      </div>
+
+      <!-- Buy Crypto: provider (387:608768) -->
+      <div class="wpane wpane--form" data-wpane="buy-provider" hidden>
+        <div class="wform">
+          <div class="wblock">
+            <p class="wlabel">You spend</p>
+            <label class="winput"><input type="text" inputmode="decimal" placeholder="0.00" autocomplete="off" aria-label="You spend" data-prov-fiat><span class="winput__cur"><img src="assets/img/currency-usd.webp" alt="" decoding="async"><span data-buy-fiat-code>USD</span><img class="winput__chev" src="assets/img/ws-chevron.svg" alt="" decoding="async"></span></label>
+          </div>
+          <div class="wblock">
+            <p class="wlabel">You receive</p>
+            <label class="winput"><input type="text" inputmode="decimal" placeholder="0.000000" autocomplete="off" aria-label="You receive" data-prov-crypto><span class="winput__cur"><img src="assets/img/currency-t.webp" alt="" decoding="async" data-buy-crypto-icon><span data-buy-crypto-code>USDT</span><img class="winput__chev" src="assets/img/ws-chevron.svg" alt="" decoding="async"></span></label>
+            <div class="wchips" data-prov-chips><button class="wchip" type="button" data-prov-chip="100">100</button><button class="wchip" type="button" data-prov-chip="200">200</button><button class="wchip" type="button" data-prov-chip="300">300</button><button class="wchip" type="button" data-prov-chip="500">500</button><button class="wchip" type="button" data-prov-chip="1000">1K</button></div>
+          </div>
+          <div class="wblock">
+            <p class="wlabel">Pay with</p>
+            <div class="wrow wrow--field wrow--method"><span class="wrow__icon"><img src="assets/img/ws-card.svg" alt="" decoding="async"></span><span class="wrow__name"><span class="wrow__code">Card</span></span><span class="wrow__value"><span class="wrow__sub">0% Fee</span></span><img class="wrow__arrow" src="assets/img/ws-arrow.svg" alt="" decoding="async"></div>
+          </div>
+        </div>
+        <div class="wbtns">
+          <button class="btn wbtn wbtn--primary" type="button" data-prov-submit><span>Buy <span data-buy-crypto-code>USDT</span> via Card</span></button>
+          <button class="btn btn--secondary wbtn" type="button" data-wstep="buy">Back</button>
+        </div>
+      </div>
+
+      <!-- Buy Crypto: completed (387:617049) -->
+      <div class="wpane wpane--form" data-wpane="buy-done" hidden>
+        <div class="wform">
+          <div class="wresult"><img src="assets/img/ws-success.svg" alt="" decoding="async"><p class="wresult__title">Completed!</p><p class="wresult__text">Your transaction is being processed and should arrive shortly.</p></div>
+          <div class="wfacts"><p><span>You spend</span><span data-buy-done-spend>16.00 USD</span></p><p><span>Provider payment:</span><span data-buy-done-get>16.000000 USDT</span></p></div>
+        </div>
+        <div class="wbtns">
+          <button class="btn wbtn wbtn--primary is-inert" type="button" aria-disabled="true" tabindex="-1">View Transaction</button>
+          <button class="btn btn--secondary wbtn" type="button" data-wstep="wallet">Ok</button>
+        </div>
+      </div>
+
+      <!-- Swap (201:246320, phone 387:551674; wagering 387:559929) -->
+      <div class="wpane wpane--form" data-wpane="swap" hidden>
+        <div class="wform">
+          <div class="wblock">
+            <p class="wlabel">From</p>
+            <button class="wrow wrow--field" type="button" data-wpick="swap-from"></button>
+            <div class="wlist wpick" hidden data-wpick-list="swap-from"></div>
+            <label class="winput" data-swap-from-field><input type="text" inputmode="decimal" placeholder="0.000000" autocomplete="off" aria-label="Amount to swap" data-swap-from><button class="winput__max" type="button" data-swap-max>MAX</button></label>
+            <div class="wwager" hidden data-swap-wager>
+              <p class="wwager__head"><span>Wagering requirement</span><span data-wager-pct>80%</span></p>
+              <div class="wwager__bar"><span data-wager-bar></span></div>
+              <p class="wwager__hint"><span>Remaining wagering amount:</span><b data-wager-left>10.00 USDC</b></p>
+              <hr>
+              <p class="wwager__text">To make a withdrawal, you must wager an amount equal to your deposit. For example, if you deposited $100, you need to wager $100 to withdraw. This requirement applies under our anti-money laundering (AML) policy.</p>
+            </div>
+          </div>
+          <div class="wsplit"><button class="wsplit__btn" type="button" aria-label="Swap currencies" data-swap-flip><img src="assets/img/ws-swap.svg" alt="" decoding="async"></button></div>
+          <div class="wblock">
+            <p class="wlabel">To</p>
+            <button class="wrow wrow--field" type="button" data-wpick="swap-to"></button>
+            <div class="wlist wpick" hidden data-wpick-list="swap-to"></div>
+            <label class="winput"><input type="text" inputmode="decimal" placeholder="0.000000" autocomplete="off" aria-label="Amount to receive" data-swap-to><span class="winput__max">MAX</span></label>
+          </div>
+          <div class="wrate"><p><span>Exchange rate</span><span data-swap-rate>1 USDT ≈ 0.000313 ETH</span></p><button type="button" aria-label="Refresh the rate" data-swap-refresh><img src="assets/img/ws-refresh.svg" alt="" decoding="async"></button></div>
+        </div>
+        <button class="btn wbtn wbtn--primary" type="button" data-swap-submit>Swap Now</button>
+      </div>
+
+      <!-- Confirm Swap (387:576041) -->
+      <div class="wpane" data-wpane="swap-confirm" hidden>
+        <div class="wconfirm">
+          <p class="wconfirm__title">Exchange confirmation</p>
+          <div class="wpair"><div class="wrow" data-confirm-from></div><div class="wsplit"><span class="wsplit__btn"><img src="assets/img/ws-swap.svg" alt="" decoding="async"></span></div><div class="wrow" data-confirm-to></div></div>
+          <div class="wfacts wfacts--confirm"><p><span>Transaction Fee</span><small data-confirm-fee>0.250000 USDT</small></p><p><span>Total Swap Amount:</span><small data-confirm-total>16.250000 USDT</small></p><p><span>Exchange rate:</span><span data-confirm-rate>1 USDT ≈ 0.000313 ETH</span></p><p><span>Provider payment:</span><span>Swaps.xyz</span></p></div>
+        </div>
+        <div class="wnote"><img src="assets/img/ws-warning.svg" alt="" decoding="async"><p>When you exchange cryptocurrency, it is treated as a deposit; therefore, a wagering requirement applies to withdrawals.</p></div>
+        <div class="wactions"><button class="btn btn--secondary wbtn" type="button" data-wstep="swap">Cancel</button><button class="btn wbtn wbtn--primary" type="button" data-swap-confirm>Confirm Swap</button></div>
+      </div>
+
+      <!-- Swap Completed (387:576181) -->
+      <div class="wpane wpane--form" data-wpane="swap-done" hidden>
+        <div class="wresult"><img src="assets/img/ws-success.svg" alt="" decoding="async"><p class="wresult__title">Swap Completed!</p><p class="wresult__text">Your transaction is being processed and should arrive shortly.</p></div>
+        <div class="wpane">
+          <div class="wreceipt"><p><span>Swap Curency</span><b data-swap-done-sum>16.250000 USDT</b></p><hr><p><span>Tx Hash</span><button class="wreceipt__hash" type="button" aria-label="Copy the transaction hash" data-swap-hash><span data-swap-hash-text>0x8e...3f2c</span><img src="assets/img/ws-copy.svg" alt="" decoding="async"></button></p></div>
+          <div class="wactions"><button class="btn btn--secondary wbtn" type="button" data-wstep="wallet">Back to Wallet</button><button class="btn wbtn wbtn--primary is-inert" type="button" aria-disabled="true" tabindex="-1">View Transaction</button></div>
+        </div>
+      </div>
     </section>
   </div>
 

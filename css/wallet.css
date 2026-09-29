@@ -73,6 +73,11 @@
 
 .wdrop[hidden],
 .wmodal[hidden],
+.wmodal__close[hidden],
+.wpick[hidden],
+.wnote[hidden],
+.wwager[hidden],
+.winput[hidden],
 .wempty[hidden],
 .wpane[hidden] {
   display: none;
@@ -348,6 +353,11 @@ button.wrow:hover {
   gap: 16px;
 }
 
+/* Figma: the header row is 26px high, the 32px close button overflows it */
+.wmodal__card--wallet .wmodal__head {
+  height: 26px;
+}
+
 /* Mobile: settings and fiat come up from the bottom */
 @media (max-width: 1023px) {
   .wmodal--sheet {
@@ -435,20 +445,6 @@ button.wrow:hover {
   gap: 12px;
 }
 
-.wpane--soon {
-  padding: 32px 16px;
-  font-size: 12px;
-  line-height: 16px;
-  text-align: center;
-  color: var(--c-txt-50);
-}
-
-.wpane--soon p:first-child {
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 20px;
-  color: var(--c-white);
-}
 
 .wtotal {
   display: flex;
@@ -674,4 +670,512 @@ button.wrow:hover {
 .is-inert {
   pointer-events: none;
   cursor: default;
+}
+
+/* ==========================================================================
+   Buy Crypto and Swap (Figma file "Wallet", Screens 201:246320): the Wallet
+   modal tabs lead to the Buy Crypto flow (form, Swapped.com provider,
+   completed) and the Swap flow (form, wagering requirement, confirmation,
+   completed). Demo data; balances change for the current visit only.
+   ========================================================================== */
+.wpane--form {
+  gap: 16px;
+}
+
+.wform {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.wblock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wlabel {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.25px;
+  color: var(--c-txt-50);
+}
+
+/* Currency cell (From / To, Pay with) */
+.wrow--field {
+  background: var(--c-bg-1);
+  border-radius: var(--radius-4);
+}
+
+button.wrow--field:hover,
+.wrow--field.is-open {
+  background: var(--c-bg-3);
+}
+
+.wrow__arrow {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+}
+
+.wrow--field.is-open .wrow__arrow {
+  transform: rotate(180deg);
+}
+
+.wrow--method {
+  border-radius: 0;
+}
+
+.wrow--method .wrow__icon img {
+  mix-blend-mode: normal;
+}
+
+/* Currency list under a cell or an input */
+.wpick {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 4px;
+  border: 1px solid var(--c-bg-6);
+  border-radius: var(--radius-4);
+  background: var(--c-bg-1);
+}
+
+/* Amount input */
+.winput {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 40px;
+  padding-left: 12px;
+  border: 1px solid var(--c-bg-6);
+  border-radius: var(--radius-4);
+  background: var(--c-bg-1);
+  cursor: text;
+}
+
+.winput:focus-within {
+  border-color: var(--c-accent);
+}
+
+.winput input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: 400 14px/18px var(--f-geist);
+  color: var(--c-txt-75);
+  font-variant-numeric: tabular-nums;
+}
+
+.winput input::placeholder {
+  color: var(--c-accent);
+}
+
+.winput input:focus {
+  outline: none;
+}
+
+.winput__max {
+  flex-shrink: 0;
+  width: 94px;
+  padding-right: 12px;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.25px;
+  text-align: right;
+  color: var(--c-accent);
+}
+
+button.winput__max:hover {
+  color: var(--c-white);
+}
+
+.winput__cur {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+  width: 94px;
+  height: 100%;
+  padding-right: 12px;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.25px;
+  color: var(--c-accent);
+}
+
+.winput__cur img:first-child {
+  width: 20px;
+  height: 20px;
+  mix-blend-mode: luminosity;
+}
+
+.winput__cur span {
+  flex: 1 1 auto;
+  text-align: left;
+}
+
+.winput__chev {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s ease;
+}
+
+.winput__cur.is-open .winput__chev {
+  transform: rotate(180deg);
+}
+
+/* Divider with the swap button */
+.wsplit {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.wsplit::before,
+.wsplit::after {
+  content: '';
+  flex: 1 1 0;
+  height: 1px;
+  background: rgba(232, 232, 232, 0.15);
+}
+
+.wsplit__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 32px;
+  background: var(--c-bg-7);
+  transition: transform 0.25s ease;
+}
+
+.wsplit__btn img {
+  width: 16px;
+  height: 16px;
+}
+
+button.wsplit__btn:hover {
+  transform: rotate(180deg);
+}
+
+/* Exchange rate */
+.wrate {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 0 8px;
+}
+
+.wrate p {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  height: 40px;
+}
+
+.wrate p span:first-child {
+  font-size: 10px;
+  line-height: 14px;
+  color: var(--c-accent);
+}
+
+.wrate p span:last-child {
+  overflow: hidden;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--c-txt-75);
+}
+
+.wrate button img {
+  width: 16px;
+  height: 16px;
+}
+
+.wrate button.is-spinning img {
+  animation: wspin 0.6s ease;
+}
+
+@keyframes wspin {
+  to { transform: rotate(360deg); }
+}
+
+/* Primary button off (nothing to swap / buy) */
+.wbtn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.wbtns {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wbtns .wbtn {
+  flex: 0 0 auto;
+  width: 100%;
+}
+
+.wactions .wbtn {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0 12px;
+}
+
+/* Warning note (below the minimum, swap is a deposit) */
+.wnote {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: var(--radius-4);
+  background: var(--c-bg-5);
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--c-txt-50);
+}
+
+.wnote img {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+/* Wagering requirement */
+.wwager {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 10px;
+  border-radius: var(--radius-2);
+  background: var(--c-bg-1);
+}
+
+.wwager__head,
+.wwager__hint {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.wwager__head {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.wwager__bar {
+  height: 8px;
+  margin-bottom: -6px;
+  overflow: hidden;
+  border-radius: 100px;
+  background: rgba(232, 232, 232, 0.1);
+}
+
+.wwager__bar span {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+  background: var(--c-brand);
+}
+
+.wwager__hint {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.25px;
+  color: var(--c-txt-50);
+}
+
+.wwager__hint b {
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--c-white);
+}
+
+.wwager hr,
+.wreceipt hr {
+  width: 100%;
+  height: 1px;
+  margin: 0;
+  border: 0;
+  background: rgba(232, 232, 232, 0.15);
+}
+
+.wwager__text {
+  font-size: 10px;
+  line-height: 14px;
+  color: var(--c-txt-50);
+}
+
+/* Confirm Swap */
+.wconfirm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+}
+
+@media (max-width: 359px) {
+  .wconfirm {
+    padding: 16px 0;
+  }
+}
+
+.wconfirm__title {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  color: var(--c-txt-50);
+}
+
+.wpair {
+  display: flex;
+  flex-direction: column;
+  height: 92px;
+  padding: 4px;
+  overflow: hidden;
+  border-radius: var(--radius-2);
+  background: var(--c-bg-1);
+}
+
+.wpair > * {
+  flex-shrink: 0;
+}
+
+.wpair > :not(:last-child) {
+  margin-bottom: -10px;
+}
+
+.wpair .wrow__icon img {
+  mix-blend-mode: normal;
+}
+
+.wfacts {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 14px;
+  white-space: nowrap;
+}
+
+.wfacts p {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.wfacts p > :first-child {
+  flex-shrink: 0;
+  color: #8e8e93;
+}
+
+.wfacts p > :last-child {
+  min-width: 0;
+  white-space: normal;
+  text-align: right;
+}
+
+.wfacts small {
+  font-size: 12px;
+  line-height: 12px;
+  color: var(--c-txt-50);
+}
+
+/* Completed */
+.wresult {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.wresult img {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 8px;
+}
+
+.wresult__title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.15px;
+}
+
+.wresult__text {
+  width: 204px;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.25px;
+  color: var(--c-txt-50);
+}
+
+.wreceipt {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border-radius: var(--radius-2);
+  background: var(--c-bg-6);
+}
+
+.wreceipt p {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 14px;
+  white-space: nowrap;
+  color: #8e8e93;
+}
+
+.wreceipt b {
+  font-family: var(--f-manrope);
+  font-weight: 700;
+  line-height: normal;
+  color: var(--c-white);
+}
+
+.wreceipt__hash {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  color: var(--c-white);
+}
+
+.wreceipt__hash img {
+  width: 12px;
+  height: 12px;
+}
+
+/* Provider amount presets */
+.wchips {
+  display: flex;
+  gap: 8px;
+}
+
+.wchips .wchip {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 4px;
 }

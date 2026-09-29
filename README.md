@@ -145,11 +145,31 @@ logged in:
 - **Balance Settings** – "Hide Zero Balances" and "Display Crypto in Fiat"
   (fiat list with search and recently used currencies). With a fiat selected
   the header and the dropdown show the amounts in that fiat.
+- **Buy Crypto** (Screens `201:246320`) – crypto amount and the approximate
+  fiat price (both editable, currency lists), "below the minimum purchase
+  limit of $7.00" note; Buy opens the Swapped.com provider step (You spend /
+  You receive, presets 100…1K, Pay with Card), then Completed.
+- **Swap** – From / To currencies (lists, ⇅ flips them), amounts in both
+  fields, MAX, exchange rate with refresh; Swap Now opens Confirm Swap
+  (fee $0.25 in the From currency, total, rate, provider Swaps.xyz), then
+  Swap Completed with a Tx hash (tap copies it). Swap Now is off when there is
+  nothing to swap or not enough balance.
+- **Wagering requirement** – a currency with an unwagered deposit shows the
+  requirement (progress, remaining amount) instead of the amount field and
+  can't be swapped. Demo: USDC starts at 80%; crypto received by a swap or a
+  purchase is a new deposit (0%).
+- Swaps and purchases change the balances until the page is reloaded.
 - State (currency, hidden balance, settings) is kept in `localStorage`.
 
 Differences from Figma: the demo currencies differ (Figma repeats USDC), the
-fiat descriptions are English; Buy Crypto / Swap tabs, Deposit and Withdraw are
-placeholders; on mobile Balance Settings and the fiat list are bottom sheets.
+fiat descriptions are English; amounts and the exchange rate come from the demo
+prices (Figma: fixed sample numbers, e.g. 1 USDT ≈ 0.006119 ETH); the provider
+presets are 100 / 200 / 300 / 500 / 1K (Figma repeats 200); Buy Crypto's
+Completed shows the amounts that were bought (Figma swaps the two values);
+the Card icon is drawn by hand (Figma exports a placeholder); the loading
+skeletons, View Transaction, the provider settings, Deposit and Withdraw are
+not part of the prototype; on mobile Balance Settings and the fiat list are
+bottom sheets.
 
 Game page (`game.html`, file "crypto-casino", Real and demo mode `3369:293780`):
 a tap on any game tile first opens the game card (Game Page `389:253407`: tile,

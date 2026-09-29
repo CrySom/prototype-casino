@@ -172,3 +172,13 @@ player-avatar.svg           composed from circle_bg + "Avatar image/default man"
 footer-chevron.svg          https://www.figma.com/api/mcp/asset/cc9d7204-06bb-4f1b-8480-a6d0d411a9f9/b5638.svg
 gambleaware.svg             https://www.figma.com/api/mcp/asset/cc9d7204-06bb-4f1b-8480-a6d0d411a9f9/58e6e.svg
 sb-favorites.svg, sb-bets.svg  flt-favorites.svg / flt-providers.svg recoloured to #B2B2B2
+# Wallet file (e3o4uTJkx3s6IRWwqF2ddD): Buy Crypto and Swap, exported 2026-09-29; ws-card.svg is drawn by hand
+ws-arrow.svg                https://www.figma.com/api/mcp/asset/f1ed6bcb-67f7-4216-9a9b-458a6c6fdf92/c215c.svg
+ws-swap.svg                 https://www.figma.com/api/mcp/asset/f1ed6bcb-67f7-4216-9a9b-458a6c6fdf92/57838.svg
+ws-refresh.svg              https://www.figma.com/api/mcp/asset/f1ed6bcb-67f7-4216-9a9b-458a6c6fdf92/d1831.svg
+ws-warning.svg              https://www.figma.com/api/mcp/asset/2b3577e4-19ed-4543-9e1b-514041b6e5f4/066e4.svg
+ws-success.svg              https://www.figma.com/api/mcp/asset/890258ed-e4b1-4539-b80d-2ca8195518f1/88750.svg
+ws-copy.svg                 https://www.figma.com/api/mcp/asset/890258ed-e4b1-4539-b80d-2ca8195518f1/c633d.svg
+ws-chevron.svg              https://www.figma.com/api/mcp/asset/8db8f3a8-a34a-4b3f-8c11-f0d9cda6cb40/89c3f.svg
+ws-repeat.svg               https://www.figma.com/api/mcp/asset/8db8f3a8-a34a-4b3f-8c11-f0d9cda6cb40/3fa5f.svg
+ws-settings.svg             https://www.figma.com/api/mcp/asset/3721376d-a6e8-4ed0-b8ff-bc4410946a47/f7262.svg
