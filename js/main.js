@@ -1420,7 +1420,30 @@
       });
     });
     wdAmount.addEventListener('input', function () { wd.amount = num(wdAmount.value); renderWd(); });
-    wdAddress.addEventListener('input', renderWd);
+    // Demo: a click on the empty Address field fills in a sample address of the
+    // chosen network (it follows the network until the player edits it)
+    var WD_ADDR = {
+      TRX: 'TR7hrgJeKQxGTci8q8Z7f9Lm5tQ6j8cV3F',
+      BNB: '0x3F8b2c6D1e9A47f5B0c83d2E6a91F4b7C5d0E218',
+      ETH: '0x3F8b2c6D1e9A47f5B0c83d2E6a91F4b7C5d0E218',
+      TON: 'UQCv4Lm8pR2nT6wX9zB1dF5hJ3kN7qS0uY4aE8gI2oM6cW1',
+      BTC: 'bc1q9h6tp4l0zk2m8xw3r5v7n1c6d4s2a8f0g3j5ke',
+      LTC: 'ltc1q7m3k9d2f5h8j1n4p6r0t3w5y8a2c4e6g9b1xz'
+    };
+    var wdAuto = function () {
+      if (wdAddress.value.trim() && !wd.auto) return;
+      wdAddress.value = WD_ADDR[wdNet().code] || '';
+      wd.auto = !!wdAddress.value;
+    };
+    wdAddress.addEventListener('click', function () {
+      if (wdAddress.value.trim()) return;
+      wdAuto();
+      renderWd();
+    });
+    wdAddress.addEventListener('input', function () {
+      wd.auto = false;
+      renderWd();
+    });
     wq('[data-wd-max]').addEventListener('click', function (event) {
       event.preventDefault();
       wd.amount = Math.max(0, byCode(wd.cur).amount - wdFee());
@@ -1465,6 +1488,7 @@
       } else {
         wd.net = +v;
       }
+      if (wd.auto) wdAuto();
       renderWd();
       closeW('wdpick');
     });
@@ -1522,6 +1546,7 @@
       wd.amount = 0;
       wdAmount.value = '';
       wdAddress.value = '';
+      wd.auto = false;
       renderWallet();
       setWdStep('done');
     });

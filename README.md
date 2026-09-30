@@ -170,7 +170,8 @@ logged in:
 - **Withdraw** (`439:375390`) – the Withdraw buttons (Wallet, Profile) open
   its own window: cryptocurrency and network (sheets up to 1023px: "Select
   currency to withdraw" with the available balances, "Select network type"
-  with the commission), amount with MAX, address, bonus note, amount / fee /
+  with the commission), amount with MAX, address (a click on the empty field
+  fills in a sample address of the network), bonus note, amount / fee /
   total; a currency with an unwagered deposit shows the wagering requirement
   and Wager now (to the Casino hall). Withdraw opens Confirm Withdrawal (you'll
   receive, 6-digit email code — any digits, Resend with a countdown), then
