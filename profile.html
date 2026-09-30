@@ -528,8 +528,8 @@
           <img class="gpreview__img" src="assets/img/game-slot.webp" alt="">
           <div class="gpreview__dim"></div>
           <button class="gpreview__fav" type="button" aria-label="Add to favorites" aria-pressed="false" data-game-fav><img src="assets/img/game-fav-16.svg" alt="" decoding="async"></button>
-          <a class="btn btn--secondary gpreview__play auth-only" href="game.html" aria-label="Play"><img src="assets/img/game-play-24.svg" alt="" decoding="async"></a>
-          <a class="btn btn--secondary gpreview__play guest-only" href="#login" data-modal-open="login" aria-label="Play"><img src="assets/img/game-play-24.svg" alt="" decoding="async"></a>
+          <a class="btn btn--secondary gpreview__play auth-only is-inert" aria-label="Play (not available yet)" aria-disabled="true" tabindex="-1"><img src="assets/img/game-play-24.svg" alt="" decoding="async"></a>
+          <a class="btn btn--secondary gpreview__play guest-only is-inert" aria-label="Play (not available yet)" aria-disabled="true" tabindex="-1"><img src="assets/img/game-play-24.svg" alt="" decoding="async"></a>
           <div class="gpreview__label"><p class="gpreview__title">Game title</p><div class="game-tile__provider"><img src="assets/img/provider-evolution.webp" alt="Evolution"></div></div>
         </div>
         <div class="gpreview__info">
@@ -539,8 +539,8 @@
           </div>
           <div class="gpreview__btns">
             <a class="btn btn--secondary gpbtn" href="game.html?demo=1">Demo</a>
-            <a class="btn btn--primary gpbtn auth-only" href="game.html">Play</a>
-            <a class="btn btn--primary gpbtn guest-only" href="#login" data-modal-open="login">Play</a>
+            <a class="btn btn--primary gpbtn auth-only is-inert" aria-disabled="true" tabindex="-1">Play</a>
+            <a class="btn btn--primary gpbtn guest-only is-inert" aria-disabled="true" tabindex="-1">Play</a>
           </div>
         </div>
       </div>

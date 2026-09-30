@@ -1758,8 +1758,7 @@
     renderWallet();
   }
 
-  // Play flow: a game tile opens the game card (Demo / Play, game currency;
-  // switched off, see PREGAME);
+  // Play flow: a game tile opens the game card (Demo / Play, game currency);
   // on the game page "Play real mode" switches demo to money mode (guests are
   // asked to log in).
   var favKey = 'game-fav';
@@ -1814,12 +1813,9 @@
       gp.querySelector('[data-gp-code]').textContent = code;
     };
 
-    // The pre-game card is switched off for now: a tile opens the game page
-    // right away (its href). Set PREGAME to true to bring the card back.
-    var PREGAME = false;
     document.addEventListener('click', function (event) {
       var tile = event.target.closest('a[data-game]');
-      if (!PREGAME || !tile || event.defaultPrevented) return;
+      if (!tile || event.defaultPrevented) return;
       event.preventDefault();
       openGp();
     });

@@ -571,3 +571,9 @@
     right: 16px;
   }
 }
+
+/* Play is shown but not available yet (Demo works) */
+.gpreview__play.is-inert,
+.gpbtn.is-inert {
+  opacity: 0.3;
+}
