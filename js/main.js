@@ -839,6 +839,8 @@
       { code: 'BTC', name: 'Bitcoin', amount: 0, usd: 65000, icon: 'currency-e.webp' },
       { code: 'LTC', name: 'Litecoin', amount: 0, usd: 80, icon: 'currency-usd.webp' }
     ];
+    // ?balance=0 opens the prototype with an empty wallet (first deposit scenario)
+    if (/[?&]balance=0(&|$)/.test(location.search)) CURRENCIES.forEach(function (c) { c.amount = 0; });
     var FIATS = [
       { code: 'USD', name: 'US Dollar', sym: '$', rate: 1 },
       { code: 'AED', name: 'UAE Dirham', sym: 'AED ', rate: 3.67 },
@@ -981,6 +983,8 @@
       if (name === 'coin' || name === 'provider') wmodal('wallet').hidden = false;
       if (name === 'wdpick') wmodal('withdraw').hidden = false;
       if (name === 'withdraw') clearTimeout(wd.timer);
+      if (name === 'deppick') wmodal('deposit').hidden = false;
+      if (name === 'deposit') clearTimeout(dep.timer);
       if (!anyModalOpen()) root.classList.remove('modal-open');
     };
 
@@ -1536,6 +1540,165 @@
       openW('wallet');
     });
 
+    // Deposit (Wallet 525:364601, wireframes): its own window from the header
+    // wallet button, the Wallet and the Profile. Currency and network are
+    // picked in a sheet; the network shows the address with its QR code. An
+    // empty balance offers Buy crypto (the Wallet's Buy Crypto step), a
+    // non-empty one offers it as a repeat deposit. Demo: a few seconds after
+    // the address is shown the transfer "arrives" ($100 in the coin).
+    var DEP_NETS = {
+      USDT: [
+        { code: 'TRX', name: 'TRON (TRC20)', min: 1, icon: 'net-trx.svg', qr: 'trx' },
+        { code: 'APT', name: 'APTOS', min: 0.5, icon: 'net-aptos.svg', qr: 'apt' },
+        { code: 'BNB', name: 'BSC (BEP20)', min: 0.5, icon: 'net-bnb.svg', qr: 'evm' },
+        { code: 'TON', name: 'TON', min: 0.5, icon: 'net-ton.svg', qr: 'ton' },
+        { code: 'ETH', name: 'Ethereum (ERC20)', min: 5, icon: 'net-eth.svg', qr: 'evm' },
+        { code: 'PLASMA', name: 'Plasma (USDT0)', min: 0.1, icon: 'net-plasma.svg', qr: 'evm' },
+        { code: 'NEAR', name: 'Near', min: 0.5, icon: 'net-near.svg', qr: 'near' },
+        { code: 'SOL', name: 'SOL', min: 0.5, icon: 'net-sol.svg', qr: 'sol' }
+      ],
+      USDC: [
+        { code: 'ETH', name: 'Ethereum (ERC20)', min: 5, icon: 'net-eth.svg', qr: 'evm' },
+        { code: 'BNB', name: 'BSC (BEP20)', min: 0.5, icon: 'net-bnb.svg', qr: 'evm' },
+        { code: 'SOL', name: 'SOL', min: 0.5, icon: 'net-sol.svg', qr: 'sol' }
+      ],
+      ETH: [{ code: 'ETH', name: 'Ethereum (ERC20)', min: 0.002, icon: 'net-eth.svg', qr: 'evm' }],
+      BTC: [{ code: 'BTC', name: 'Bitcoin', min: 0.0001, icon: 'net-btc.svg', qr: 'btc' }],
+      LTC: [{ code: 'LTC', name: 'Litecoin', min: 0.01, icon: 'net-ltc.svg', qr: 'ltc' }]
+    };
+    // Demo addresses; dq-*.svg are their QR codes
+    var DEP_ADDR = {
+      trx: 'TXz9P3cq4Hn7mR2kVbW8sJfL5yDgA1eQuN',
+      evm: '0x7a3F9c21B04dE8f6A5b2C9e17D4f08A6b3E5c912',
+      ton: 'UQBx7Kp2mN4vR9sT1wY6zA3cE8fH5jL0qG2dU7iO4bX9kMnP',
+      apt: '0x5c1e8b3a9f27d4c6e0b18a5f3d72c94e6b0a18d5f3c27e9b4a6d0c81f5e3b729',
+      near: '7f3a9c2e5b18d4f6a0c3e7b92d5f1a8c4e6b0d3f7a2c9e5b1d8f4a6c0e3b7d92',
+      sol: '9wFzK3vRqT8mPj2LhN6xYc4bDs1aGe7uVt5oMkQpXr3Z',
+      btc: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh',
+      ltc: 'ltc1qg82tn7m5z6d4c3x9h0jv8k2w5p7s4r6y3e1a0f'
+    };
+    var depModal = wmodal('deposit');
+    var depPick = wmodal('deppick');
+    var dq = function (sel) { return depModal.querySelector(sel); };
+    var dep = { cur: 'USDT', net: -1, timer: null, pick: null };
+    var depToast = document.querySelector('[data-dep-toast]');
+    var depEmpty = function () { return !CURRENCIES.some(function (c) { return c.amount > 0; }); };
+    var depNet = function () { return DEP_NETS[dep.cur][dep.net]; };
+    var depWarn = function (c, n) {
+      return n ? 'Send only ' + c.code + ' via ' + n.name + ' to this address. Sending other assets or using another network may result in permanent loss.' :
+        'Choose the network you will send ' + c.code + ' from. Sending via another network may result in permanent loss.';
+    };
+    var renderDep = function () {
+      var c = byCode(dep.cur), n = depNet(), empty = depEmpty();
+      dq('[data-dep-pick="cur"]').innerHTML = fieldRow(c, true);
+      dq('[data-dep-pick="net"]').innerHTML = n ?
+        netRow(n, n.code === c.code ? c.name : n.code) + '<img class="wrow__arrow" src="' + IMGP + 'ws-arrow.svg" alt="">' :
+        '<span class="wrow__name"><span class="wrow__placeholder">Choose network</span></span><img class="wrow__arrow" src="' + IMGP + 'ws-arrow.svg" alt="">';
+      dq('[data-dep-address-block]').hidden = !n;
+      dq('[data-dep-callout="top"]').hidden = !empty || !!n;
+      dq('[data-dep-callout="bottom"]').hidden = !empty || !n;
+      dq('[data-dep-repeat]').hidden = empty || !!n;
+      if (n) {
+        dq('[data-dep-qr]').src = IMGP + 'dq-' + n.qr + '.svg';
+        dq('[data-dep-qr-coin]').src = IMGP + c.icon;
+        dq('[data-dep-address]').textContent = DEP_ADDR[n.qr];
+        dq('[data-dep-warn]').textContent = depWarn(c, n);
+      }
+    };
+    var depArrive = function () {
+      clearTimeout(dep.timer);
+      if (!depNet()) return;
+      dep.timer = setTimeout(function () {
+        if (depModal.hidden && depPick.hidden) return;
+        var c = byCode(dep.cur), amount = 100 / c.usd;
+        credit(c, amount);
+        wstate.current = c.code;
+        saveW();
+        renderWallet();
+        if (!depPick.hidden) closeW('deppick');
+        closeW('deposit');
+        depToast.querySelector('[data-dep-toast-text]').textContent = 'Your deposit is here: +' + fix(amount, 6) + ' ' + c.code;
+        depToast.hidden = false;
+        clearTimeout(dep.toast);
+        dep.toast = setTimeout(function () { depToast.hidden = true; }, 5000);
+      }, 6000);
+    };
+    var openDep = function () {
+      if (byCode(wstate.current)) dep.cur = wstate.current;
+      dep.net = -1;
+      renderDep();
+      ['wallet', 'withdraw'].forEach(function (n) { if (!wmodal(n).hidden) closeW(n); });
+      openW('deposit');
+    };
+    document.querySelectorAll('[data-deposit-open]').forEach(function (b) {
+      b.addEventListener('click', function (event) {
+        event.preventDefault();
+        openDep();
+      });
+    });
+    var renderDepPick = function () {
+      var cur = dep.pick === 'cur', c = byCode(dep.cur);
+      depPick.querySelector('[data-deppick-title]').textContent = cur ? 'Select currency to deposit' : 'Select network type';
+      depPick.querySelector('[data-deppick-note]').hidden = cur;
+      depPick.querySelector('[data-deppick-warn]').textContent = depWarn(c);
+      depPick.querySelector('[data-deppick-list]').innerHTML = cur ?
+        CURRENCIES.map(function (x) {
+          return row(x, wstate.hidden ? HIDDEN : usdText(x.amount * x.usd), wstate.hidden ? HIDDEN : cryptoText(x), 'button', x.code === dep.cur)
+            .replace('data-wcur=', 'data-deppick-item=');
+        }).join('') :
+        DEP_NETS[dep.cur].map(function (n, i) {
+          return '<button class="wrow' + (i === dep.net ? ' is-active' : '') + '" type="button" data-deppick-item="' + i + '">' +
+            netRow(n, 'Min. deposit: ' + n.min + ' ' + c.code, i === dep.net) + '</button>';
+        }).join('');
+    };
+    depModal.querySelectorAll('[data-dep-pick]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        dep.pick = b.getAttribute('data-dep-pick');
+        renderDepPick();
+        depModal.hidden = true;
+        openW('deppick');
+      });
+    });
+    depPick.addEventListener('click', function (event) {
+      var item = event.target.closest('[data-deppick-item]');
+      if (!item) return;
+      var v = item.getAttribute('data-deppick-item');
+      if (dep.pick === 'cur') {
+        if (v !== dep.cur) {
+          dep.cur = v;
+          dep.net = -1;
+          clearTimeout(dep.timer);
+        }
+      } else if (+v !== dep.net) {
+        dep.net = +v;
+        depArrive();
+      }
+      renderDep();
+      closeW('deppick');
+    });
+    depModal.querySelectorAll('[data-dep-buy]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        buy.crypto = dep.cur;
+        closeW('deposit');
+        setWStep('buy');
+        openW('wallet');
+      });
+    });
+    dq('[data-dep-copy]').addEventListener('click', function (event) {
+      var sp = event.currentTarget.querySelector('span');
+      var addr = sp.textContent;
+      var done = function () {
+        sp.textContent = 'Copied';
+        setTimeout(function () { sp.textContent = addr; }, 1200);
+      };
+      if (navigator.clipboard) navigator.clipboard.writeText(addr).then(done, done);
+      else done();
+    });
+    depToast.querySelector('[data-dep-toast-close]').addEventListener('click', function () {
+      clearTimeout(dep.toast);
+      depToast.hidden = true;
+    });
+
     var setWStep = function (step) {
       var st = STEPS[step];
       wcard.querySelectorAll('[data-wpane]').forEach(function (p) { p.hidden = p.getAttribute('data-wpane') !== step; });
@@ -1563,7 +1726,7 @@
     document.addEventListener('keydown', function (event) {
       if (event.key !== 'Escape') return;
       if (!wdrop.hidden) setDrop(false);
-      ['coin', 'provider', 'wdpick', 'fiat', 'settings', 'withdraw', 'wallet'].some(function (n) {
+      ['coin', 'provider', 'wdpick', 'deppick', 'fiat', 'settings', 'withdraw', 'deposit', 'wallet'].some(function (n) {
         if (!wmodal(n).hidden) { closeW(n); return true; }
         return false;
       });

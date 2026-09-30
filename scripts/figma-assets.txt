@@ -189,3 +189,6 @@ ws-chevron-right.svg        https://www.figma.com/api/mcp/asset/9d4ee4c4-b7aa-45
 # Withdraw (439:375390); net-*.svg are not from Figma: cryptocurrency-icons 0.18.1 "color" (trx, bnb, eth, btc, ltc), net-ton.svg = Simple Icons "ton" on a circle
 ws-security.svg             https://www.figma.com/api/mcp/asset/86de1753-c111-4eec-af2f-8776ecf9a6c1/69ac6.svg
 ws-chevron-right-16.svg     https://www.figma.com/api/mcp/asset/7e25db69-7f2a-44a4-b6ca-be8d5dacb658/3a100.svg
+# Deposit (525:364601, wireframes): nothing exported. net-sol.svg = cryptocurrency-icons 0.18.1 "color" sol,
+# net-near.svg = Simple Icons "near" on a circle, net-aptos.svg / net-plasma.svg are letter badges (no icon set has them);
+# dq-*.svg are QR codes of the demo deposit addresses (Python qrcode, error correction H)

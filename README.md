@@ -176,7 +176,20 @@ logged in:
   receive, 6-digit email code — any digits, Resend with a countdown), then
   Withdrawal Completed with a Tx hash. Network icons (`net-*`) are from
   cryptocurrency-icons (TON: Simple Icons) — Figma has placeholders.
-- Swaps, purchases and withdrawals change the balances until the page is reloaded.
+- **Deposit** (`525:364601`, wireframes — built in the prototype's style from
+  the Wallet / Withdraw components) – the header wallet button, the Wallet and
+  Profile Deposit buttons open it: cryptocurrency and network (sheets "Select
+  currency to deposit" and "Select network type" with the warning and the
+  minimum deposit), then the QR code, the deposit address (click copies it)
+  and the "send only … via …" warning. An empty balance shows the "No crypto?
+  Buy crypto" callout, otherwise "Repeat deposit through Buy crypto"; both open
+  the Wallet's Buy Crypto step for that coin. "or Use Your Wallet" with the
+  Connect Wallet row is shown but not available yet. Demo: about 6 seconds after
+  the address is shown the transfer arrives — $100 in the coin is credited (as
+  a deposit to wager) and the "Congrats!" toast appears. Open a page with
+  `?balance=0` (e.g. `home.html?balance=0`) for the first-deposit scenario.
+  QR codes (`dq-*.svg`) encode the demo addresses.
+- Swaps, purchases, deposits and withdrawals change the balances until the page is reloaded.
 - State (currency, hidden balance, settings) is kept in `localStorage`.
 
 Differences from Figma: the demo currencies differ (Figma repeats USDC), the
@@ -187,7 +200,7 @@ prices (Figma: fixed sample numbers, e.g. 1 USDT ≈ 0.006119 ETH); the provider
 presets are 100 / 200 / 300 / 500 / 1K (Figma repeats 200); Buy Crypto's
 Completed shows the amounts that were bought (Figma swaps the two values);
 the Card icon is drawn by hand (Figma exports a placeholder); the loading
-skeletons, View Transaction, the provider settings, Deposit and Withdraw are
+skeletons, View Transaction, the provider settings and Connect Wallet are
 not part of the prototype; on mobile Balance Settings and the fiat list are
 bottom sheets.
 

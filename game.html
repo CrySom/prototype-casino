@@ -31,7 +31,7 @@
           <span class="slot-balance__code" data-balance-code>USDT</span>
           <span class="balance__chevron"><img src="assets/img/hdr-chevron.svg" alt="" decoding="async"></span>
         </button>
-        <button class="slot-balance__wallet is-inert" type="button" aria-label="Wallet (not available yet)" aria-disabled="true" tabindex="-1"><img src="assets/img/gp-wallet.svg" alt="" decoding="async"></button>
+        <button class="slot-balance__wallet" type="button" aria-label="Deposit" data-deposit-open><img src="assets/img/gp-wallet.svg" alt="" decoding="async"></button>
       </div>
       <button class="slot-header__icon slot-header__fav" type="button" aria-label="Add to favorites" aria-pressed="false" data-game-fav><img src="assets/img/gm-star.svg" alt="" decoding="async"></button>
     </div>
@@ -112,7 +112,7 @@
       <button class="btn btn--secondary wbtn" type="button" data-wallet-open>Wallet</button>
       <button class="btn btn--secondary wbtn" type="button" data-wsettings-open>Balance Settings</button>
     </div>
-    <a class="btn wbtn wbtn--primary" href="#"><img src="assets/img/wl-deposit.svg" alt="" decoding="async"><span>Deposit</span></a>
+    <a class="btn wbtn wbtn--primary" href="#deposit" data-deposit-open><img src="assets/img/wl-deposit.svg" alt="" decoding="async"><span>Deposit</span></a>
   </div>
 
   <!-- Wallet (334:419971) -->
@@ -126,7 +126,7 @@
           <p class="wtotal__label">Total Real Balance<button class="wtotal__eye" type="button" aria-label="Hide balance" data-balance-eye><img class="balance__eye-off" src="assets/img/wl-eye-off.svg" alt="" decoding="async"><img class="balance__eye-on" src="assets/img/hdr-eye.svg" alt="" decoding="async"></button></p>
           <div class="wtotal__row"><p class="wtotal__sum" data-wallet-total>$1,250.00</p><button class="wtotal__fiat" type="button" data-wfiat-open><span data-wallet-fiat>USD</span><img src="assets/img/wl-chevron.svg" alt="" decoding="async"></button></div>
         </div>
-        <div class="wactions"><a class="btn btn--secondary wbtn" href="#withdraw" data-withdraw-open><img src="assets/img/wl-withdraw.svg" alt="" decoding="async"><span>Withdraw</span></a><a class="btn wbtn wbtn--primary" href="#"><img src="assets/img/wl-deposit.svg" alt="" decoding="async"><span>Deposit</span></a></div>
+        <div class="wactions"><a class="btn btn--secondary wbtn" href="#withdraw" data-withdraw-open><img src="assets/img/wl-withdraw.svg" alt="" decoding="async"><span>Withdraw</span></a><a class="btn wbtn wbtn--primary" href="#deposit" data-deposit-open><img src="assets/img/wl-deposit.svg" alt="" decoding="async"><span>Deposit</span></a></div>
         <div class="wtable"><div class="wtable__head"><span>Currencies</span><span>Balance</span></div><div class="wlist" data-wallet-list></div></div>
       </div>
       <!-- Buy Crypto (Wallet 201:246320, phone 387:607607 / 387:608027 / 387:608463) -->
@@ -324,6 +324,50 @@
       <div class="wlist wlist--coin" data-wdpick-list></div>
     </section>
   </div>
+
+  <!-- Deposit (Wallet 525:364601, wireframes; built from the Wallet / Withdraw components): currency, network,
+       address with the QR code; Buy crypto for an empty balance (or as a repeat deposit); Connect Wallet -->
+  <div class="wmodal" id="deposit" hidden data-wmodal="deposit">
+    <div class="wmodal__backdrop" data-wmodal-close></div>
+    <section class="wmodal__card wmodal__card--wallet" role="dialog" aria-modal="true" aria-label="Deposit">
+      <div class="wmodal__head"><h2 class="wmodal__title">Deposit</h2><button class="wmodal__close" type="button" aria-label="Close" data-wmodal-close><img src="assets/img/wl-close.svg" alt="" decoding="async"></button></div>
+      <button class="wbuy" type="button" hidden data-dep-buy data-dep-callout="top"><span class="wbuy__text"><b>No crypto?</b><span>Purchase crypto with a card or other payment methods.</span></span><span class="wbuy__link">Buy crypto<img src="assets/img/ws-chevron-right-16.svg" alt="" decoding="async"></span></button>
+      <div class="wform wform--tight">
+        <div class="wblock">
+          <p class="wlabel">Select cryptocurrency</p>
+          <button class="wrow wrow--field" type="button" data-dep-pick="cur"></button>
+        </div>
+        <div class="wblock">
+          <p class="wlabel">Select network</p>
+          <button class="wrow wrow--field" type="button" data-dep-pick="net"></button>
+        </div>
+        <div class="wblock" hidden data-dep-address-block>
+          <div class="wqr"><img class="wqr__code" src="assets/img/dq-evm.svg" alt="QR code of the deposit address" decoding="async" data-dep-qr><span class="wqr__coin"><img src="assets/img/currency-t.webp" alt="" decoding="async" data-dep-qr-coin></span></div>
+          <p class="wlabel">Deposit Address</p>
+          <button class="waddr" type="button" aria-label="Copy the deposit address" data-dep-copy><span data-dep-address></span><img src="assets/img/ws-copy.svg" alt="" decoding="async"></button>
+          <div class="wnote"><img src="assets/img/ws-warning.svg" alt="" decoding="async"><p data-dep-warn></p></div>
+          <p class="wwait"><span class="wwait__dot"></span><span>Waiting for your deposit…</span></p>
+        </div>
+      </div>
+      <button class="wbuy" type="button" hidden data-dep-buy data-dep-callout="bottom"><span class="wbuy__text"><b>No crypto?</b><span>Purchase crypto with a card or other payment methods.</span></span><span class="wbuy__link">Buy crypto<img src="assets/img/ws-chevron-right-16.svg" alt="" decoding="async"></span></button>
+      <button class="wbuy wbuy--row" type="button" hidden data-dep-buy data-dep-repeat><span class="wbuy__text"><span>Repeat deposit through</span></span><span class="wbuy__link">Buy crypto<img src="assets/img/ws-chevron-right-16.svg" alt="" decoding="async"></span></button>
+      <p class="wsplit wsplit--text">or Use Your Wallet</p>
+      <div class="wconnect is-inert" aria-disabled="true"><span class="wconnect__chip"><img src="assets/img/reg-metamask.svg" alt="" decoding="async">Metamask</span><span class="wconnect__more">+15</span><span class="wconnect__link">Connect Wallet<img src="assets/img/ws-chevron-right-16.svg" alt="" decoding="async"></span></div>
+    </section>
+  </div>
+
+  <!-- Deposit: select currency / network type, bottom sheet on mobile -->
+  <div class="wmodal wmodal--sheet" id="deposit-pick" hidden data-wmodal="deppick">
+    <div class="wmodal__backdrop" data-wmodal-close></div>
+    <section class="wmodal__card wmodal__card--coin" role="dialog" aria-modal="true" aria-label="Select">
+      <div class="wmodal__head"><h2 class="wmodal__title" data-deppick-title>Select currency to deposit</h2><button class="wmodal__close" type="button" aria-label="Close" data-wmodal-close><img src="assets/img/wl-close.svg" alt="" decoding="async"></button></div>
+      <div class="wnote" hidden data-deppick-note><img src="assets/img/ws-warning.svg" alt="" decoding="async"><p data-deppick-warn></p></div>
+      <div class="wlist wlist--coin" data-deppick-list></div>
+    </section>
+  </div>
+
+  <!-- Deposit received (525:365671) -->
+  <div class="wtoast" hidden role="status" data-dep-toast><img src="assets/img/ws-success.svg" alt="" decoding="async"><p><b>Congrats!</b><span data-dep-toast-text>Your deposit is here!</span></p><button class="wtoast__close" type="button" aria-label="Close" data-dep-toast-close><img src="assets/img/wl-close.svg" alt="" decoding="async"></button></div>
 
   <!-- Balance Settings (334:420233) -->
   <div class="wmodal wmodal--sheet" id="balance-settings" hidden data-wmodal="settings">
