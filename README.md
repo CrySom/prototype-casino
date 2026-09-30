@@ -206,10 +206,10 @@ not part of the prototype; on mobile Balance Settings and the fiat list are
 bottom sheets.
 
 Game page (`game.html`, file "crypto-casino", Real and demo mode `3369:293780`):
-a tap on any game tile first opens the game card (Game Page `389:253407`: tile,
-name, Demo / Play, "Game currency" with its list); Demo opens the game in demo
-mode. Play (the button and the play icon on the tile) is shown but switched off
-for now.
+game tiles are switched off for now: a tap does nothing. The game card (Game Page
+`389:253407`: tile, name, Demo / Play, "Game currency" with its list) comes back
+with `GAMES_ON` in `js/main.js`; then Demo opens the game in demo mode, Play in
+money mode (guests are asked to log in).
 
 - **Header** – current crypto currency (opens the balance dropdown), Wallet,
   favourite star and close (back to the previous page); guests see Sign in /

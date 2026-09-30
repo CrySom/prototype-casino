@@ -1813,11 +1813,14 @@
       gp.querySelector('[data-gp-code]').textContent = code;
     };
 
+    // Game tiles are switched off for now: a tap does nothing (no game card,
+    // no game page). Set GAMES_ON to true to bring the game card back.
+    var GAMES_ON = false;
     document.addEventListener('click', function (event) {
       var tile = event.target.closest('a[data-game]');
       if (!tile || event.defaultPrevented) return;
       event.preventDefault();
-      openGp();
+      if (GAMES_ON) openGp();
     });
     gp.querySelectorAll('[data-gp-close]').forEach(function (b) {
       b.addEventListener('click', function () { closeGp(); });
