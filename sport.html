@@ -306,7 +306,7 @@
           <p class="wtotal__label">Total Real Balance<button class="wtotal__eye" type="button" aria-label="Hide balance" data-balance-eye><img class="balance__eye-off" src="assets/img/wl-eye-off.svg" alt="" decoding="async"><img class="balance__eye-on" src="assets/img/hdr-eye.svg" alt="" decoding="async"></button></p>
           <div class="wtotal__row"><p class="wtotal__sum" data-wallet-total>$1,250.00</p><button class="wtotal__fiat" type="button" data-wfiat-open><span data-wallet-fiat>USD</span><img src="assets/img/wl-chevron.svg" alt="" decoding="async"></button></div>
         </div>
-        <div class="wactions"><a class="btn btn--secondary wbtn" href="#"><img src="assets/img/wl-withdraw.svg" alt="" decoding="async"><span>Withdraw</span></a><a class="btn wbtn wbtn--primary" href="#"><img src="assets/img/wl-deposit.svg" alt="" decoding="async"><span>Deposit</span></a></div>
+        <div class="wactions"><a class="btn btn--secondary wbtn" href="#withdraw" data-withdraw-open><img src="assets/img/wl-withdraw.svg" alt="" decoding="async"><span>Withdraw</span></a><a class="btn wbtn wbtn--primary" href="#"><img src="assets/img/wl-deposit.svg" alt="" decoding="async"><span>Deposit</span></a></div>
         <div class="wtable"><div class="wtable__head"><span>Currencies</span><span>Balance</span></div><div class="wlist" data-wallet-list></div></div>
       </div>
       <!-- Buy Crypto (Wallet 201:246320, phone 387:607607 / 387:608027 / 387:608463) -->
@@ -428,6 +428,80 @@
     <section class="wmodal__card wmodal__card--coin" role="dialog" aria-modal="true" aria-label="Provider">
       <div class="wmodal__head"><h2 class="wmodal__title">Provider</h2><button class="wmodal__close" type="button" aria-label="Close" data-wmodal-close><img src="assets/img/wl-close.svg" alt="" decoding="async"></button></div>
       <div class="wlist wlist--coin" data-prov-list></div>
+    </section>
+  </div>
+
+  <!-- Withdraw (Wallet 439:375390): form, wagering requirement, confirmation with the email code, completed -->
+  <div class="wmodal" id="withdraw" hidden data-wmodal="withdraw">
+    <div class="wmodal__backdrop" data-wmodal-close></div>
+    <section class="wmodal__card wmodal__card--wallet" role="dialog" aria-modal="true" aria-label="Withdraw">
+      <div class="wmodal__head"><h2 class="wmodal__title" data-wd-title>Withdraw</h2><button class="wmodal__close" type="button" aria-label="Close" data-wmodal-close><img src="assets/img/wl-close.svg" alt="" decoding="async"></button></div>
+
+      <!-- Form (439:375443 / 439:622518; wagering 439:625170) -->
+      <div class="wpane wpane--form" data-wd-step="form">
+        <div class="wform wform--tight">
+          <div class="wblock">
+            <p class="wlabel">Select cryptocurrency</p>
+            <button class="wrow wrow--field" type="button" data-wd-pick="cur"></button>
+          </div>
+          <div class="wblock" data-wd-net-block>
+            <p class="wlabel">Select network</p>
+            <button class="wrow wrow--field" type="button" data-wd-pick="net"></button>
+          </div>
+          <div class="wblock" data-wd-amount-block>
+            <p class="wlabel">Amount</p>
+            <label class="winput"><input type="text" inputmode="decimal" placeholder="0.000000" autocomplete="off" aria-label="Amount" data-wd-amount><button class="winput__max" type="button" data-wd-max>MAX</button></label>
+          </div>
+          <div class="wblock" data-wd-address-block>
+            <p class="wlabel">Address</p>
+            <label class="winput winput--text"><input type="text" placeholder="Please enter your address" autocomplete="off" spellcheck="false" aria-label="Address" data-wd-address></label>
+            <div class="wnote" hidden data-wd-note><img src="assets/img/ws-warning.svg" alt="" decoding="async"><p>Withdrawing your funds may forfeit all available bonuses. Please use your bonuses before making a withdrawal.</p></div>
+          </div>
+          <div class="wwager" hidden data-wd-wager>
+            <p class="wwager__head"><span>Wagering requirement</span><span data-wd-wager-pct>80%</span></p>
+            <div class="wwager__bar"><span data-wd-wager-bar></span></div>
+            <p class="wwager__hint"><span>Remaining wagering amount:</span><b data-wd-wager-left>10.00 USDC</b></p>
+            <hr>
+            <p class="wwager__text">To make a withdrawal, you must wager an amount equal to your deposit. For example, if you deposited $100, you need to wager $100 to withdraw. This requirement applies under our anti-money laundering (AML) policy.</p>
+          </div>
+        </div>
+        <div class="wfacts wfacts--confirm"><p><span>Withdrawal Amount:</span><small data-wd-sum>0.000000 USDT</small></p><p><span>Fee:</span><small data-wd-fee>1.000000 USDT</small></p><p><span>Total Withdraw Amount:</span><span data-wd-total>1.00 USDT</span></p></div>
+        <button class="btn wbtn wbtn--primary" type="button" data-wd-submit>Withdraw</button>
+        <a class="btn wbtn wbtn--primary" href="casino.html" hidden data-wd-wager-now>Wager now</a>
+      </div>
+
+      <!-- Confirm Withdrawal (439:629900) -->
+      <div class="wpane wpane--form" data-wd-step="confirm" hidden>
+        <div class="wverify">
+          <div class="wverify__sum"><span>You’ll receive</span><b data-wd-get>14.540000 USDT</b></div>
+          <hr>
+          <div class="wfacts wfacts--confirm"><p><span>Withdrawal Amount:</span><small data-wd-sum>14.540000 USDT</small></p><p><span>Fee:</span><small data-wd-fee>0.250000 USDT</small></p><p><span>Total Withdraw Amount:</span><span data-wd-total>14.79 USDT</span></p></div>
+          <hr>
+          <div class="wverify__head"><img src="assets/img/ws-security.svg" alt="" decoding="async"><p><b>Email Verification Code</b><span>Enter the 6-digit code sent to your registered email address.</span></p></div>
+          <div class="wcode" data-wd-code><input type="text" inputmode="numeric" maxlength="1" autocomplete="one-time-code" aria-label="Digit 1"><input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 2"><input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 3"><input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 4"><input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 5"><input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 6"></div>
+          <p class="wverify__resend">Didn’t receive code?<button type="button" data-wd-resend>Resend (54s)</button></p>
+        </div>
+        <div class="wactions"><button class="btn btn--secondary wbtn" type="button" data-wd-back>Back</button><button class="btn wbtn wbtn--primary" type="button" data-wd-confirm>Confirm</button></div>
+      </div>
+
+      <!-- Withdrawal Completed (439:632262) -->
+      <div class="wpane wpane--form" data-wd-step="done" hidden>
+        <div class="wresult"><img src="assets/img/ws-success.svg" alt="" decoding="async"><p class="wresult__title">Withdrawal Completed!</p><p class="wresult__text">Your transaction is being processed and should arrive shortly.</p></div>
+        <div class="wpane">
+          <div class="wreceipt"><p><span>Amount Sent</span><b data-wd-sent>14.540000 USDT</b></p><hr><p><span>Tx Hash</span><button class="wreceipt__hash" type="button" aria-label="Copy the transaction hash" data-wd-hash><span>0x8e...3f2c</span><img src="assets/img/ws-copy.svg" alt="" decoding="async"></button></p></div>
+          <div class="wactions"><button class="btn btn--secondary wbtn" type="button" data-wd-wallet>Back to Wallet</button><button class="btn wbtn wbtn--primary is-inert" type="button" aria-disabled="true" tabindex="-1">View Transaction</button></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Withdraw: select currency / network (439:375603 / 439:375650), bottom sheet on mobile -->
+  <div class="wmodal wmodal--sheet" id="withdraw-pick" hidden data-wmodal="wdpick">
+    <div class="wmodal__backdrop" data-wmodal-close></div>
+    <section class="wmodal__card wmodal__card--coin" role="dialog" aria-modal="true" aria-label="Select">
+      <div class="wmodal__head"><h2 class="wmodal__title" data-wdpick-title>Select currency to withdraw</h2><button class="wmodal__close" type="button" aria-label="Close" data-wmodal-close><img src="assets/img/wl-close.svg" alt="" decoding="async"></button></div>
+      <p class="wlabel" data-wdpick-sub>Available balances</p>
+      <div class="wlist wlist--coin" data-wdpick-list></div>
     </section>
   </div>
 

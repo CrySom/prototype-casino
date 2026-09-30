@@ -186,3 +186,6 @@ ws-settings.svg             https://www.figma.com/api/mcp/asset/3721376d-a6e8-4e
 # pv-banxa.webp (banxa.com favicon 192), pv-swapped.webp (swapped.com apple-touch icon), pv-ramp.webp
 # (ramp.network webclip), pv-binance.svg (simple-icons "binance"); rasters resized to 48 px and greyscaled.
 ws-chevron-right.svg        https://www.figma.com/api/mcp/asset/9d4ee4c4-b7aa-452b-a729-3f8f7f4b3c35/d06a8.svg
+# Withdraw (439:375390); net-*.svg are not from Figma: cryptocurrency-icons 0.18.1 "color" (trx, bnb, eth, btc, ltc), net-ton.svg = Simple Icons "ton" on a circle
+ws-security.svg             https://www.figma.com/api/mcp/asset/86de1753-c111-4eec-af2f-8776ecf9a6c1/69ac6.svg
+ws-chevron-right-16.svg     https://www.figma.com/api/mcp/asset/7e25db69-7f2a-44a4-b6ca-be8d5dacb658/3a100.svg

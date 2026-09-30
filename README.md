@@ -167,7 +167,16 @@ logged in:
   requirement (progress, remaining amount) instead of the amount field and
   can't be swapped. Demo: USDC starts at 80%; crypto received by a swap or a
   purchase is a new deposit (0%).
-- Swaps and purchases change the balances until the page is reloaded.
+- **Withdraw** (`439:375390`) – the Withdraw buttons (Wallet, Profile) open
+  its own window: cryptocurrency and network (sheets up to 1023px: "Select
+  currency to withdraw" with the available balances, "Select network type"
+  with the commission), amount with MAX, address, bonus note, amount / fee /
+  total; a currency with an unwagered deposit shows the wagering requirement
+  and Wager now (to the Casino hall). Withdraw opens Confirm Withdrawal (you'll
+  receive, 6-digit email code — any digits, Resend with a countdown), then
+  Withdrawal Completed with a Tx hash. Network icons (`net-*`) are from
+  cryptocurrency-icons (TON: Simple Icons) — Figma has placeholders.
+- Swaps, purchases and withdrawals change the balances until the page is reloaded.
 - State (currency, hidden balance, settings) is kept in `localStorage`.
 
 Differences from Figma: the demo currencies differ (Figma repeats USDC), the

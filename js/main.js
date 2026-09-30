@@ -979,6 +979,8 @@
         renderWallet();
       }
       if (name === 'coin' || name === 'provider') wmodal('wallet').hidden = false;
+      if (name === 'wdpick') wmodal('withdraw').hidden = false;
+      if (name === 'withdraw') clearTimeout(wd.timer);
       if (!anyModalOpen()) root.classList.remove('modal-open');
     };
 
@@ -1333,6 +1335,207 @@
       setWStep('buy-done');
     });
 
+    // Withdraw (Wallet 439:375390): its own window from the Wallet / Profile
+    // Withdraw buttons. Currency and network are picked in a sheet; a currency
+    // with an unwagered deposit shows the wagering requirement and Wager now.
+    // Confirmation asks for the 6-digit email code (any digits in the demo).
+    var NETWORKS = {
+      USDT: [
+        { code: 'TRX', name: 'TRON (TRC20)', feeUsd: 1, icon: 'net-trx.svg' },
+        { code: 'BNB', name: 'BSC (BEP20)', feeUsd: 0.2, icon: 'net-bnb.svg' },
+        { code: 'TON', name: 'TON', feeUsd: 0.2, icon: 'net-ton.svg' },
+        { code: 'ETH', name: 'Ethereum (ERC20)', feeUsd: 0.8, icon: 'net-eth.svg' }
+      ],
+      USDC: [
+        { code: 'ETH', name: 'Ethereum (ERC20)', feeUsd: 0.8, icon: 'net-eth.svg' },
+        { code: 'BNB', name: 'BSC (BEP20)', feeUsd: 0.2, icon: 'net-bnb.svg' }
+      ],
+      ETH: [{ code: 'ETH', name: 'Ethereum (ERC20)', feeUsd: 2, icon: 'net-eth.svg' }],
+      BTC: [{ code: 'BTC', name: 'Bitcoin', feeUsd: 3, icon: 'net-btc.svg' }],
+      LTC: [{ code: 'LTC', name: 'Litecoin', feeUsd: 0.1, icon: 'net-ltc.svg' }]
+    };
+    var wdModal = wmodal('withdraw');
+    var wdPick = wmodal('wdpick');
+    var wq = function (sel) { return wdModal.querySelector(sel); };
+    var wd = { cur: 'USDT', net: 0, amount: 0, hash: '', timer: null };
+    var wdAmount = wq('[data-wd-amount]');
+    var wdAddress = wq('[data-wd-address]');
+    var wdCodes = wdModal.querySelectorAll('[data-wd-code] input');
+    var wdNet = function () { return NETWORKS[wd.cur][wd.net] || NETWORKS[wd.cur][0]; };
+    var wdFee = function () { return wdNet().feeUsd / byCode(wd.cur).usd; };
+    var wdDigits = function (c) { return c.usd > 100 ? 6 : 2; };
+    var netRow = function (n, sub, check) {
+      return '<span class="wrow__icon"><img src="' + IMGP + n.icon + '" alt=""></span>' +
+        '<span class="wrow__name"><span class="wrow__code">' + wEsc(n.name) + '</span><span class="wrow__full">' + wEsc(sub) + '</span></span>' +
+        (check ? '<img class="wrow__check" src="' + IMGP + 'wl-check.svg" alt="Selected">' : '');
+    };
+    var commission = function (n) {
+      var c = byCode(wd.cur), f = fiatOf(wstate.fiat) || FIATS[0];
+      var fee = n.feeUsd / c.usd;
+      return 'Commission: ' + fee.toFixed(fee < 0.01 ? 6 : 2).replace(/\.?0+$/, '') + ' ' + c.code + ' (≈' + f.sym + (n.feeUsd * f.rate).toFixed(2) + ')';
+    };
+    var setWdStep = function (step) {
+      wdModal.querySelectorAll('[data-wd-step]').forEach(function (p) { p.hidden = p.getAttribute('data-wd-step') !== step; });
+      wq('[data-wd-title]').textContent = step === 'confirm' ? 'Confirm Withdrawal' : step === 'done' ? 'Completed!' : 'Withdraw';
+    };
+    var renderWd = function () {
+      var c = byCode(wd.cur), n = wdNet();
+      var w = WAGER[c.code];
+      var wagering = !!(w && w.left > 0);
+      wq('[data-wd-pick="cur"]').innerHTML = fieldRow(c, true);
+      wq('[data-wd-pick="net"]').innerHTML = netRow(n, n.code === c.code ? c.name : n.code) +
+        '<img class="wrow__arrow" src="' + IMGP + 'ws-arrow.svg" alt="">';
+      ['[data-wd-net-block]', '[data-wd-amount-block]', '[data-wd-address-block]'].forEach(function (sel) { wq(sel).hidden = wagering; });
+      wq('[data-wd-wager]').hidden = !wagering;
+      if (wagering) {
+        var pct = Math.round((1 - w.left / w.total) * 100);
+        wq('[data-wd-wager-pct]').textContent = pct + '%';
+        wq('[data-wd-wager-bar]').style.width = pct + '%';
+        wq('[data-wd-wager-left]').textContent = w.left.toFixed(2) + ' ' + c.code;
+      }
+      var fee = wdFee(), total = wd.amount + fee, d = wdDigits(c);
+      wdModal.querySelectorAll('[data-wd-sum]').forEach(function (el) { el.textContent = wd.amount.toFixed(6) + ' ' + c.code; });
+      wdModal.querySelectorAll('[data-wd-fee]').forEach(function (el) { el.textContent = fee.toFixed(6) + ' ' + c.code; });
+      wdModal.querySelectorAll('[data-wd-total]').forEach(function (el) { el.textContent = total.toFixed(d) + ' ' + c.code; });
+      wq('[data-wd-note]').hidden = !(wd.amount || wdAddress.value.trim());
+      wq('[data-wd-submit]').hidden = wagering;
+      wq('[data-wd-wager-now]').hidden = !wagering;
+      wq('[data-wd-submit]').disabled = !wd.amount || wdAddress.value.trim().length < 10 || total > c.amount + 1e-9;
+    };
+    var openWd = function () {
+      if (!byCode(wd.cur) || !byCode(wd.cur).amount) wd.cur = byCode(wstate.current) && byCode(wstate.current).amount ? wstate.current : 'USDT';
+      setWdStep('form');
+      renderWd();
+      if (!wmodal('wallet').hidden) closeW('wallet');
+      openW('withdraw');
+    };
+    document.querySelectorAll('[data-withdraw-open]').forEach(function (b) {
+      b.addEventListener('click', function (event) {
+        event.preventDefault();
+        openWd();
+      });
+    });
+    wdAmount.addEventListener('input', function () { wd.amount = num(wdAmount.value); renderWd(); });
+    wdAddress.addEventListener('input', renderWd);
+    wq('[data-wd-max]').addEventListener('click', function (event) {
+      event.preventDefault();
+      wd.amount = Math.max(0, byCode(wd.cur).amount - wdFee());
+      wdAmount.value = fix(wd.amount, 6);
+      renderWd();
+    });
+    var wdPickFor = null;
+    var renderWdPick = function () {
+      var cur = wdPickFor === 'cur';
+      wdPick.querySelector('[data-wdpick-title]').textContent = cur ? 'Select currency to withdraw' : 'Select network type';
+      wdPick.querySelector('[data-wdpick-sub]').hidden = !cur;
+      wdPick.querySelector('[data-wdpick-list]').innerHTML = cur ?
+        CURRENCIES.filter(function (c) { return c.amount > 0; }).map(function (c) {
+          return row(c, wstate.hidden ? HIDDEN : usdText(c.amount * c.usd), wstate.hidden ? HIDDEN : cryptoText(c), 'button', false)
+            .replace('data-wcur=', 'data-wdpick-item=')
+            .replace(/<\/button>$/, '<img class="wrow__arrow" src="' + IMGP + 'ws-chevron-right-16.svg" alt=""></button>');
+        }).join('') :
+        NETWORKS[wd.cur].map(function (n, i) {
+          return '<button class="wrow' + (i === wd.net ? ' is-active' : '') + '" type="button" data-wdpick-item="' + i + '">' +
+            netRow(n, commission(n), i === wd.net) + '</button>';
+        }).join('');
+    };
+    wdModal.querySelectorAll('[data-wd-pick]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        wdPickFor = b.getAttribute('data-wd-pick');
+        renderWdPick();
+        wdModal.hidden = true;
+        openW('wdpick');
+      });
+    });
+    wdPick.addEventListener('click', function (event) {
+      var item = event.target.closest('[data-wdpick-item]');
+      if (!item) return;
+      var v = item.getAttribute('data-wdpick-item');
+      if (wdPickFor === 'cur') {
+        if (v !== wd.cur) {
+          wd.cur = v;
+          wd.net = 0;
+          wd.amount = 0;
+          wdAmount.value = '';
+        }
+      } else {
+        wd.net = +v;
+      }
+      renderWd();
+      closeW('wdpick');
+    });
+    var wdTick = function (left) {
+      var b = wq('[data-wd-resend]');
+      clearTimeout(wd.timer);
+      b.disabled = left > 0;
+      b.textContent = left > 0 ? 'Resend (' + left + 's)' : 'Resend';
+      if (left > 0) wd.timer = setTimeout(function () { wdTick(left - 1); }, 1000);
+    };
+    var codeReady = function () {
+      return Array.prototype.every.call(wdCodes, function (i) { return /^\d$/.test(i.value); });
+    };
+    wq('[data-wd-submit]').addEventListener('click', function () {
+      var c = byCode(wd.cur);
+      wq('[data-wd-get]').textContent = wd.amount.toFixed(6) + ' ' + c.code;
+      wdCodes.forEach(function (i) { i.value = ''; });
+      wq('[data-wd-confirm]').disabled = true;
+      setWdStep('confirm');
+      wdTick(54);
+      wdCodes[0].focus();
+    });
+    wdCodes.forEach(function (input, i) {
+      input.addEventListener('input', function () {
+        var digits = input.value.replace(/\D/g, '');
+        if (digits.length > 1) {
+          // pasted code: spread it over the boxes
+          digits.split('').slice(0, wdCodes.length - i).forEach(function (d, k) { wdCodes[i + k].value = d; });
+          wdCodes[Math.min(i + digits.length, wdCodes.length) - 1].focus();
+        } else {
+          input.value = digits;
+          if (digits && wdCodes[i + 1]) wdCodes[i + 1].focus();
+        }
+        wq('[data-wd-confirm]').disabled = !codeReady();
+      });
+      input.addEventListener('keydown', function (event) {
+        if (event.key === 'Backspace' && !input.value && wdCodes[i - 1]) wdCodes[i - 1].focus();
+      });
+    });
+    wq('[data-wd-resend]').addEventListener('click', function () { wdTick(54); });
+    wq('[data-wd-back]').addEventListener('click', function () {
+      clearTimeout(wd.timer);
+      setWdStep('form');
+    });
+    wq('[data-wd-confirm]').addEventListener('click', function () {
+      if (!codeReady()) return;
+      var c = byCode(wd.cur);
+      clearTimeout(wd.timer);
+      c.amount = Math.max(0, c.amount - wd.amount - wdFee());
+      var hex = '';
+      for (var i = 0; i < 64; i++) hex += '0123456789abcdef'[Math.floor(Math.random() * 16)];
+      wd.hash = '0x' + hex;
+      wq('[data-wd-sent]').textContent = wd.amount.toFixed(6) + ' ' + c.code;
+      wq('[data-wd-hash] span').textContent = wd.hash.slice(0, 4) + '...' + wd.hash.slice(-4);
+      wd.amount = 0;
+      wdAmount.value = '';
+      wdAddress.value = '';
+      renderWallet();
+      setWdStep('done');
+    });
+    wq('[data-wd-hash]').addEventListener('click', function (event) {
+      var sp = event.currentTarget.querySelector('span');
+      var done = function () {
+        sp.textContent = 'Copied';
+        setTimeout(function () { sp.textContent = wd.hash.slice(0, 4) + '...' + wd.hash.slice(-4); }, 1200);
+      };
+      if (navigator.clipboard) navigator.clipboard.writeText(wd.hash).then(done, done);
+      else done();
+    });
+    wq('[data-wd-wallet]').addEventListener('click', function () {
+      closeW('withdraw');
+      setWStep('wallet');
+      openW('wallet');
+    });
+
     var setWStep = function (step) {
       var st = STEPS[step];
       wcard.querySelectorAll('[data-wpane]').forEach(function (p) { p.hidden = p.getAttribute('data-wpane') !== step; });
@@ -1360,7 +1563,7 @@
     document.addEventListener('keydown', function (event) {
       if (event.key !== 'Escape') return;
       if (!wdrop.hidden) setDrop(false);
-      ['coin', 'provider', 'fiat', 'settings', 'wallet'].some(function (n) {
+      ['coin', 'provider', 'wdpick', 'fiat', 'settings', 'withdraw', 'wallet'].some(function (n) {
         if (!wmodal(n).hidden) { closeW(n); return true; }
         return false;
       });

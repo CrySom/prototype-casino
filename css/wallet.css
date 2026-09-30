@@ -1198,3 +1198,173 @@ button.wsplit__btn:hover {
 .wrow__icon--logo img {
   border-radius: var(--radius-4);
 }
+
+/* ==========================================================================
+   Withdraw (Wallet 439:375390): form, confirmation with the email code,
+   completed; currency / network sheets
+   ========================================================================== */
+.wblock[hidden],
+.wbtn[hidden],
+.wlabel[hidden] {
+  display: none;
+}
+
+.wform--tight {
+  gap: 12px;
+}
+
+.wblock .wnote {
+  margin-top: 2px;
+}
+
+.winput--text {
+  padding-right: 12px;
+}
+
+.winput--text input {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.25px;
+}
+
+.winput--text input::placeholder {
+  color: var(--c-accent);
+}
+
+.wverify {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 10px;
+  border-radius: var(--radius-2);
+  background: var(--c-bg-6);
+}
+
+.wverify hr {
+  width: 100%;
+  height: 1px;
+  margin: 0;
+  border: 0;
+  background: rgba(232, 232, 232, 0.15);
+}
+
+.wverify__sum {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.wverify__sum span {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.25px;
+  color: #8e8e93;
+}
+
+.wverify__sum b {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 33px;
+  color: var(--c-brand);
+}
+
+.wverify .wfacts {
+  padding: 0;
+}
+
+.wverify__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wverify__head img {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  margin: 0 10px;
+}
+
+.wverify__head p {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.wverify__head b {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--c-brand);
+}
+
+.wverify__head span {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.25px;
+  color: var(--c-secondary);
+}
+
+.wcode {
+  display: flex;
+  gap: 16px;
+}
+
+.wcode input {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--c-bg-6);
+  border-radius: var(--radius-4);
+  background: var(--c-bg-1);
+  font: 700 16px/22px var(--f-geist);
+  letter-spacing: 0.15px;
+  text-align: center;
+  color: var(--c-txt-75);
+}
+
+.wcode input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+@media (max-width: 359px) {
+  .wcode {
+    gap: 8px;
+  }
+}
+
+.wverify__resend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.25px;
+  color: var(--c-secondary);
+}
+
+.wverify__resend button {
+  height: 26px;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 12px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  color: var(--c-white);
+}
+
+.wverify__resend button:disabled {
+  cursor: default;
+  color: var(--c-accent);
+}
+
+.wrow__icon img[src*="net-"] {
+  width: 24px;
+  height: 24px;
+}
