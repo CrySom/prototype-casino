@@ -206,9 +206,11 @@ not part of the prototype; on mobile Balance Settings and the fiat list are
 bottom sheets.
 
 Game page (`game.html`, file "crypto-casino", Real and demo mode `3369:293780`):
-a tap on any game tile first opens the game card (Game Page `389:253407`: tile,
-name, Demo / Play, "Game currency" with its list); Demo opens the game in demo
-mode, Play in money mode (guests are asked to log in).
+a tap on any game tile opens the game page right away (money mode; demo for
+guests). The game card (Game Page `389:253407`: tile, name, Demo / Play, "Game
+currency" with its list) is switched off for now — `PREGAME` in `js/main.js`
+brings it back; then Demo opens the game in demo mode, Play in money mode
+(guests are asked to log in).
 
 - **Header** – current crypto currency (opens the balance dropdown), Wallet,
   favourite star and close (back to the previous page); guests see Sign in /
@@ -232,8 +234,8 @@ the Menu tab of the bottom bar is active on it.
   chip opening the fiat list, real balance / bonuses / free bet with info
   tooltips, Withdraw, Deposit, View wallet); My activity, Security and
   Safety & Privacy cells; Log out (goes to the home page as a guest).
-- **Gaming profile** – level + progress block ("Level + progress in profile"),
-  favourite games, recent bets.
+- **Gaming profile** – the tab is shown but switched off for now (the pane with
+  the level + progress block, favourite games and recent bets stays in the markup).
 - Guests see a prompt to log in. Two columns from 1280px (cards on the left,
   sticky), player and balance side by side from 768px.
 
