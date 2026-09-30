@@ -1458,8 +1458,7 @@
       wdPick.querySelector('[data-wdpick-list]').innerHTML = cur ?
         CURRENCIES.filter(function (c) { return c.amount > 0; }).map(function (c) {
           return row(c, wstate.hidden ? HIDDEN : usdText(c.amount * c.usd), wstate.hidden ? HIDDEN : cryptoText(c), 'button', false)
-            .replace('data-wcur=', 'data-wdpick-item=')
-            .replace(/<\/button>$/, '<img class="wrow__arrow" src="' + IMGP + 'ws-chevron-right-16.svg" alt=""></button>');
+            .replace('data-wcur=', 'data-wdpick-item=');
         }).join('') :
         NETWORKS[wd.cur].map(function (n, i) {
           return '<button class="wrow' + (i === wd.net ? ' is-active' : '') + '" type="button" data-wdpick-item="' + i + '">' +
